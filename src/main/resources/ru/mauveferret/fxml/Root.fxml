@@ -109,7 +109,7 @@
                                  </children>
                               </GridPane>
                               <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="θ is measured relatively normal to the outside of the surface, φ is from X axis  (check at help page)!" />
-                              <Label layoutX="16.0" layoutY="138.0" prefHeight="27.0" prefWidth="557.0" text="Just choose directory, where your calculations are located, ISINCA will  finds out the rest of the parameters">
+                              <Label layoutX="16.0" layoutY="138.0" prefHeight="27.0" prefWidth="557.0" text="Just choose directory, where your calculations are located, ISINCA will  finds out the parameters">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font></Label>
@@ -248,12 +248,11 @@
                                  <font>
                                     <Font size="20.0" />
                                  </font></Button>
-                              <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;get *.txt&quot; переводит результаты работы SCATTER  в читаемый вид (для TRIM не работает)" />
+                              <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;get *.txt&quot; переводит результаты работы SCATTER  в читаемый вид" />
                               <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(θ) показываает рассеяние (и/или распыление) при  0&lt;θ&lt;180 и внедрение при 180&lt;θ&lt;360" />
                               <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="Полные угловые распределения получаются при указании больших dφ, dθ " />
                               <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta θ - шаг, а не разброс " />
-                              <Label layoutX="13.0" layoutY="142.0" prefHeight="27.0" prefWidth="570.0" text="Если оставить число запущенных частиц равным 10, программа попытается оценить значение сама" />
-                              <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="Справка" />
+                              <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" />
                               <Button layoutX="313.0" layoutY="14.0" mnemonicParsing="false" onAction="#openGIT" text="!!!HELP!!!" />
                            </children></AnchorPane>
                      </content>

@@ -1,17 +1,17 @@
 # ISInCa - Ion Surface Interaction Calculator
 
-ISInCA - is a small JAVA tool dedicated to postprocess *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](http://www2.ipp.mpg.de/~stel/SDTrimSP.html)* calculations. It is planned to gradually widen the list of the supported codes (like TRYDIN, MARLOWE and so on).
+ISInCA - is a small **Java** tool dedicated to postprocess *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)* calculations. It is planned to gradually widen the list of the supported codes (like TRYDIN, MARLOWE and so on).
 
-[![N|Solid](https://i.ibb.co/0cQrTDm/Croco-Logo.png)](https://dobrynja.livejournal.com/38140.html).
+![N|Solid](https://i.ibb.co/0cQrTDm/Croco-Logo.png)
  
 # Basic outputs
 
-Listed codes are created for investigation of particles with surface analysis. Usually you can set some beam parameters (like mass/angle/energy distribution, doze) and the target composition (and a relief for some exotic codes). Usually such codes generate single or several files, containing tables with scattered, sputtered, transmitted, displaced particles with data on their position, motion direction, sort, energy, pathlength etc. ISInCa code can transform this huge (up to hundreds of GB) data files to familiar and easy for analysis distributions. In this way, it can calculate:
+Listed codes are created for the analysis of particles with surface interaction. Usually you can set some beam parameters (like mass/angle/energy distribution, doze) and the target composition (and a relief for some exotic codes). Usually such codes generate single or several files, containing tables with scattered, sputtered, transmitted, displaced particles with data on their position, motion direction, sort, energy, pathlength etc. ISInCa code can transform this huge (up to hundreds of GB) data files to familiar and easy for interpretation distributions. In this way, it can calculate:
 
  - Energy distributions dN/dE(E) for any solid angles with any energy step **(backscattered primary particles, sputtered and transmitted particles)**
  - Angle distributions dN/dTheta(Theta) **(backscattered primary particles, sputtered and transmitted particles)**
- - Depth distributions for primary particles **NOT FINISHED YET**
- - Polar Maps for ane solid angles
+ - ~~Depth distributions for primary particles~~ **In process**
+ - Polar Maps 
  - Cartesian Maps 
  - Integral coefficients:
    - Scattered coefficient (amount of scattered divided by amount of incident)
@@ -22,11 +22,11 @@ Listed codes are created for investigation of particles with surface analysis. U
    - Displaced coefficient
    - ...
    - 
-All data is available for different combination of particles (scattered, sputtered, implanted, transmitted  and displaced).
+All data is available for different combination of particles (scattered - B, sputtered - S, implanted - I , transmitted - T  and displaced - D). You should take into account, that the amount of particle's types depend on the specific code. As example, `SDTrimSP` supports all types, `Scatter` only B,S and I.
 Since version *[`2020.4.0`](https://github.com/mauveferret/ISInCa/commit/d3d1506027f252289089755e8020599890d4b4ca)* ISInCa can calculate data separatly for every particle from incident beam or a target. Also an opportunity for combining results from several calculations has appeared.
 
 # Installation
-ISInCa is fully JAVA program so it can be launched in any OS on every processor architecture!  
+ISInCa is fully `JAVA` program so it can be launched in any OS on every processor architecture!  
 Executable files for the latest version are located in *[`/out`](https://github.com/mauveferret/ISInCa/tree/master/out)* directory:
 - For "easy mode" in Windows OS you can download an executable file *[`ISInCa.exe`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.exe)* (for GUI mode only with limiting calculation capabilities!)
 - For all OS you can take *[`isinca.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*, which provides full functionality of ISInCa
@@ -35,7 +35,7 @@ Executable files for the latest version are located in *[`/out`](https://github.
 In any case you need to have a **Java Virtual Machine** (version **11** or newer) installed on your computer. To check whether the JVM was already installed, open the terminal (in Windows OS press "Win"+"R", then type "cmd" in an appeared window, then press enter) and type `java -version`, then press "enter". If the output looks like 
 > Java is not recognized as an internal or external command
 
-or the version is less then **11**, you need to download JVM. For example, from the [Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (the company, that supports Java). Installation of the JDK (which includes JVM + libraries) seems not to be tricky (look for *[`tutorial`](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-microsoft-windows-platforms.htm#JSJIG-GUID-2B9D2A17-176B-4BC8-AE2D-FD884161C958)*). ISInCa executables don't need special installation, so you can run ISInCa right after downloading and installing JVM
+or the version is less then **11**, you need to download JVM. For example, from the [Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (the company, that supports Java). Installation of the JDK (which includes JVM + libraries) seems not to be tricky (look for *[`tutorial`](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-microsoft-windows-platforms.htm#JSJIG-GUID-2B9D2A17-176B-4BC8-AE2D-FD884161C958)*). In Linux just type `sudo apt install default-jdk`. ISInCa executables don't need special installation, so you can run ISInCa right after downloading and installing JVM
 
 # Launch
 
@@ -45,7 +45,20 @@ For your convinience **CONSOLE** and **GUI** modes were made in ISInCA. GUI is b
 
 GUI is the default mode so there is no need in any launch arguments, so just run it... Main window of the GUI mode looks like:
 [![N|Solid](https://i.ibb.co/ckSBLs9/10-10-2020-180648.png)](https://github.com/mauveferret)
-The interface seems to be user-friendly. In case of troubles check `help` tab. 
+
+The interface seems to be user-friendly.
+
+###**calculation algorithm**
+
+1. Press "Choose directory bottom". Select the folder with the files, genereted by your Monte-Carlo program. In case of `Scatter` it is most likely `/out`  folder inside SCATTER folder. It should contain 
+`SC*****.dat` file. In case of`SDTrimSP` the folder should contain `tri.inp` and `partic_***.dat` files. 
+2. SDTrimpSP  should identify the program type automatically in `code type` window in a bottom left section as well as the amount of particles.
+3. Choose data, that you wish to get in bottom center section. As can be seen, you can choose several types of particles (B,S,I,T,D) for several types of charts (enerfy spectrum polar chart, polar map and 2 cartesian mapes).
+4. Note that not all types of particles are available for some codes and charts. Also you can choose wether to visualise data after calculation. Anyway, the calculated charts will be saved in `/ISInCa` folder inside the folder you've chosen previously. In case of `SCATTER` you can also convert binary `SC*****.dat` file to user-frienldy `*.txt` file with UTF-8 encoding readable by the notepad or OriginPro.
+5. You can specify parameters of charts in corresponding tabs. AS example, for *dN/dE(E)* you can choose the upper energy limit, amount of dots on chart (deltaE, eV), and the solid registration angle.
+6. Finally, press `start calculation` button and just wait  the charts to appear.
+
+In case of troubles check `help` tab. 
 The main feature of the GUI mode os the posibility to visualize postprocessed data. For this ISInCa was equipped with **JFreeChart** library. It allows to create, modify and safe plots. Look at the example for a polar distribution:
 
 [![N|Solid](https://i.ibb.co/Ykvbk2N/10-10-2020-180630.png)](https://github.com/mauveferret)
@@ -141,4 +154,4 @@ Imagine a situation: you want to estimate the sputtering of steel by some multic
 
 ## Direcories structure
 
-**Not finished, to lazy. will end later...** 
+**...will describe later...** 
