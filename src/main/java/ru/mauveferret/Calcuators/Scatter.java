@@ -131,7 +131,8 @@ public class Scatter extends ParticleInMatterCalculator {
 
                     //Here is several spectra calculators
 
-                    PolarAngles angles = new PolarAngles(cosx,cosy,cosz);
+                    //note incorrect order. this is because we use SDTrimSp axes, which varies from Scatter one
+                    PolarAngles angles = new PolarAngles(cosz,cosy,cosx);
 
                     for (Dependence distr: dependencies){
                         switch (distr.getDepName())
