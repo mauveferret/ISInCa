@@ -107,7 +107,7 @@ public class Scatter extends ParticleInMatterCalculator {
             DataInputStream reader = new DataInputStream(new FileInputStream(dataPath));
             byte[] buf = new byte[STRING_COUNT_PER_CYCLE *18];
 
-            //TODO +17
+            //TODO +17  //update 22.10.15 WTF?
             while (reader.available() >  STRING_COUNT_PER_CYCLE *18) {
 
                 reader.read(buf);
@@ -118,9 +118,6 @@ public class Scatter extends ParticleInMatterCalculator {
 
                     floatSort = buf[shift];
 
-                    if (floatSort<0) sort = "B";
-                    else if (floatSort == 0) sort = "S";
-                    else if (floatSort>0) sort = "I";
 
                     //second byte of buf has  unknown purpose
 
@@ -129,10 +126,14 @@ public class Scatter extends ParticleInMatterCalculator {
                     cosy = ByteBuffer.wrap(ArraySubPart(buf, 10 + shift, 13 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                     cosz = ByteBuffer.wrap(ArraySubPart(buf, 14 + shift, 17 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 
+
+                    if (floatSort<0) sort = "B";
+                    else if (cosz>=0 ) sort = "S"; //floatsort>=0!
+                    else  sort = "I";
+
                     //Here is several spectra calculators
 
-                    //note incorrect order. this is because we use SDTrimSp axes, which varies from Scatter one
-                    PolarAngles angles = new PolarAngles(cosz,cosy,cosx);
+                    PolarAngles angles = new PolarAngles(cosx,cosy,cosz);
 
                     for (Dependence distr: dependencies){
                         switch (distr.getDepName())

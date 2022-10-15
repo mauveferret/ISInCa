@@ -65,9 +65,8 @@ public class Energy extends Dependence {
             double[] newArray = new double[distributionArray.get(element).length];
             for (int j=0; j<newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
 
-            for (int i = 0; i < newArray.length; i++) {
-                newArray[i] = newArray[i] / dE;
-            }
+
+            //FIXME removed divide by dE
 
             try {
                 FileOutputStream energyWriter = new FileOutputStream(pathsToLog.get(element));
@@ -75,8 +74,8 @@ public class Energy extends Dependence {
                 energyWriter.write(headerComments.get(element).getBytes());
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                     stroka = i * dE + columnSeparatorInLog
-                            + new BigDecimal(newArray[i] / dE).
-                            setScale(4, RoundingMode.UP) + "\n";
+                            + new BigDecimal(newArray[i]).
+                            setScale(3, RoundingMode.UP) + "\n";
                     energyWriter.write(stroka.getBytes());
                 }
                 energyWriter.close();

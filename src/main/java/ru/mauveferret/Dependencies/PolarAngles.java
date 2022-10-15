@@ -44,23 +44,14 @@ public class PolarAngles {
 
     private void cartesianToAngles(double cosx,double cosy,double cosz){
 
+        //Works for scatter coordinate system (z=z normal surface, x = x, y=-y)
 
-        // SDTrimSP style Cartesian system ( -x is a normal, projectiles are in ZX plane) TODO
+        if (cosx>0 & cosy>0) azimuth = 360 - Math.atan(cosy / cosx)*57.2958;
+        if (cosx>0 & cosy<0) azimuth = Math.atan(Math.abs(cosy / cosx))*57.2958;
+        if (cosx<0 & cosy<0) azimuth =180 - Math.atan(cosy / cosx)*57.2958;
+        if (cosx<0 & cosy>0) azimuth = 180 + Math.atan(Math.abs(cosy / cosx))*57.2958;
 
-        //now its Scatter style
-        if ((cosx>0 & cosy>0) || (cosx<0 & cosy<0)) azimuth = Math.atan(cosy / cosx)*57.2958;
-        else if ((cosx<0 && cosy>0) || (cosx>0 && cosy<0)) azimuth = 180-Math.atan(-1*(cosy/cosx))*57.2958;
-        if (cosy<0) azimuth=360-azimuth;
-        double absPolar = 90-Math.atan(Math.sqrt(cosx * cosx + cosy * cosy)/Math.abs(cosz))*57.2958;;
-
-        polar = absPolar;
-        //FIXME not work forscatter
-        //if (azimuth>90 && azimuth<270) polar+=90;
-        //System.out.println(azimuth);
-        //if (azimuth<=90 && cosz>=0) polar = absPolar;
-        //else  if (azimuth<=90 && cosz<0) polar=90+absPolar;
-        //else  if (azimuth>90 && cosz<0) polar=180+absPolar;
-        //else  polar=270+absPolar;
+       polar = Math.atan(Math.sqrt(cosx * cosx + cosy * cosy)/Math.abs(cosz))*57.2958;
 
     }
 
