@@ -39,7 +39,7 @@ public class GUI extends Application {
     public void showGraph(double spectra[], double E0, double dE, String name)
     {
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("SCATTER ONE LOVE");
+        dialogStage.setTitle("ENERGY SPECTRUM");
         dialogStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
         dialogStage.initModality(Modality.NONE);
         NumberAxis x = new NumberAxis();

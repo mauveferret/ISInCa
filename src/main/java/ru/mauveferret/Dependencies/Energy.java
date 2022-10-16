@@ -65,16 +65,13 @@ public class Energy extends Dependence {
             double[] newArray = new double[distributionArray.get(element).length];
             for (int j=0; j<newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
 
-
-            //FIXME removed divide by dE
-
             try {
                 FileOutputStream energyWriter = new FileOutputStream(pathsToLog.get(element));
                 String stroka;
                 energyWriter.write(headerComments.get(element).getBytes());
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                     stroka = i * dE + columnSeparatorInLog
-                            + new BigDecimal(newArray[i]).
+                            + new BigDecimal(newArray[i]/dE).
                             setScale(3, RoundingMode.UP) + "\n";
                     energyWriter.write(stroka.getBytes());
                 }
@@ -89,11 +86,16 @@ public class Energy extends Dependence {
 
     @Override
     public boolean visualize() {
+
+        //make normalization on dE for the chart
+        double[] normSpectrum = new double[distributionArray.get("all").length];
+        System.arraycopy(distributionArray.get("all"), 0, normSpectrum, 0, distributionArray.get("all").length);
+        for (int i=0; i<normSpectrum.length; i++) normSpectrum[i] = normSpectrum[i]/dE;
+
         Platform.runLater(() -> {
 
-            if (!sort.equals("") && doVisualisation) new GUI().showGraph(distributionArray.get("all"), E0, dE, "Энергетический спектр "+
+            if (!sort.equals("") && doVisualisation) new GUI().showGraph(normSpectrum, E0, dE, "Энергетический спектр "+
                     calculator.projectileElements+" --> "+calculator.targetElements+" phi = "+phi+" theta = "+theta);
-            //if (NThetaR||NThetaY) new GUI().showGraph(polarAngleSpectrum,360, dThetaNTheta, "угловой спектр, phi = "+phiNTheta1);
         });
         return  true;
     }

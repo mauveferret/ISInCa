@@ -127,9 +127,10 @@ public class Scatter extends ParticleInMatterCalculator {
                     cosz = ByteBuffer.wrap(ArraySubPart(buf, 14 + shift, 17 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 
 
-                    if (floatSort<0) sort = "B";
-                    else if (cosz>=0 ) sort = "S"; //floatsort>=0!
-                    else  sort = "I";
+                    if (floatSort<0 && cosz>0) sort = "B";
+                    if (floatSort<0 && cosz<0) sort = "I";
+                    if (floatSort>=0 && cosz>=0 ) sort = "S";
+                    if (floatSort>=0 && cosz<=0 )   sort = "D";
 
                     //Here is several spectra calculators
 
@@ -138,11 +139,11 @@ public class Scatter extends ParticleInMatterCalculator {
                     for (Dependence distr: dependencies){
                         switch (distr.getDepName())
                         {
-                            case "energy": ((Energy) distr).check(angles,sort,en,projectileElements);
+                            case "energy": ((Energy) distr).check(angles,sort,en,elementsList.get(((int) floatSort)+2));
                             break;
-                            case "polar": ((Polar) distr).check(angles,sort, projectileElements);
+                            case "polar": ((Polar) distr).check(angles,sort, elementsList.get(((int) floatSort)+2));
                             break;
-                            case "anglemap": ((AngleMap) distr).check(angles,sort, projectileElements);
+                            case "anglemap": ((AngleMap) distr).check(angles,sort, elementsList.get(((int) floatSort)+2));
                             break;
                             case "gettxt": ((getTXT) distr).check(angles,sort,en);
                             break;
@@ -150,15 +151,34 @@ public class Scatter extends ParticleInMatterCalculator {
                     }
 
                     //calculate some scattering constants
-                    if (!sort.contains("S")) particleCount++;
 
-                    if (sort.equals("B")) {
-                        scattered.put("all", scattered.get("all") + 1);
-                        energyRecoil.put("all", energyRecoil.get("all") + en);
+                    String element = elementsList.get(((int) floatSort)+2);
+                    if (!sort.contains("S") && !sort.contains("D") && !sort.contains("T")) particleCount++;
+
+                    switch (sort) {
+                        case "B":
+                            scattered.put(element, scattered.get(element) + 1);
+                            energyRecoil.put(element, energyRecoil.get(element) + en);
+                            scattered.put("all", scattered.get("all") + 1);
+                            energyRecoil.put("all", energyRecoil.get("all") + en);
+                            break;
+                        case "S":
+                            sputtered.put(element, sputtered.get(element) + 1);
+                            sputtered.put("all", sputtered.get("all") + 1);
+                            break;
+                        case "I":
+                            implanted.put(element, implanted.get(element) + 1);
+                            implanted.put("all", implanted.get("all") + 1);
+                            break;
+                        case "T":
+                            transmitted.put(element, transmitted.get(element) + 1);
+                            transmitted.put("all", transmitted.get("all") + 1);
+                            break;
+                        case "D":
+                            displaced.put(element, displaced.get(element) + 1);
+                            displaced.put("all", displaced.get("all") + 1);
+                            break;
                     }
-                    else if (sort.equals("S"))  sputtered.put("all", sputtered.get("all") + 1);
-
-                    else if (sort.equals("I")) implanted.put("all", implanted.get("all") + 1);
 
                     shift += 18;
                 }

@@ -38,7 +38,6 @@ public class Polar extends Dependence {
     }
 
     public void check(PolarAngles angles, String someSort, String element){
-       // System.out.println(57.2958*Math.acos(cosa));
         //if (Math.abs(57.2958*Math.acos(cosa)-phi)<dPhi || (57.2958*Math.acos(cosa) > 180- dPhi))
         if (sort.contains(someSort)) {
             if (angles.doesAzimuthAngleMatch(phi,dPhi)) {
@@ -46,7 +45,6 @@ public class Polar extends Dependence {
                 distributionArray.get("all")[(int) Math.round((90+angles.getPolar()) / dTheta)]++;
             }
             if (angles.doesAzimuthAngleMatch(phi+180,dPhi)) {
-                //System.out.println("erhbrseyhedrtrterh");
                 distributionArray.get(element)[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
                 distributionArray.get("all")[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
             }
@@ -65,23 +63,11 @@ public class Polar extends Dependence {
                 String stroka;
                polarWriter.write(headerComments.get(element).getBytes());
 
-               double[] newArray = new double[distributionArray.get(element).length];
-               for (int j=0; j<newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
+               double[] newArray = normDistrToDTheta(distributionArray.get(element));
 
                 for (int i = 0; i <= (int) Math.round(180 / dTheta); i++) {
-                    //FIXME Omega angle ?!
-                    if (i * dTheta != 90) {
-                        newArray[i] = newArray[i] / (Math.toRadians(dPhi) *
-                                Math.sin(Math.toRadians(Math.abs(i * dTheta - 90))));
-                    } //we can't divide by zero
-                    else {
-                        //TODO
-                        newArray[i] = newArray[i] / (Math.toRadians(dPhi) *
-                                Math.sin(Math.toRadians(dTheta)));
-                    }
                     stroka = ((i * dTheta - 90)) + columnSeparatorInLog
-                            + new BigDecimal(newArray[i]).setScale(4, RoundingMode.UP) + "\n";
-                    //FIXME maybe you shoud write it as it is?!
+                            + new BigDecimal(newArray[i]).setScale(3, RoundingMode.UP) + "\n";
                     if (i * dTheta != 90) polarWriter.write(stroka.getBytes());
                 }
                 polarWriter.close();
@@ -93,9 +79,10 @@ public class Polar extends Dependence {
         return  true;
     }
 
-    //only for "all" elements of the target
+    //only for "all" elements of the target (for those which were chosen in GUI: B, S ....)
     @Override
     public boolean visualize() {
+
         if (!sort.equals("") && doVisualisation)
         Platform.runLater(() -> {
             String title = calculator.projectileElements+" with "+calculator.projectileMaxEnergy+" eV hits at polar angle of "+
@@ -103,8 +90,28 @@ public class Polar extends Dependence {
                     calculator.targetElements+".\n Dependence made at phi " +
                     calculator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dTheta+" degrees. Chart is for "+
                     sort+" particles";
-           new PolarChart(title,distributionArray.get("all"), dTheta, calculator.projectileIncidentPolarAngle, pathsToLog.get("all"));
+           new PolarChart(title,normDistrToDTheta(distributionArray.get("all")), dTheta, calculator.projectileIncidentPolarAngle, pathsToLog.get("all"));
         });
         return  true;
+    }
+
+    private double[] normDistrToDTheta(double[] someDistr1){
+
+        //We make a copy of someDistr1 because it's not an array, but  just a link to distributionArray
+        //If we use someDistr1 further, we would change the arraylist("all"), which is unfavourable
+        double[] someDistr = new double[someDistr1.length];
+        System.arraycopy(someDistr1, 0, someDistr, 0, someDistr1.length);
+
+        for (int i = 0; i <= (int) Math.round(180 / dTheta); i++) {
+            if (i * dTheta != 90) {
+                someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
+                        Math.sin(Math.toRadians(Math.abs(i * dTheta - 90))));
+            } //we can't divide by zero
+            else {
+                someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
+                        Math.sin(Math.toRadians(dTheta)));
+            }
+        }
+        return someDistr;
     }
 }
