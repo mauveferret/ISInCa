@@ -52,7 +52,7 @@ public class PolarAngles {
         if (cosx<0 & cosy>0) azimuth = 180 + Math.atan(Math.abs(cosy / cosx))*57.2958;
 
        polar = Math.atan(Math.sqrt(cosx * cosx + cosy * cosy)/Math.abs(cosz))*57.2958;
-
+       //System.out.println(azimuth+" "+(Math.abs(74-polar)<3));
     }
 
 

@@ -181,19 +181,21 @@ public class RootFxmlController {
             yourCalcuator = new Scatter(path,true);
             String initialize = yourCalcuator.initializeModelParameters();
             if (!initialize.equals("OK")) {
-                System.out.println(initialize);
+                //System.out.println(initialize);
                 yourCalcuator = new TRIM(path,true);
                 initialize = yourCalcuator.initializeModelParameters();
                 if (!initialize.equals("OK")) {
-                    System.out.println(initialize);
+                    //System.out.println(initialize);
                     yourCalcuator = new SDTrimSP(path, visualize.isSelected(), getSummary.isSelected());
                     initialize = yourCalcuator.initializeModelParameters();
                     if (!initialize.equals("OK")) {
-                        System.out.println(initialize);
+                        //System.out.println(initialize);
                         new GUI().showNotification("ERROR: "+initialize);
                     } else codeName.setText("SDTrimSP");
                 } else codeName.setText("TRIM");
             } else codeName.setText("SCATTER");
+            if (!initialize.equals("OK"))
+                new GUI().showNotification("ERROR: directory doesn't contain all files for calculation");
 
             numberOfParticlesInScatter.setText(yourCalcuator.projectileAmount + "");
             E0.setText(yourCalcuator.projectileMaxEnergy + "");

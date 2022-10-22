@@ -90,12 +90,19 @@ public class PolarChart extends ApplicationFrame {
         XYSeries mainSeries = new XYSeries("calculation");
         double max = 0;
         for (int i=0; i<thetaDistr.length; i++) {
-            if (i*dTheta!=90) mainSeries.add(i*dTheta-90, thetaDistr[i]);
-            if (thetaDistr[i]>max) max = thetaDistr[i];
+            if (Math.abs(i * dTheta -90)!= 0)
+            {
+               // System.out.println(i*dTheta-90+" "+thetaDistr[i]);
+                mainSeries.add(i*dTheta-90, thetaDistr[i]);
+                if (thetaDistr[i]>max) max = thetaDistr[i];
+            }
+
         }
+
+       // System.out.println(max);
         XYSeries cosineSeries = new XYSeries("cosine");
         for (int i=0; i<thetaDistr.length; i++) {
-             cosineSeries.add(i*dTheta-90, max*Math.cos(Math.toRadians(i*dTheta-90)));
+            cosineSeries.add(i*dTheta-90, max*Math.cos(Math.toRadians(i*dTheta-90)));
         }
 
         XYSeries projectiles = new XYSeries("incident beam");

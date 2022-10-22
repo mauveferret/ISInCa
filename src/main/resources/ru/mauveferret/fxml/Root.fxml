@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="490.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="490.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
    <children>
       <ImageView fitHeight="332.0" fitWidth="299.0" layoutX="387.0" layoutY="219.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -108,8 +108,8 @@
                                     </Label>
                                  </children>
                               </GridPane>
-                              <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="θ is measured relatively normal to the outside of the surface, φ is from X axis  (check at help page)!" />
-                              <Label layoutX="16.0" layoutY="138.0" prefHeight="27.0" prefWidth="557.0" text="Just choose directory, where your calculations are located, ISINCA will  finds out the parameters">
+                              <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="θ is defined from the surface normal, φ is from X axis  (check help page)!" />
+                              <Label layoutX="14.0" layoutY="124.0" prefHeight="27.0" prefWidth="557.0" text="Just choose directory, where your calculations are located, ISInCA will  find out the parameters">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font></Label>
@@ -140,7 +140,7 @@
                               </TextField>
                               <Label fx:id="call123" layoutX="225.0" layoutY="14.0" text="dφ" />
                               <Label layoutX="154.0" layoutY="14.0" text="φ" />
-                              <Label layoutX="280.0" layoutY="67.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;360 (см. справку)" />
+                              <Label layoutX="280.0" layoutY="67.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 " />
                               <Label layoutX="280.0" layoutY="34.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;180" />
                            </children>
                         </AnchorPane>
@@ -162,9 +162,8 @@
                                  </font>
                               </TextField>
                               <Label layoutX="57.0" layoutY="10.0" text="delta φ" />
-                              <Label layoutX="254.0" layoutY="21.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;360 (первый столбец)" />
-                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 (первая строка)" />
-                              <Label layoutX="13.0" layoutY="102.0" prefHeight="27.0" prefWidth="557.0" text="Здесь θ считается от нормали (как в энергоспектре)!" />
+                              <Label layoutX="254.0" layoutY="21.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;360 (first column)" />
+                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 (first row)" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -198,7 +197,7 @@
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="particles amount" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="total particles amount" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <Label alignment="CENTER" text="sputtered (S)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <TextField fx:id="sputtered" alignment="CENTER" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="87.0" text="0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
@@ -243,17 +242,14 @@
                         <AnchorPane prefHeight="150.0" prefWidth="583.0">
                            <children>
                               <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showHelp" text="Axes" />
-                              <Label layoutX="64.0" layoutY="13.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= Картинка, поясняющая геометрию " />
-                              <Button id="YouDoWhatYouGonnaDo" layoutX="497.0" layoutY="12.0" mnemonicParsing="false" onAction="#YouDoWhatYouGonnaDo" prefHeight="39.0" prefWidth="72.0" text="!">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Button>
-                              <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;get *.txt&quot; переводит результаты работы SCATTER  в читаемый вид" />
-                              <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(θ) показываает рассеяние (и/или распыление) при  0&lt;θ&lt;180 и внедрение при 180&lt;θ&lt;360" />
-                              <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="Полные угловые распределения получаются при указании больших dφ, dθ " />
-                              <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta θ - шаг, а не разброс " />
-                              <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" />
-                              <Button layoutX="313.0" layoutY="14.0" mnemonicParsing="false" onAction="#openGIT" text="!!!HELP!!!" />
+                              <Label layoutX="64.0" layoutY="13.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= picture with axes" />
+                              <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;convert *.dat&quot; converts  SCATTER binary file to ASCII " />
+                              <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(θ) shows scattering(sputtering) if  0&lt;θ&lt;180 and implantation if 180&lt;θ&lt;360 (not made)" />
+                              <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="You can get integral distributions by setting large  dφ, dθ " />
+                              <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta θ - is step, not dispersion" />
+                              <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" visible="false" />
+                              <Button layoutX="318.0" layoutY="12.0" mnemonicParsing="false" onAction="#openGIT" text="HELP" />
+                              <Button id="YouDoWhatYouGonnaDo" layoutX="377.0" layoutY="12.0" mnemonicParsing="false" onAction="#YouDoWhatYouGonnaDo" prefHeight="25.0" prefWidth="52.0" text="!" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -347,7 +343,7 @@
                      </font></TextField>
                   <Label layoutX="198.0" layoutY="161.0" text="visualize data" />
                   <CheckBox fx:id="visualize" layoutX="279.0" layoutY="157.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
-                  <Label layoutX="209.0" layoutY="182.0" text="get *.txt" />
+                  <Label layoutX="199.0" layoutY="182.0" text="convert *.dat " />
                   <CheckBox fx:id="getTXT" layoutX="279.0" layoutY="177.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" />
                   <CheckBox fx:id="getSummary" layoutX="279.0" layoutY="197.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
                   <Label layoutX="199.0" layoutY="201.0" text="get summary" />

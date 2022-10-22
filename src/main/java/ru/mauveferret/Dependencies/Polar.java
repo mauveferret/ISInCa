@@ -39,8 +39,12 @@ public class Polar extends Dependence {
 
     public void check(PolarAngles angles, String someSort, String element){
         //if (Math.abs(57.2958*Math.acos(cosa)-phi)<dPhi || (57.2958*Math.acos(cosa) > 180- dPhi))
-        if (sort.contains(someSort)) {
+
+
+        //FIXME a lot of NaN in Scatter!
+        if (sort.contains(someSort) && (!Double.isNaN(angles.getPolar()))) {
             if (angles.doesAzimuthAngleMatch(phi,dPhi)) {
+                //System.out.println((int) Math.round((90+angles.getPolar()) / dTheta));
                 distributionArray.get(element)[(int) Math.round((90+angles.getPolar()) / dTheta)]++;
                 distributionArray.get("all")[(int) Math.round((90+angles.getPolar()) / dTheta)]++;
             }
@@ -48,7 +52,6 @@ public class Polar extends Dependence {
                 distributionArray.get(element)[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
                 distributionArray.get("all")[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
             }
-
 
         }
     }
@@ -103,7 +106,8 @@ public class Polar extends Dependence {
         System.arraycopy(someDistr1, 0, someDistr, 0, someDistr1.length);
 
         for (int i = 0; i <= (int) Math.round(180 / dTheta); i++) {
-            if (i * dTheta != 90) {
+
+            if (Math.abs(i * dTheta -90)!= 0) {
                 someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
                         Math.sin(Math.toRadians(Math.abs(i * dTheta - 90))));
             } //we can't divide by zero
