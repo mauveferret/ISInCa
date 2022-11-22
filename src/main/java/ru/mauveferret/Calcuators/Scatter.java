@@ -44,6 +44,11 @@ public class Scatter extends ParticleInMatterCalculator {
                 String line;
                 String previousLine = "";
                 String someParameter = "";
+
+                ///FIXME error in case of 4 layers
+                String lastElementOf1Layer = "";
+                String lastElementOf2Layer = "";
+
                 while (reader.ready()){
                     line = reader.readLine();
                     if (line.contains("=")) someParameter = line.substring(line.indexOf("=")+1).trim();
@@ -51,10 +56,34 @@ public class Scatter extends ParticleInMatterCalculator {
                         projectileElements= someParameter;
                         elementsList.add(someParameter);
                     }
+
+
+                    if (line.contains("Component")&&line.contains("L1"))
+                    {
+                        lastElementOf1Layer = someParameter;
+                    }
+                    if (line.contains("Component")&&line.contains("L2"))
+                        lastElementOf2Layer = someParameter;
+
                     if (line.contains("Atom") && !previousLine.contains("Projectile")) {
                         if (targetElements.contains("elements")) targetElements = "";
                         targetElements += someParameter+" ";
                         elementsList.add(someParameter);
+                        //System.out.println(someParameter);
+
+                        if (previousLine.contains(lastElementOf1Layer)){
+                            int zeroID = 5-elementsList.size()+2;
+                            for (int i=zeroID+2;i<=5;i++) {
+                                elementsList.add(i+"");
+                            }
+                        }
+                        if (previousLine.contains(lastElementOf2Layer)){
+                            int zeroID = 10-elementsList.size()+2;
+                            for (int i=zeroID+7;i<=10;i++) {
+                                elementsList.add(i+"");
+                            }
+                        }
+
                     }
                     if (line.contains("StartEnergy")) projectileMaxEnergy = Double.parseDouble(someParameter);
                     if (line.contains("StartAngle")) projectileIncidentPolarAngle = Double.parseDouble(someParameter);
@@ -92,6 +121,9 @@ public class Scatter extends ParticleInMatterCalculator {
 
     @Override
     public void postProcessCalculatedFiles(ArrayList<Dependence> depr) {
+
+
+        for (String elements: elementsList) System.out.println(elements+" ");
 
         dependencies = depr;
         for (Dependence dep: dependencies) dep.initializeArrays(elementsList);
