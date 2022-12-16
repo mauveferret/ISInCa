@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <groupId>ru.mauveferret</groupId>
     <artifactId>ISInCa</artifactId>
-    <version>2022.5.0</version>
+    <version>2022.6.0</version>
     <properties>
         <javafx.version>[15,)</javafx.version>
     </properties>

@@ -89,6 +89,16 @@ public abstract class Dependence implements Cloneable{
         return (Dependence) super.clone();
     }
 
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     public void check(){};
     //abstract double[] getSpectrum();
     public abstract boolean logDependencies();

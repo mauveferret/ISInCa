@@ -62,27 +62,31 @@ public class Energy extends Dependence {
 
         for (String element: elements) {
 
-            double[] newArray = new double[distributionArray.get(element).length];
-            for (int j=0; j<newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
+            if (!isNumeric(element)) {
+                double[] newArray = new double[distributionArray.get(element).length];
+                for (int j = 0; j < newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
 
-            try {
-                FileOutputStream energyWriter = new FileOutputStream(pathsToLog.get(element));
-                String stroka;
-                energyWriter.write(headerComments.get(element).getBytes());
-                for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
-                    stroka = i * dE + columnSeparatorInLog
-                            + new BigDecimal(newArray[i]/dE).
-                            setScale(3, RoundingMode.UP) + "\n";
-                    energyWriter.write(stroka.getBytes());
+                try {
+                    FileOutputStream energyWriter = new FileOutputStream(pathsToLog.get(element));
+                    String stroka;
+                    energyWriter.write(headerComments.get(element).getBytes());
+                    for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
+                        stroka = i * dE + columnSeparatorInLog
+                                + new BigDecimal(newArray[i] / dE).
+                                setScale(3, RoundingMode.UP) + "\n";
+                        energyWriter.write(stroka.getBytes());
+                    }
+                    energyWriter.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
                 }
-                energyWriter.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return false;
             }
         }
         return  true;
     }
+
+
 
     @Override
     public boolean visualize() {
