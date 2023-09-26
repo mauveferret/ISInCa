@@ -379,6 +379,7 @@ public class Console {
                             }
                             distributions.add(new AngleMap(deltaPolarMap, deltaPolarMap, sortPolarMap, yourCalculator));
                         }
+                        break;
                         case "eneang_Map": {
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {

@@ -41,6 +41,7 @@
                 for <N_E>. delta = (incident particles energy)/100,
                 theta = (incident particles theta). Rewrite tags to
                 change-->
+                <delta>50</delta>
                 <sort>B</sort>
                 <phi>0</phi>
                 <deltaPhi>3</deltaPhi>
@@ -56,6 +57,11 @@
                 <sort>S</sort>
                 <delta>3</delta>
             </polar_Map>
+            <eneang_Map>
+                <sort>BS</sort>
+                <deltaE>200</deltaE>
+                <deltaA>3</deltaA>
+            </eneang_Map>
             <cartesian_Map>
                 <sort>S</sort>
                 <MapSize>1000</MapSize>
