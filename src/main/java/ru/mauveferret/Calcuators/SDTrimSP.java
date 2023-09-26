@@ -62,15 +62,18 @@ public class SDTrimSP extends ParticleInMatterCalculator{
                             targetElements = "";
 
                             //all elements are in projectileElements variable, in form "H","W"
+                             projectileElements = projectileElements.replaceAll("\"","");
                              elements = projectileElements.split(",");
 
+                             //FIXME What is it for?
                             try {
-                                //i just can't remove " by replace so i made it in this barbaric manner
                                 for (int i = 0; i < elements.length; i++)
                                     elements[i] = elements[i].substring(1, elements[i].length() - 1);
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
+
+
                         }
 
                         if (line.contains("e0") && !line.contains("case")) {
@@ -343,6 +346,9 @@ public class SDTrimSP extends ParticleInMatterCalculator{
                         break;
                     case "cartesianmap":
                         ((CartesianMap) distr).check(zEnd, yEnd, sort, element);
+                        break;
+                    case "angenmap":
+                        ((AngEnMap) distr).check(angles, sort, en, element);
                 }
             }
 

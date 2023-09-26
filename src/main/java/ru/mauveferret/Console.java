@@ -22,8 +22,8 @@ public class Console {
     String fullpath;
     File configFile;
     //params
-    private double thetaNE, phiNE, phiNTheta, deltaNE, deltaPhiNE, deltaThetaNE, deltaPhiNTheta, deltaThetaNTheta, deltaPolarMap, deltaCartesianMap, MapSize;
-    private String  sortNE, sortNTheta, sortPolarMap, sortCartesianMap, cartesianMapType;
+    private double thetaNE, phiNE, phiNTheta, deltaNE, deltaPhiNE, deltaThetaNE, deltaPhiNTheta, deltaThetaNTheta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
+    private String  sortNE, sortNTheta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
     private String dirSubname;
     //Preferences
     private boolean getTXT, getSummary, visualize, combine;
@@ -378,6 +378,22 @@ public class Console {
                                 }
                             }
                             distributions.add(new AngleMap(deltaPolarMap, deltaPolarMap, sortPolarMap, yourCalculator));
+                        }
+                        case "eneang_Map": {
+                            for (int j = 0; j < distrPars.getLength(); j++) {
+                                switch (distrPars.item(j).getNodeName().toLowerCase()) {
+                                    case "sort":
+                                        sortEneangMap = distrPars.item(j).getTextContent();
+                                        break;
+                                    case "deltaE":
+                                        deltaE_eneangMap = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
+                                    case "deltaA":
+                                        deltaA_eneangMap = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
+                                }
+                            }
+                            distributions.add(new AngEnMap(deltaA_eneangMap, deltaE_eneangMap, sortEneangMap, yourCalculator));
                         }
                         break;
                         case "cartesianmap": {

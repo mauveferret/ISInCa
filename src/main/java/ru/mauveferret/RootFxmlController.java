@@ -406,6 +406,9 @@ public class RootFxmlController {
                 if (!sort.equals(""))
                     distributions.add(new AngleMap(dPhiNTheta, dThetaNTheta,sort, yourCalcuator));
 
+                if (!sort.equals(""))
+                    distributions.add(new AngEnMap(dThetaNTheta,dE, sort, yourCalcuator));
+
                 //others
 
                 //FIXME full funtional is not presented, not made in Scatter, Trim

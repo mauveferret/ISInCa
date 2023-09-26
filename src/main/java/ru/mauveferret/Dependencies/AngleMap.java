@@ -93,7 +93,7 @@ public class AngleMap extends Dependence {
     @Override
     public boolean visualize() {
         if (!sort.equals("") && doVisualisation) EventQueue.invokeLater(() ->
-                new ScatterColorMap("ISInCa",  mapArray.get("all"), dPhi, dTheta));
+                new ScatterColorMap("ISInCa",  mapArray.get("all"), dPhi, dTheta, pathsToLog.get("all")));
         return  true;
     }
 

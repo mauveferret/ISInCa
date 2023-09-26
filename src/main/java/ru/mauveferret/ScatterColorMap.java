@@ -11,8 +11,12 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class ScatterColorMap {
@@ -23,10 +27,13 @@ public class ScatterColorMap {
     double[][] array;
    static double dPhi, dTheta;
 
-    public ScatterColorMap(String title, double[][] array, double dPhi, double dTheta) {
+   static  String pathToLog = "";
+
+    public ScatterColorMap(String title, double[][] array, double dPhi, double dTheta, String pathToLog) {
         this.array = array;
         this.dPhi = dPhi;
         this.dTheta = dTheta;
+        this.pathToLog = pathToLog;
 
         JFrame f = new JFrame(title);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,6 +51,16 @@ public class ScatterColorMap {
         f.setVisible(true);
         //return low value for the next plots
         maxParticlesCount=5;
+
+        try {
+            BufferedImage bi = createChart(createDataset()).createBufferedImage(640,640);
+            File outputfile = new File(pathToLog.replace("txt","png"));
+            ImageIO.write(bi, "png", outputfile);
+
+        } catch (IOException ex) {
+            System.out.println();
+        }
+
     }
 
     private static JFreeChart createChart(XYDataset dataset) {

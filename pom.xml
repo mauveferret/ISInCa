@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <groupId>ru.mauveferret</groupId>
     <artifactId>ISInCa</artifactId>
-    <version>2022.7.0</version>
+    <version>2023.09.0</version>
     <properties>
         <javafx.version>[15,)</javafx.version>
     </properties>
@@ -178,7 +178,7 @@
                             </classPath>
                             <jre>
                                 <minVersion>11</minVersion>
-                                <jdkPreference>jdkOnly</jdkPreference>
+                                <path>${java.home}</path>
                             </jre>
                             <versionInfo>
                                 <fileVersion>${version}.0</fileVersion>
