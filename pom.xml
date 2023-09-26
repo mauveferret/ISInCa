@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <groupId>ru.mauveferret</groupId>
     <artifactId>ISInCa</artifactId>
-    <version>2023.09.0</version>
+    <version>2023.9.0</version>
     <properties>
         <javafx.version>[15,)</javafx.version>
     </properties>
@@ -168,8 +168,8 @@
                         <configuration>
                             <headerType>gui</headerType>
                             <jar>${basedir}/out/ISInCa.jar</jar>
-                            <icon>${project.build.directory}/classes/ru/mauveferret/pics/CrocoLogo.ico</icon>
                             <outfile>${basedir}/out/ISInCa.exe</outfile>
+                            <icon>${project.build.directory}/classes/ru/mauveferret/pics/CrocoLogo.ico</icon>
                             <errTitle>some went wrong</errTitle>
                             <classPath>
                                 <mainClass>ru.mauveferret.Main</mainClass>
