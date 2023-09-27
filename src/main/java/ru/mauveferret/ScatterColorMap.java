@@ -35,23 +35,6 @@ public class ScatterColorMap {
         this.dTheta = dTheta;
         this.pathToLog = pathToLog;
 
-        JFrame f = new JFrame(title);
-        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("pics/CrocoLogo.png")));
-        ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(640, 640);
-            }
-        };
-        chartPanel.setMouseZoomable(true, false);
-        f.add(chartPanel);
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-        //return low value for the next plots
-        maxParticlesCount=5;
-
         try {
             BufferedImage bi = createChart(createDataset()).createBufferedImage(640,640);
             File outputfile = new File(pathToLog.replace("txt","png"));
@@ -60,6 +43,30 @@ public class ScatterColorMap {
         } catch (IOException ex) {
             System.out.println();
         }
+
+        try{
+            JFrame f = new JFrame(title);
+            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("pics/CrocoLogo.png")));
+            ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(640, 640);
+                }
+            };
+            chartPanel.setMouseZoomable(true, false);
+            f.add(chartPanel);
+            f.pack();
+            f.setLocationRelativeTo(null);
+            f.setVisible(true);
+            //return low value for the next plots
+            maxParticlesCount=5;
+        }
+        catch (Exception e){
+            System.out.println("[WARNING] Are you in GUI mode?! No X11 DISPLAY variable was set. Check ScatteredColorMap.");
+        }
+
+
 
     }
 

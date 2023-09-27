@@ -19,6 +19,8 @@ import java.util.Arrays;
 
 public class Console {
 
+
+    public static boolean isConsole = false;
     String fullpath;
     File configFile;
     //params
@@ -58,7 +60,7 @@ public class Console {
             getTXT = false;
             getSummary = true;
             visualize = false;
-            combine = true;
+            combine = false;
             // N_E
             sortNE = "B";
             deltaNE = 100;
@@ -112,6 +114,8 @@ public class Console {
             calculationThreads = new ArrayList<>();
             printandvisualize = new ArrayList<>();
             combiners = new ArrayList<>();
+
+            isConsole = true;
 
             //create threads
             for (int i = 0; i < calcs.getLength(); i++) {
@@ -381,15 +385,16 @@ public class Console {
                         }
                         break;
                         case "eneang_Map": {
+                            deltaE_eneangMap = yourCalculator.projectileMaxEnergy / 200;
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {
                                     case "sort":
                                         sortEneangMap = distrPars.item(j).getTextContent();
                                         break;
-                                    case "deltaE":
+                                    case "deltae":
                                         deltaE_eneangMap = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
-                                    case "deltaA":
+                                    case "deltaa":
                                         deltaA_eneangMap = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                 }

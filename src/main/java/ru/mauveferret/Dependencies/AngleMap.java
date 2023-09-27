@@ -6,6 +6,8 @@ import java.awt.*;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import static ru.mauveferret.Console.isConsole;
+
 public class AngleMap extends Dependence {
 
     private final double dPhi;
@@ -86,6 +88,11 @@ public class AngleMap extends Dependence {
                 System.out.println(e.getMessage());
                 return false;
             }
+        }
+        //FIXME !!!!!! only for Mamedov's calcs
+        if (!doVisualisation) {
+            if (isConsole) doVisualisation = true;
+            visualize();
         }
         return  true;
     }

@@ -79,6 +79,8 @@ public class Polar extends Dependence {
                 return false;
             }
         }
+
+
         return  true;
     }
 

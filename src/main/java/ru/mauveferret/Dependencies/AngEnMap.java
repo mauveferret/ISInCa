@@ -8,6 +8,8 @@ import java.awt.*;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import static ru.mauveferret.Console.isConsole;
+
 public class AngEnMap extends Dependence {
 
     public final double E0;
@@ -23,6 +25,7 @@ public class AngEnMap extends Dependence {
 
         depType = "map";
         mapArrayYsize = (int) Math.ceil(90/dTheta)+1;
+
         mapArrayXsize = (int) Math.ceil(E0/dE)+1;
         endOfPath="_dE "+dE+"_dTheta"+dTheta+".txt";
     }
@@ -87,6 +90,13 @@ public class AngEnMap extends Dependence {
                 return false;
             }
         }
+
+        //FIXME !!!!!! only for Mamedov's calcs
+        if (!doVisualisation) {
+            if (isConsole) doVisualisation = true;
+            visualize();
+        }
+
         return  true;
     }
 

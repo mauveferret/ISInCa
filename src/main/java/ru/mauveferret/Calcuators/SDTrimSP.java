@@ -65,13 +65,17 @@ public class SDTrimSP extends ParticleInMatterCalculator{
                              projectileElements = projectileElements.replaceAll("\"","");
                              elements = projectileElements.split(",");
 
+
                              //FIXME What is it for?
                             try {
                                 for (int i = 0; i < elements.length; i++)
                                     elements[i] = elements[i].substring(1, elements[i].length() - 1);
                             } catch (Exception e) {
-                                System.out.println(e.getMessage());
+                                //System.out.println("73");
+                                System.out.println("[WARNING] SDTrimSP75 : "+e.getMessage());
                             }
+
+
 
 
                         }
