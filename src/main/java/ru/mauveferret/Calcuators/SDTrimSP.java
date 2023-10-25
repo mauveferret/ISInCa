@@ -66,6 +66,7 @@ public class SDTrimSP extends ParticleInMatterCalculator{
                              elements = projectileElements.split(",");
 
 
+                             /*
                              //FIXME What is it for?
                             try {
                                 for (int i = 0; i < elements.length; i++)
@@ -75,8 +76,7 @@ public class SDTrimSP extends ParticleInMatterCalculator{
                                 System.out.println("[WARNING] SDTrimSP75 : "+e.getMessage());
                             }
 
-
-
+                              */
 
                         }
 
