@@ -72,7 +72,7 @@ public abstract class Dependence implements Cloneable{
 
         for (String element: elements){
             pathsToLog.put(element, pathToLog+element+"_"+ endOfPath);
-            String addheaderComment = " calculated  for "+element+" target elements ";
+            String addheaderComment = " calculated  for "+element+" elements ";
             headerComments.put(element, headerComment+calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n");
             switch (depType){
                 case "distribution": distributionArray.put(element, new double[distributionSize]);

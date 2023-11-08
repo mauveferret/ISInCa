@@ -6,6 +6,8 @@ import ru.mauveferret.ScatterColorMap;
 
 import java.awt.*;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import static ru.mauveferret.Console.isConsole;
@@ -60,9 +62,13 @@ public class AngEnMap extends Dependence {
             // from probability distr. to angle
 
             for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
-                for (int j = 1; j <= (int) Math.round(90 / dTheta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                            /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j * dTheta))));
+                for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
+                    if (j==0)
+                        mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
+                            /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
+                    else
+                        mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
+                                /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j*dTheta))));
                 }
             }
 
@@ -79,8 +85,7 @@ public class AngEnMap extends Dependence {
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                     stroka = (int) (i * dE) + columnSeparatorInLog;
                     for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
-                        if (i < (int) Math.round(360 / dTheta)) stroka = stroka + mapArray.get(element)[i][j] + columnSeparatorInLog;
-                        else stroka = stroka + mapArray.get(element)[i - 1][j] + columnSeparatorInLog;
+                        stroka = stroka + String.format("%12.4e",mapArray.get(element)[i][j])  + columnSeparatorInLog;
                     }
                     stroka = stroka + "\n";
                     surfaceWriter.write(stroka.getBytes());
