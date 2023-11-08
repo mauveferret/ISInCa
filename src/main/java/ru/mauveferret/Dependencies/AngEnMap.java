@@ -61,7 +61,8 @@ public class AngEnMap extends Dependence {
 
             for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                 for (int j = 1; j <= (int) Math.round(90 / dTheta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dE * Math.sin(Math.toRadians(Math.abs(j * dTheta))));
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
+                            /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j * dTheta))));
                 }
             }
 
