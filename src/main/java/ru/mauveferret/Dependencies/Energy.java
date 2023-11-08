@@ -71,7 +71,7 @@ public class Energy extends Dependence {
                     String stroka;
                     energyWriter.write(headerComments.get(element).getBytes());
                     for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
-                        stroka = i * dE + columnSeparatorInLog
+                        stroka = String.format("%.2f",i * dE) + columnSeparatorInLog
                                 + new BigDecimal(newArray[i] / dE).
                                 setScale(3, RoundingMode.UP) + "\n";
                         energyWriter.write(stroka.getBytes());

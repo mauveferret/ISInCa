@@ -63,12 +63,14 @@ public class AngEnMap extends Dependence {
 
             for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                 for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
-                    if (j==0)
+                    if (j==0){
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                            /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
-                    else
+                                /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
+                    }
+                    else {
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
                                 /(calculator.particleCount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j*dTheta))));
+                    }
                 }
             }
 
@@ -83,7 +85,7 @@ public class AngEnMap extends Dependence {
                 surfaceWriter.write(stroka.getBytes());
 
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
-                    stroka = (int) (i * dE) + columnSeparatorInLog;
+                    stroka = String.format("%.2f",i * dE) + columnSeparatorInLog;
                     for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
                         stroka = stroka + String.format("%12.4e",mapArray.get(element)[i][j])  + columnSeparatorInLog;
                     }
