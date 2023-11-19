@@ -170,7 +170,8 @@ public class Scatter extends ParticleInMatterCalculator {
 
                     if (floatSort>=0 && cosz>=0 ) sort = "S"; else
                     if (floatSort<0 && cosz>0) sort = "B"; else
-                    if (floatSort<0 && cosz<0) sort = "I"; else
+                    if (floatSort<0 && cosz<0 && en<100) sort = "I"; else
+                    if (floatSort<0 && cosz<0 && en>100) sort = "T"; else
                     if (floatSort>=0 && cosz<=0 ) sort = "D";
                     else sort = "S"; // for particles with "NaN" coordinates.
 
