@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Energy extends Dependence {
 
     public final double E0;
-    public final double theta;
-    public final double dTheta;
+    public final double beta;
+    public final double dBeta;
     public final double phi;
     public final double dPhi;
     public final double dE;
@@ -21,12 +21,12 @@ public class Energy extends Dependence {
     public final double energyAnalyserBroadening;
     private double broadening = 0;
 
-    public Energy(double dE, double phi, double dPhi, double theta, double dTheta, String sort, Simulator calculator, double energyAnalyserBroadening) {
+    public Energy(double dE, double phi, double dPhi, double beta, double dBeta, String sort, Simulator calculator, double energyAnalyserBroadening) {
         super(calculator, sort);
         this.E0 = calculator.projectileMaxEnergy;
-        this.theta = theta;
+        this.beta = beta;
         // Idea is that input delta is absolute values, but we use at as difference |a-b|<delta
-        this.dTheta = dTheta/2;
+        this.dBeta = dBeta/2;
         this.phi = phi;
         this.dPhi = dPhi/2;
         this.dE = dE;
@@ -34,14 +34,14 @@ public class Energy extends Dependence {
 
         depType = "distribution";
         distributionSize = (int) Math.ceil(E0/dE)+1;
-        endOfPath="_theta "+theta+"_phi "+phi+"_dE"+dE+"_time "+ ((int ) (Math.random()*100))+".txt";
+        endOfPath="_beta "+beta+"_phi "+phi+"_dE"+dE+"_time "+ ((int ) (Math.random()*100))+".txt";
 
     }
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
         headerComment = simulator.createHeader();
-        String addheaderComment = " delta E "+dE+" eV theta "+theta+" deg dTheta "+dTheta+" deg phi "+
+        String addheaderComment = " delta E "+dE+" eV beta "+beta+" deg dBeta "+dBeta+" deg phi "+
                 phi+" deg dPhi "+dPhi+" deg";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Energy particles "+"\n"+"eV  count \n\n"+headerComment+"\n";
@@ -52,7 +52,7 @@ public class Energy extends Dependence {
 
         if (sort.contains(someSort)) {
 
-            if (angles.doesAzimuthAngleMatch(phi, dPhi) && angles.doesPolarAngleMatch(theta, dTheta)) {
+            if (angles.doesAzimuthAngleMatch(phi, dPhi) && angles.doesPolarAngleMatch(beta, dBeta)) {
                 if (energyAnalyserBroadening==0) {
                     distributionArray.get(element)[(int) Math.round(E / dE)]++;
                     distributionArray.get("all")[(int) Math.round(E / dE)]++;
@@ -111,7 +111,7 @@ public class Energy extends Dependence {
         Platform.runLater(() -> {
 
             if (!sort.equals("") && doVisualisation) new GUI().showGraph(normSpectrum, E0, dE, "Энергетический спектр "+
-                    simulator.projectileElements+" --> "+ simulator.targetElements+" phi = "+phi+" theta = "+theta);
+                    simulator.projectileElements+" --> "+ simulator.targetElements+" phi = "+phi+" beta = "+beta);
         });
         return  true;
     }

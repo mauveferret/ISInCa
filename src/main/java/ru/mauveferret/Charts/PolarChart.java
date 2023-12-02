@@ -34,17 +34,17 @@ import javax.swing.*;
 public class PolarChart extends ApplicationFrame {
 
     String title;
-    double[] thetaDistr;
-    double dTheta;
-    double Theta;
+    double[] betaDistr;
+    double dBeta;
+    double Beta;
 
-    public PolarChart(final String title, double[] thetaDistr, double dTheta, double Theta, String path) {
+    public PolarChart(final String title, double[] betaDistr, double dBeta, double Beta, String path) {
         super(title);
         this.title = title;
         path = path.replace(".txt", ".png");
-        this.thetaDistr = thetaDistr;
-        this.dTheta = dTheta;
-        this.Theta = Theta;
+        this.betaDistr = betaDistr;
+        this.dBeta = dBeta;
+        this.Beta = Beta;
 
         JFrame f = new JFrame("ISInCa: Polar Dependence");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -89,25 +89,25 @@ public class PolarChart extends ApplicationFrame {
         final XYSeriesCollection data = new XYSeriesCollection();
         XYSeries mainSeries = new XYSeries("calculation");
         double max = 0;
-        for (int i=0; i<thetaDistr.length; i++) {
-            if (Math.abs(i * dTheta -90)!= 0)
+        for (int i=0; i<betaDistr.length; i++) {
+            if (Math.abs(i * dBeta -90)!= 0)
             {
-               // System.out.println(i*dTheta-90+" "+thetaDistr[i]);
-                mainSeries.add(i*dTheta-90, thetaDistr[i]);
-                if (thetaDistr[i]>max) max = thetaDistr[i];
+               // System.out.println(i*dBeta-90+" "+betaDistr[i]);
+                mainSeries.add(i*dBeta-90, betaDistr[i]);
+                if (betaDistr[i]>max) max = betaDistr[i];
             }
 
         }
 
        // System.out.println(max);
         XYSeries cosineSeries = new XYSeries("cosine");
-        for (int i=0; i<thetaDistr.length; i++) {
-            cosineSeries.add(i*dTheta-90, max*Math.cos(Math.toRadians(i*dTheta-90)));
+        for (int i=0; i<betaDistr.length; i++) {
+            cosineSeries.add(i*dBeta-90, max*Math.cos(Math.toRadians(i*dBeta-90)));
         }
 
         XYSeries projectiles = new XYSeries("incident beam");
-        projectiles.add(-1*Theta,max);
-        projectiles.add(-1*Theta,0);
+        projectiles.add(-1*Beta,max);
+        projectiles.add(-1*Beta,0);
 
         data.addSeries(mainSeries);
         data.addSeries(cosineSeries);

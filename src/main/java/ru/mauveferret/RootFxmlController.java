@@ -90,15 +90,15 @@ public class RootFxmlController {
     //energy?
 
     @FXML
-    private TextField dPolarAngleNtheta;
+    private TextField dPolarAngleNbeta;
     @FXML
-    private TextField azimuthAngleNtheta;
+    private TextField azimuthAngleNbeta;
     @FXML
-    private TextField dAzimuthAngleNtheta;
+    private TextField dAzimuthAngleNbeta;
 
     //Surface particle distribution
     @FXML
-    private TextField NdThetaPhi, NThetadPhi;
+    private TextField NdBetaPhi, NBetadPhi;
     @FXML
     private TextField NEBetadBeta, NEBetadE;
 
@@ -225,16 +225,16 @@ public class RootFxmlController {
             azimuthAngleNE.setText("0");
         }
         try {
-            double t = Double.parseDouble(azimuthAngleNtheta.getText());
+            double t = Double.parseDouble(azimuthAngleNbeta.getText());
             if (t < 0 || t > 179 ) {
-                azimuthAngleNtheta.setText("0");
+                azimuthAngleNbeta.setText("0");
 
                 new GUI().showNotification("Please set φ in a range of  0<=φ<=180");
             }
         }
         catch (Exception e)
         {
-            azimuthAngleNtheta.setText("0");
+            azimuthAngleNbeta.setText("0");
         }
     }
     @FXML
@@ -265,9 +265,9 @@ public class RootFxmlController {
             dAzimuthAngleNE.setText("2");
         }
         try {
-            double t = Double.parseDouble(dAzimuthAngleNtheta.getText());
+            double t = Double.parseDouble(dAzimuthAngleNbeta.getText());
             if (t <= 0 ) {
-                dAzimuthAngleNtheta.setText("2");
+                dAzimuthAngleNbeta.setText("2");
 
                 new GUI().showNotification("Please set positive dβ.");
 
@@ -275,7 +275,7 @@ public class RootFxmlController {
         }
         catch (Exception e)
         {
-            dAzimuthAngleNtheta.setText("2");
+            dAzimuthAngleNbeta.setText("2");
         }
         try {
             double t = Double.parseDouble(NEBetadBeta.getText());
@@ -305,6 +305,15 @@ public class RootFxmlController {
             E0.setText("25000");
         }
 
+        try {
+            double E = Double.parseDouble(deltaEtoE.getText());
+            if (E<0) throw new Exception();
+        }
+        catch (Exception e)
+        {
+            deltaEtoE.setText("0");
+            new GUI().showNotification("Please set correct deltaEtoE");
+        }
     }
 
     @FXML
@@ -351,19 +360,19 @@ public class RootFxmlController {
 
                 //int energyReturnValue = E;
                 double dE = Double.parseDouble(energyResolution.getText());
-                double thetaNE = Double.parseDouble(polarAngleNE.getText());
-                double dThetaNE = Double.parseDouble(dPolarAngleNE.getText());
-                double energyAnalyserBroadening = Double.parseDouble(deltaEtoE.getText());
+                double betaNE = Double.parseDouble(polarAngleNE.getText());
+                double dBetaNE = Double.parseDouble(dPolarAngleNE.getText());
+                double energyAnalyserBroadening = Double.parseDouble(deltaEtoE.getText().replace(",","."));
                 double phiNE=Double.parseDouble(azimuthAngleNE.getText());
                 double dphiNE=Double.parseDouble(dAzimuthAngleNE.getText());
 
                 ///////////
 
-                double dThetaNTheta=Double.parseDouble(dPolarAngleNtheta.getText());
-                double phiNTheta=Double.parseDouble(azimuthAngleNtheta.getText());
-                double dPhiNTheta=Double.parseDouble(dAzimuthAngleNtheta.getText());
-                double NThetadPhi1 = Double.parseDouble(NThetadPhi.getText());
-                double NdThetaPhi1 = Double.parseDouble(NdThetaPhi.getText());
+                double dBetaNBeta=Double.parseDouble(dPolarAngleNbeta.getText());
+                double phiNBeta=Double.parseDouble(azimuthAngleNbeta.getText());
+                double dPhiNBeta=Double.parseDouble(dAzimuthAngleNbeta.getText());
+                double NBetadPhi1 = Double.parseDouble(NBetadPhi.getText());
+                double NdBetaPhi1 = Double.parseDouble(NdBetaPhi.getText());
                 double NEBetadBeta1 = Double.parseDouble(NEBetadBeta.getText());
                 double NEBetadE1 = Double.parseDouble(NEBetadE.getText());
 
@@ -378,21 +387,21 @@ public class RootFxmlController {
                 sort += (NET.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new Energy(dE,phiNE, dphiNE, thetaNE, dThetaNE,sort, yourSimulator, energyAnalyserBroadening));
+                    distributions.add(new Energy(dE,phiNE, dphiNE, betaNE, dBetaNE,sort, yourSimulator, energyAnalyserBroadening));
 
                 sort = (NBetaB.isSelected()) ? "B" : "";
                 sort += (NBetaS.isSelected()) ? "S" : "";
                 sort += (NBetaT.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new Polar(phiNTheta, dPhiNTheta, dThetaNTheta,sort, yourSimulator));
+                    distributions.add(new Polar(phiNBeta, dPhiNBeta, dBetaNBeta,sort, yourSimulator));
 
                 sort = (NBetaPhiB.isSelected()) ? "B" : "";
                 sort += (NBetaPhiS.isSelected()) ? "S" : "";
                 sort += (NBetaPhiT.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new AngleMap(dPhiNTheta, dThetaNTheta,sort, yourSimulator));
+                    distributions.add(new AngleMap(dPhiNBeta, dBetaNBeta,sort, yourSimulator));
 
                 sort = (NEBetaB.isSelected()) ? "B" : "";
                 sort += (NEBetaS.isSelected()) ? "S" : "";

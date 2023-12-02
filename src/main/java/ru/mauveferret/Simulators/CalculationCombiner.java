@@ -14,7 +14,7 @@ public class CalculationCombiner extends Simulator {
 
 
     //говно
-    double dTheta1 = 3;
+    double dBeta1 = 3;
     double dPhi1 = 3;
 
     private final ArrayList<Simulator> calculators;
@@ -94,13 +94,13 @@ public class CalculationCombiner extends Simulator {
             switch (remoteDep.getDepName()){
                 case "polar":
                     dependencies.add(new Polar(((Polar) remoteDep).phi, ((Polar) remoteDep).dPhi*2,
-                            ((Polar) remoteDep).dTheta, remoteDep.getSort(), this));
+                            ((Polar) remoteDep).dBeta, remoteDep.getSort(), this));
                     //Никита, это умножение dPhi на 2 уже пиздец какой-то ненормальный
-               dTheta1 =   ((Polar) remoteDep).dTheta;
+               dBeta1 =   ((Polar) remoteDep).dBeta;
                     dPhi1 = ((Polar) remoteDep).dPhi;
                 break;
                 case "energy": dependencies.add(new Energy(((Energy) remoteDep).dE, ((Energy) remoteDep).phi,
-                        ((Energy) remoteDep).dPhi*2, ((Energy) remoteDep).theta, ((Energy) remoteDep).dTheta*2,
+                        ((Energy) remoteDep).dPhi*2, ((Energy) remoteDep).beta, ((Energy) remoteDep).dBeta*2,
                         ((Energy) remoteDep).getSort(), this, 0));
                 break;
             }

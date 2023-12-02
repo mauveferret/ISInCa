@@ -108,7 +108,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="deltaEtoE" alignment="CENTER" onKeyReleased="#DeltaChanged" prefHeight="56.0" prefWidth="99.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                    <TextField fx:id="deltaEtoE" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="56.0" prefWidth="99.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="26.0" />
                                        </font>
@@ -138,26 +138,26 @@
                      <content>
                         <AnchorPane prefHeight="150.0" prefWidth="583.0">
                            <children>
-                              <TextField fx:id="dPolarAngleNtheta" alignment="CENTER" layoutX="37.0" layoutY="38.0" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="69.0" text="3">
+                              <TextField fx:id="dPolarAngleNbeta" alignment="CENTER" layoutX="37.0" layoutY="38.0" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="69.0" text="3">
                                  <font>
                                     <Font size="24.0" />
 
                                  </font>
                               </TextField>
-                              <Label fx:id="call1" layoutX="44.0" layoutY="14.0" text="delta θ" />
-                              <TextField fx:id="dAzimuthAngleNtheta" alignment="CENTER" layoutX="198.0" layoutY="38.0" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="69.0" text="3">
+                              <Label fx:id="call1" layoutX="44.0" layoutY="14.0" text="delta β" />
+                              <TextField fx:id="dAzimuthAngleNbeta" alignment="CENTER" layoutX="198.0" layoutY="38.0" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="69.0" text="3">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="azimuthAngleNtheta" alignment="CENTER" layoutX="120.0" layoutY="38.0" onKeyReleased="#AngleChanged" prefHeight="51.0" prefWidth="69.0" text="0">
+                              <TextField fx:id="azimuthAngleNbeta" alignment="CENTER" layoutX="120.0" layoutY="38.0" onKeyReleased="#AngleChanged" prefHeight="51.0" prefWidth="69.0" text="0">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
                               <Label fx:id="call123" layoutX="225.0" layoutY="14.0" text="dφ" />
                               <Label layoutX="154.0" layoutY="14.0" text="φ" />
-                              <Label layoutX="280.0" layoutY="67.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 " />
+                              <Label layoutX="280.0" layoutY="67.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 " />
                               <Label layoutX="280.0" layoutY="34.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;180" />
                            </children>
                         </AnchorPane>
@@ -167,20 +167,20 @@
                      <content>
                         <AnchorPane prefHeight="150.0" prefWidth="583.0">
                            <children>
-                              <TextField fx:id="NdThetaPhi" alignment="CENTER" layoutX="132.0" layoutY="34.0" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="101.0" text="3">
+                              <TextField fx:id="NdBetaPhi" alignment="CENTER" layoutX="132.0" layoutY="34.0" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="101.0" text="3">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="161.0" layoutY="10.0" text="delta θ" />
-                              <TextField fx:id="NThetadPhi" alignment="CENTER" layoutX="22.0" layoutY="34.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="101.0" text="3">
+                              <Label layoutX="161.0" layoutY="10.0" text="delta β" />
+                              <TextField fx:id="NBetadPhi" alignment="CENTER" layoutX="22.0" layoutY="34.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="101.0" text="3">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
                               <Label layoutX="57.0" layoutY="10.0" text="delta φ" />
                               <Label layoutX="254.0" layoutY="21.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;360 (first column)" />
-                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 (first row)" />
+                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -194,14 +194,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="161.0" layoutY="10.0" text="delta θ" />
+                              <Label layoutX="161.0" layoutY="10.0" text="delta β" />
                               <TextField fx:id="NEBetadE" alignment="CENTER" layoutX="22.0" layoutY="34.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="101.0" text="250">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
                               <Label layoutX="57.0" layoutY="10.0" text="delta E" />
-                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;θ&lt;90 (first row)" />
+                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -210,14 +210,15 @@
                      <content>
                         <AnchorPane prefHeight="135.0" prefWidth="583.0">
                            <children>
-                              <GridPane layoutX="10.0" layoutY="10.0" prefHeight="79.0" prefWidth="646.0">
+                              <GridPane layoutX="10.0" layoutY="10.0" prefHeight="84.0" prefWidth="757.0">
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -260,17 +261,17 @@
                                        </font>
                                     </TextField>
                                     <Label alignment="CENTER" text="transmitted (T)" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <TextField fx:id="displaced" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="145.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label alignment="CENTER" text="displaced (D)" GridPane.columnIndex="6" />
                                  </children>
                               </GridPane>
-                              <Label layoutX="161.0" layoutY="100.0" prefHeight="24.0" prefWidth="481.0" text="Note that for plausible values you have to set enough large sizes of correspond files" />
-                              <TextField fx:id="displaced" alignment="CENTER" layoutX="8.0" layoutY="109.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="145.0" text="0">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </TextField>
-                              <Label alignment="CENTER" layoutX="45.0" layoutY="90.0" text="displaced (D)" />
-                              <Label layoutX="161.0" layoutY="118.0" prefHeight="24.0" prefWidth="491.0" text="For Scatter you should mark Sputter and Profiles (netter more than 100 nm) in the left top " />
-                              <Label layoutX="161.0" layoutY="135.0" prefHeight="24.0" prefWidth="491.0" text="of the GUI. On SDTrimSP you should set enough amount of particles in the &quot;partic_*.dat&quot; file" />
+                              <Label layoutX="18.0" layoutY="100.0" prefHeight="24.0" prefWidth="481.0" text="Note that for plausible values you have to set enough large sizes of correspond files" />
+                              <Label layoutX="18.0" layoutY="118.0" prefHeight="24.0" prefWidth="491.0" text="For Scatter you should mark Sputter and Profiles (netter more than 100 nm) in the left top " />
+                              <Label layoutX="18.0" layoutY="135.0" prefHeight="24.0" prefWidth="491.0" text="of the GUI. On SDTrimSP you should set enough amount of particles in the &quot;partic_*.dat&quot; file" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -282,9 +283,9 @@
                               <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showHelp" text="Axes" />
                               <Label layoutX="64.0" layoutY="13.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= picture with axes" />
                               <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;convert *.dat&quot; converts  SCATTER binary file to ASCII " />
-                              <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(θ) shows scattering(sputtering) if  0&lt;θ&lt;180 and implantation if 180&lt;θ&lt;360 (not made)" />
-                              <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="You can get integral distributions by setting large  dφ, dθ " />
-                              <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta θ - is step, not dispersion" />
+                              <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(β) shows scattering(sputtering) if  0&lt;β&lt;180 and implantation if 180&lt;β&lt;360 (not made)" />
+                              <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="You can get integral distributions by setting large  dφ, dβ " />
+                              <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta β - is step, not dispersion" />
                               <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" visible="false" />
                               <Button layoutX="296.0" layoutY="14.0" mnemonicParsing="false" onAction="#openGIT" text="HELP" />
                            </children></AnchorPane>

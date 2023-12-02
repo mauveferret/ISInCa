@@ -38,8 +38,8 @@ public class PolarAngles {
         else return (azimuth < dPhi || azimuth>360-dPhi);
     }
 
-    public boolean doesPolarAngleMatch(double theta, double dTheta){
-        return (Math.abs(theta-polar)<dTheta);
+    public boolean doesPolarAngleMatch(double beta, double dBeta){
+        return (Math.abs(beta-polar)<dBeta);
     }
 
     private void cartesianToAngles(double cosx,double cosy,double cosz){

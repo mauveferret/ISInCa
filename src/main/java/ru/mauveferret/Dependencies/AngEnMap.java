@@ -13,26 +13,26 @@ public class AngEnMap extends Dependence {
 
     public final double E0;
     private final double dE;
-    private final double dTheta;
+    private final double dBeta;
 
-    public AngEnMap(double dTheta, double dE, String sort, Simulator calculator) {
+    public AngEnMap(double dBeta, double dE, String sort, Simulator calculator) {
         super(calculator, sort);
         this.dE = dE;
         this.E0 = calculator.projectileMaxEnergy;
 
-        this.dTheta = dTheta;
+        this.dBeta = dBeta;
 
         depType = "map";
-        mapArrayYsize = (int) Math.ceil(90/dTheta)+1;
+        mapArrayYsize = (int) Math.ceil(90/dBeta)+1;
 
         mapArrayXsize = (int) Math.ceil(E0/dE)+1;
-        endOfPath="_dE "+dE+"_dTheta"+dTheta+".txt";
+        endOfPath="_dE "+dE+"_dBeta"+dBeta+".txt";
     }
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
         headerComment = simulator.createHeader();
-        String addheaderComment = " dE "+dE+" eV dTheta "+dTheta+" degrees ";
+        String addheaderComment = " dE "+dE+" eV dBeta "+dBeta+" degrees ";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         //headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
@@ -43,8 +43,8 @@ public class AngEnMap extends Dependence {
         //only for backscattered and sputtered!
         if (sort.contains(someSort))
         {
-            mapArray.get(element)[(int) Math.round(E / dE)][(int) Math.round( angles.getPolar()/ dTheta)]++;
-            mapArray.get("all")[(int) Math.round(E / dE)][(int) Math.round( angles.getPolar()/ dTheta)]++;
+            mapArray.get(element)[(int) Math.round(E / dE)][(int) Math.round( angles.getPolar()/ dBeta)]++;
+            mapArray.get("all")[(int) Math.round(E / dE)][(int) Math.round( angles.getPolar()/ dBeta)]++;
         }
     }
 
@@ -59,15 +59,15 @@ public class AngEnMap extends Dependence {
             // from probability distr. to angle
 
             for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
-                for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
+                for (int j = 0; j <= (int) Math.round(90 / dBeta); j++) {
                     if (j==0){
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(simulator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
+                                /(simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                     }
                     else {
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(simulator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j*dTheta))));
-                        //System.out.println(j+" "+calculator.projectileAmount+" "+dE+" "+dTheta+" "+Math.sin(Math.toRadians(Math.abs(j*dTheta))));
+                                /(simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(j*dBeta))));
+                        //System.out.println(j+" "+calculator.projectileAmount+" "+dE+" "+dBeta+" "+Math.sin(Math.toRadians(Math.abs(j*dBeta))));
                     }
                 }
             }
@@ -76,15 +76,15 @@ public class AngEnMap extends Dependence {
                 FileOutputStream surfaceWriter = new FileOutputStream(pathsToLog.get(element));
                 String stroka = "E";
                 surfaceWriter.write(headerComments.get(element).getBytes());
-                for (int i = 0; i <= (int) Math.round(90 / dTheta); i++) {
-                    stroka = stroka + columnSeparatorInLog + (int) (i * dTheta);
+                for (int i = 0; i <= (int) Math.round(90 / dBeta); i++) {
+                    stroka = stroka + columnSeparatorInLog + (int) (i * dBeta);
                 }
                 stroka = stroka + "\n";
                 surfaceWriter.write(stroka.getBytes());
 
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                     stroka = String.format("%.2f",i * dE) + columnSeparatorInLog;
-                    for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
+                    for (int j = 0; j <= (int) Math.round(90 / dBeta); j++) {
                         stroka = stroka + String.format("%12.4e",mapArray.get(element)[i][j])  + columnSeparatorInLog;
                     }
                     stroka = stroka + "\n";
@@ -112,7 +112,7 @@ public class AngEnMap extends Dependence {
                 new EnAngColorMap(simulator.projectileElements+" with average energy of "+ simulator.projectileMaxEnergy/1000
                         +" keV hits target of "+
                         simulator.targetElements.replaceAll(" ","")+" at average polar angle of "+
-                        simulator.projectileIncidentPolarAngle +" degrees ",  mapArray.get("all"), E0, dE, dTheta,pathsToLog.get("all")));
+                        simulator.projectileIncidentPolarAngle +" degrees ",  mapArray.get("all"), E0, dE, dBeta,pathsToLog.get("all")));
         return  true;
     }
 

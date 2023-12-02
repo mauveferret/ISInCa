@@ -24,8 +24,8 @@ public class Console {
     String fullpath;
     File configFile;
     //params
-    private double thetaNE, phiNE, phiNTheta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaThetaNE, deltaPhiNTheta, deltaThetaNTheta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
-    private String  sortNE, sortNTheta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
+    private double betaNE, phiNE, phiNBeta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaBetaNE, deltaPhiNBeta, deltaBetaNBeta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
+    private String  sortNE, sortNBeta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
     private String dirSubname;
     //Preferences
     private boolean getTXT, getSummary, visualize, combine;
@@ -65,15 +65,15 @@ public class Console {
             sortNE = "B";
             deltaNE = 100;
             energyAnalyserBroadening = 0;
-            thetaNE = 70;
-            deltaThetaNE = 3;
+            betaNE = 70;
+            deltaBetaNE = 3;
             phiNE = 0;
             deltaPhiNE = 3;
-            //N_Theta
-            sortNTheta = "S";
-            phiNTheta = 0;
-            deltaPhiNTheta = 3;
-            deltaThetaNTheta = 3;
+            //N_Beta
+            sortNBeta = "S";
+            phiNBeta = 0;
+            deltaPhiNBeta = 3;
+            deltaBetaNBeta = 3;
             //polar_Map
             sortPolarMap = "S";
             deltaPolarMap = 3;
@@ -326,15 +326,15 @@ public class Console {
 
                         case "N_E": {
                             deltaNE = yourCalculator.projectileMaxEnergy / 100;
-                            thetaNE = yourCalculator.projectileIncidentPolarAngle;
+                            betaNE = yourCalculator.projectileIncidentPolarAngle;
 
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {
                                     case "sort":
                                         sortNE = distrPars.item(j).getTextContent();
                                         break;
-                                    case "theta":
-                                        thetaNE = Double.parseDouble(distrPars.item(j).getTextContent());
+                                    case "beta":
+                                        betaNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                     case "phi":
                                         phiNE = Double.parseDouble(distrPars.item(j).getTextContent());
@@ -345,34 +345,34 @@ public class Console {
                                     case "deltaetoe":
                                         energyAnalyserBroadening = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
-                                    case "deltatheta":
-                                        deltaThetaNE = Double.parseDouble(distrPars.item(j).getTextContent());
+                                    case "deltabeta":
+                                        deltaBetaNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                     case "deltaphi":
                                         deltaPhiNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                 }
                             }
-                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, thetaNE, deltaThetaNE, sortNE, yourCalculator, energyAnalyserBroadening));
+                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, betaNE, deltaBetaNE, sortNE, yourCalculator, energyAnalyserBroadening));
                         }
                         break;
-                        case "N_Theta": {
+                        case "N_Beta": {
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {
                                     case "sort":
-                                        sortNTheta = distrPars.item(j).getTextContent();
+                                        sortNBeta = distrPars.item(j).getTextContent();
                                         break;
-                                    case "deltatheta":
-                                        deltaThetaNTheta = Double.parseDouble(distrPars.item(j).getTextContent());
+                                    case "deltabeta":
+                                        deltaBetaNBeta = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                     case "phi":
-                                        phiNTheta = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        phiNBeta = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                     case "deltaphi":
-                                        deltaPhiNTheta = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        deltaPhiNBeta = Double.parseDouble(distrPars.item(j).getTextContent());
                                 }
                             }
-                            distributions.add(new Polar(phiNTheta, deltaPhiNTheta, deltaThetaNTheta, sortNTheta, yourCalculator));
+                            distributions.add(new Polar(phiNBeta, deltaPhiNBeta, deltaBetaNBeta, sortNBeta, yourCalculator));
                         }
                         break;
                         case "polar_Map": {

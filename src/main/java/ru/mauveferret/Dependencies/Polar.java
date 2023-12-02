@@ -13,25 +13,25 @@ public class Polar extends Dependence {
 
     public final double phi;
     public final double dPhi;
-    public final double dTheta;
+    public final double dBeta;
 
-    public Polar(double phi, double dPhi, double dTheta, String sort, Simulator calculator) {
+    public Polar(double phi, double dPhi, double dBeta, String sort, Simulator calculator) {
         super(calculator, sort);
         //even if user entered phi>180, we will look after the plane with phi<180, which is generally the same
         this.phi = (phi > 180) ? phi-180 : phi;
         // Idea is that input delta is absolute values, but we use at as difference |a-b|<delta
         this.dPhi = dPhi/2;
-        this.dTheta = dTheta;
+        this.dBeta = dBeta;
 
         depType = "distribution";
-        distributionSize = (int) Math.ceil(180/dTheta)+1;
-        endOfPath="_phi "+phi+"_dphi "+dPhi+"_dTheta"+dTheta+".txt";
+        distributionSize = (int) Math.ceil(180/dBeta)+1;
+        endOfPath="_phi "+phi+"_dphi "+dPhi+"_dBeta"+dBeta+".txt";
     }
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
         headerComment = simulator.createHeader();
-        String addheaderComment = " phi "+phi+"  degrees dPhi "+dPhi+" degrees dTheta "+dTheta+" degrees ";
+        String addheaderComment = " phi "+phi+"  degrees dPhi "+dPhi+" degrees dBeta "+dBeta+" degrees ";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
@@ -44,13 +44,13 @@ public class Polar extends Dependence {
         //FIXME a lot of NaN in Scatter!
         if (sort.contains(someSort) && (!Double.isNaN(angles.getPolar()))) {
             if (angles.doesAzimuthAngleMatch(phi,dPhi)) {
-                //System.out.println((int) Math.round((90+angles.getPolar()) / dTheta));
-                distributionArray.get(element)[(int) Math.round((90+angles.getPolar()) / dTheta)]++;
-                distributionArray.get("all")[(int) Math.round((90+angles.getPolar()) / dTheta)]++;
+                //System.out.println((int) Math.round((90+angles.getPolar()) / dBeta));
+                distributionArray.get(element)[(int) Math.round((90+angles.getPolar()) / dBeta)]++;
+                distributionArray.get("all")[(int) Math.round((90+angles.getPolar()) / dBeta)]++;
             }
             if (angles.doesAzimuthAngleMatch(phi+180,dPhi)) {
-                distributionArray.get(element)[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
-                distributionArray.get("all")[(int) Math.round((90-angles.getPolar()) / dTheta)]++;
+                distributionArray.get(element)[(int) Math.round((90-angles.getPolar()) / dBeta)]++;
+                distributionArray.get("all")[(int) Math.round((90-angles.getPolar()) / dBeta)]++;
             }
 
         }
@@ -66,12 +66,12 @@ public class Polar extends Dependence {
                 String stroka;
                polarWriter.write(headerComments.get(element).getBytes());
 
-               double[] newArray = normDistrToDTheta(distributionArray.get(element));
+               double[] newArray = normDistrToDBeta(distributionArray.get(element));
 
-                for (int i = 0; i <= (int) Math.round(180 / dTheta); i++) {
-                    stroka = ((i * dTheta - 90)) + columnSeparatorInLog
+                for (int i = 0; i <= (int) Math.round(180 / dBeta); i++) {
+                    stroka = ((i * dBeta - 90)) + columnSeparatorInLog
                             + new BigDecimal(newArray[i]).setScale(3, RoundingMode.UP) + "\n";
-                    if (i * dTheta != 90) polarWriter.write(stroka.getBytes());
+                    if (i * dBeta != 90) polarWriter.write(stroka.getBytes());
                 }
                 polarWriter.close();
             } catch (Exception e) {
@@ -93,29 +93,29 @@ public class Polar extends Dependence {
             String title = simulator.projectileElements+" with "+ simulator.projectileMaxEnergy+" eV hits at polar angle of "+
                     simulator.projectileIncidentPolarAngle +" degrees target of "+
                     simulator.targetElements+".\n Dependence made at phi " +
-                    simulator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dTheta+" degrees. Chart is for "+
+                    simulator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dBeta+" degrees. Chart is for "+
                     sort+" particles";
-           new PolarChart(title,normDistrToDTheta(distributionArray.get("all")), dTheta, simulator.projectileIncidentPolarAngle, pathsToLog.get("all"));
+           new PolarChart(title,normDistrToDBeta(distributionArray.get("all")), dBeta, simulator.projectileIncidentPolarAngle, pathsToLog.get("all"));
         });
         return  true;
     }
 
-    private double[] normDistrToDTheta(double[] someDistr1){
+    private double[] normDistrToDBeta(double[] someDistr1){
 
         //We make a copy of someDistr1 because it's not an array, but  just a link to distributionArray
         //If we use someDistr1 further, we would change the arraylist("all"), which is unfavourable
         double[] someDistr = new double[someDistr1.length];
         System.arraycopy(someDistr1, 0, someDistr, 0, someDistr1.length);
 
-        for (int i = 0; i <= (int) Math.round(180 / dTheta); i++) {
+        for (int i = 0; i <= (int) Math.round(180 / dBeta); i++) {
 
-            if (Math.abs(i * dTheta -90)!= 0) {
+            if (Math.abs(i * dBeta -90)!= 0) {
                 someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
-                        Math.sin(Math.toRadians(Math.abs(i * dTheta - 90))));
+                        Math.sin(Math.toRadians(Math.abs(i * dBeta - 90))));
             } //we can't divide by zero
             else {
                 someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
-                        Math.sin(Math.toRadians(dTheta)));
+                        Math.sin(Math.toRadians(dBeta)));
             }
         }
         return someDistr;

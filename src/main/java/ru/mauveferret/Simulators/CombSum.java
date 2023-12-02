@@ -43,16 +43,16 @@ public class CombSum extends Simulator {
               for (Double db: combinersMap.keySet())  table+=cl(db+"");
               writer.write((table+"\n").getBytes());
               table = "";
-              double dTheta1 = combiners.get(0).dTheta1;
+              double dBeta1 = combiners.get(0).dBeta1;
               double dPhi1 = combiners.get(0).dPhi1;
 
-              for (int i = 0; i <= (int) Math.round(180 / dTheta1); i++){
-                  table +="\n"+cl((i * dTheta1 - 90)+"");
+              for (int i = 0; i <= (int) Math.round(180 / dBeta1); i++){
+                  table +="\n"+cl((i * dBeta1 - 90)+"");
                   for (CalculationCombiner combiner: combinersMap.values()) {
                       if (combiner.elementsList.contains(element)) {
-                          if (i*dTheta1!= 90) {
+                          if (i*dBeta1!= 90) {
                               double zaebalsa = combiner.dependencies.get(1).distributionArray.get(element)[i]
-                                      / (Math.toRadians(dPhi1) * Math.sin(Math.toRadians(Math.abs(i * dTheta1 - 90))));
+                                      / (Math.toRadians(dPhi1) * Math.sin(Math.toRadians(Math.abs(i * dBeta1 - 90))));
 
                               table += cl(new BigDecimal(zaebalsa).setScale(4, RoundingMode.UP) + "");
                           }

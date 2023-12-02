@@ -28,14 +28,14 @@ public class EnAngColorMap {
     private static double maxParticlesCount = 5;
 
     double[][] array;
-   static double E0, dE, dTheta;
+   static double E0, dE, dBeta;
    static  String title = "";
    static  String pathToLog = "";
-    public EnAngColorMap(String title, double[][] array, double E0, double dE, double dTheta, String pathToLog) {
+    public EnAngColorMap(String title, double[][] array, double E0, double dE, double dBeta, String pathToLog) {
         this.array = array;
         this.dE = dE;
         this.E0 = E0;
-        this.dTheta = dTheta;
+        this.dBeta = dBeta;
         this.title = title;
         this.pathToLog = pathToLog;
 
@@ -81,7 +81,7 @@ public class EnAngColorMap {
         renderer.setPaintScale(ps);
         //colored dot's sizes
         renderer.setBlockHeight(dE/1000);
-        renderer.setBlockWidth(dTheta);
+        renderer.setBlockWidth(dBeta);
         plot.setRenderer(renderer);
         JFreeChart chart = new JFreeChart(title,
                 JFreeChart.DEFAULT_TITLE_FONT, plot, false);
@@ -104,9 +104,9 @@ public class EnAngColorMap {
         int n=0;
         for (int i = 0; i < (int) (E0/dE)+1; i++) {  //energies
             double[][] data = new double[3][10000];
-            for (int j = 0; j < (int) (90/dTheta); j++) {    //polar angle
+            for (int j = 0; j < (int) (90/dBeta); j++) {    //polar angle
                 data[1][j] = i*dE/1000;
-                data[0][j] = j*dTheta;
+                data[0][j] = j*dBeta;
                 //if (i>(int) (180/dPhi)) n = i/2;
                 //else n = i;
                 data[2][j] = array[i][j];

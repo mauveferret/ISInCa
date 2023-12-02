@@ -25,14 +25,14 @@ public class ScatterColorMap {
     private static double maxParticlesCount = 5;
 
     double[][] array;
-   static double dPhi, dTheta;
+   static double dPhi, dBeta;
 
    static  String pathToLog = "";
 
-    public ScatterColorMap(String title, double[][] array, double dPhi, double dTheta, String pathToLog) {
+    public ScatterColorMap(String title, double[][] array, double dPhi, double dBeta, String pathToLog) {
         this.array = array;
         this.dPhi = dPhi;
-        this.dTheta = dTheta;
+        this.dBeta = dBeta;
         this.pathToLog = pathToLog;
 
         try {
@@ -79,8 +79,8 @@ public class ScatterColorMap {
         SpectrumPaintScale ps = new SpectrumPaintScale(0, maxParticlesCount);
         renderer.setPaintScale(ps);
         //colored dot's sizes
-        renderer.setBlockHeight(dTheta);
-        renderer.setBlockWidth(dTheta);
+        renderer.setBlockHeight(dBeta);
+        renderer.setBlockWidth(dBeta);
         plot.setRenderer(renderer);
         JFreeChart chart = new JFreeChart("particles angular Map",
                 JFreeChart.DEFAULT_TITLE_FONT, plot, false);
@@ -103,9 +103,9 @@ public class ScatterColorMap {
         int n=0;
         for (int i = 0; i < (int) (360/dPhi)+1; i++) {  //azimuth angle
             double[][] data = new double[3][1000];
-            for (int j = 0; j < (int) (90/dTheta); j++) {    //polar angle
-                data[0][j] = j*dTheta * Math.cos(i*dPhi*2*3.14/360);
-                data[1][j] = j*dTheta * Math.sin(i*dPhi*2*3.14/360);
+            for (int j = 0; j < (int) (90/dBeta); j++) {    //polar angle
+                data[0][j] = j*dBeta * Math.cos(i*dPhi*2*3.14/360);
+                data[1][j] = j*dBeta * Math.sin(i*dPhi*2*3.14/360);
                 //if (i>(int) (180/dPhi)) n = i/2;
                 //else n = i;
                 data[2][j] = array[i][j];

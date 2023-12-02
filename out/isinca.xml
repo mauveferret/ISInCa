@@ -37,22 +37,22 @@
             <dir>D_FeCrNiTi8keV0deg2375k</dir>
             <dir>H,D_FeCrNiTi20keV0deg2,5M</dir>
             <N_E>
-                <!-- params <delta> and <theta> have default values
+                <!-- params <delta> and <beta> have default values
                 for <N_E>. delta = (incident particles energy)/100,
-                theta = (incident particles theta). Rewrite tags to
+                beta = (incident particles beta). Rewrite tags to
                 change-->
                 <delta>50</delta>
                 <sort>B</sort>
                 <phi>0</phi>
                 <deltaPhi>3</deltaPhi>
-                <deltaTheta>3</deltaTheta>
+                <deltaBeta>3</deltaBeta>
             </N_E>
-            <N_Theta>
+            <N_Beta>
                 <sort>S</sort>
                 <phi>0</phi>
                 <deltaPhi>3</deltaPhi>
-                <deltaTheta>3</deltaTheta>
-            </N_Theta>
+                <deltaBeta>3</deltaBeta>
+            </N_Beta>
             <polar_Map>
                 <sort>S</sort>
                 <delta>3</delta>
@@ -78,12 +78,12 @@
 		</calc>
         <calc>
             <dir>Cs_Ge</dir>
-            <N_Theta>
+            <N_Beta>
                 <sort>BS</sort>
                 <phi>0</phi>
                 <deltaPhi>5</deltaPhi>
-                <deltaTheta>5</deltaTheta>
-            </N_Theta>
+                <deltaBeta>5</deltaBeta>
+            </N_Beta>
         </calc>
     </calcs>
 </ISInCa>
