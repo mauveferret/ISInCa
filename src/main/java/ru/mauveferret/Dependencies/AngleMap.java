@@ -1,6 +1,6 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 import ru.mauveferret.Charts.ScatterColorMap;
 import java.awt.*;
 import java.io.FileOutputStream;
@@ -13,7 +13,7 @@ public class AngleMap extends Dependence {
     private final double dPhi;
     private final double dTheta;
 
-    public AngleMap(double dPhi, double dTheta, String sort, ParticleInMatterCalculator calculator) {
+    public AngleMap(double dPhi, double dTheta, String sort, Simulator calculator) {
         super(calculator, sort);
         this.dPhi = dPhi;
         this.dTheta = dTheta;
@@ -26,9 +26,9 @@ public class AngleMap extends Dependence {
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
-        headerComment = calculator.createHeader();
+        headerComment = simulator.createHeader();
         String addheaderComment = " dPhi "+dPhi+" degrees dTheta "+dTheta+" degrees ";
-        headerComment +=calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n";
+        headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }

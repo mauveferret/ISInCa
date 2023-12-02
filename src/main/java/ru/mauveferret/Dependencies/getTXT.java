@@ -1,6 +1,6 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 
 import java.io.FileOutputStream;
 
@@ -8,7 +8,7 @@ public class getTXT extends Dependence {
 
     FileOutputStream energyWriter;
 
-    public getTXT(ParticleInMatterCalculator calculator, String sort) {
+    public getTXT(Simulator calculator, String sort) {
         super(calculator, sort);
         sort = "null";
         String pathToLog = calculator.directoryPath+fileSep+"ISInCa"+fileSep+calculator.modelingID+"_"+

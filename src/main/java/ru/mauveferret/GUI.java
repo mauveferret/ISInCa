@@ -26,7 +26,7 @@ public class GUI extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Root.fxml"));
         primaryStage.setTitle("ISInCa - Ion Surface Interaction Calculation "+Main.getVersion());
         primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        primaryStage.setScene(new Scene(root, 700, 480));
+        primaryStage.setScene(new Scene(root, 800, 520));
         primaryStage.show();
     }
 
@@ -60,46 +60,22 @@ public class GUI extends Application {
         dialogStage.show();
 
     }
-    public void Futurama()
-    {
-        Class<?> clazz = this.getClass();
-        Stage HelpStage = new Stage();
-        HelpStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        HelpStage.setTitle("You do what you gotta do!");
-        HelpStage.initModality(Modality.NONE);
-        InputStream input2 = clazz.getResourceAsStream("pics/yougottado.png");
-        Image image2 = new Image(input2, 600, 800, false, true);
-        ImageView imageView2 = new ImageView(image2);
-        FlowPane root = new FlowPane();
-        //root.setPadding(new Insets(20));
-        root.getChildren().add( imageView2);
-        //Label notification = new Label();
-        //notification.setText("Установите угол  в пределах 0<t<90");
-        StackPane root1 = new StackPane();
-        //root.getChildren().add(notification);
-        Scene scene2 = new Scene(root,600,800);
-        HelpStage.setScene(scene2);
-        HelpStage.show();
-    }
     public void showHelpPage(String pictureName)
     {
         Class<?> clazz = this.getClass();
         Stage HelpStage = new Stage();
         HelpStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        HelpStage.setTitle("Справка");
-        HelpStage.initModality(Modality.NONE);
+        HelpStage.setTitle("Help");
+        HelpStage.initModality(Modality.WINDOW_MODAL);
         InputStream input2 = clazz.getResourceAsStream(pictureName);
-        Image image2 = new Image(input2, 850, 600, false, true);
+        Image image2 = new Image(input2, 900, 600, false, true);
         ImageView imageView2 = new ImageView(image2);
         FlowPane root = new FlowPane();
         //root.setPadding(new Insets(20));
-        root.getChildren().add( imageView2);
-        //Label notification = new Label();
-        //notification.setText("Установите угол  в пределах 0<t<90");
-        StackPane root1 = new StackPane();
-        //root.getChildren().add(notification);
-        Scene scene2 = new Scene(root,850,600);
+        root.getChildren().add(imageView2);
+        Scene scene2 = new Scene(root,900,600);
         HelpStage.setScene(scene2);
+        HelpStage.setResizable(false);
         HelpStage.show();
     }
     public void showNotification(String notificationText )
@@ -121,10 +97,10 @@ public class GUI extends Application {
     {
         Stage NotificationStage = new Stage();
         NotificationStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        NotificationStage.setTitle("Предупреждение");
+        NotificationStage.setTitle("Notification");
         NotificationStage.initModality(Modality.NONE);
         Label notification = new Label();
-        notification.setText("Выберите файл!");
+        notification.setText("Choose file!");
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);
@@ -135,10 +111,10 @@ public class GUI extends Application {
     {
         Stage NotificationStage = new Stage();
         NotificationStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        NotificationStage.setTitle("Предупреждение");
+        NotificationStage.setTitle("Notification");
         NotificationStage.initModality(Modality.NONE);
         Label notification = new Label();
-        notification.setText("Это не тот файл, что вы ищете!");
+        notification.setText("This is not the file you are looking for!");
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);

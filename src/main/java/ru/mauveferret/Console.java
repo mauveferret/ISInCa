@@ -24,7 +24,7 @@ public class Console {
     String fullpath;
     File configFile;
     //params
-    private double thetaNE, phiNE, phiNTheta, deltaNE, deltaPhiNE, deltaThetaNE, deltaPhiNTheta, deltaThetaNTheta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
+    private double thetaNE, phiNE, phiNTheta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaThetaNE, deltaPhiNTheta, deltaThetaNTheta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
     private String  sortNE, sortNTheta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
     private String dirSubname;
     //Preferences
@@ -64,6 +64,7 @@ public class Console {
             // N_E
             sortNE = "B";
             deltaNE = 100;
+            energyAnalyserBroadening = 0;
             thetaNE = 70;
             deltaThetaNE = 3;
             phiNE = 0;
@@ -81,6 +82,7 @@ public class Console {
             deltaCartesianMap = 10;
             MapSize = 1000;
             cartesianMapType = "ZY";
+
 
             //  look for *.xml file and load DOM XML
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -270,7 +272,7 @@ public class Console {
         NodeList dirs = ((Element) calc).getElementsByTagName("dir");
         String combinerDir = "";
         boolean isCombinerModeEnabled = dirs.getLength()>1;
-        ArrayList<ParticleInMatterCalculator> calculatorsForCombiner = new ArrayList<>();
+        ArrayList<Simulator> calculatorsForCombiner = new ArrayList<>();
 
         for (int someDir=0; someDir<dirs.getLength(); someDir++){
             try {
@@ -287,7 +289,7 @@ public class Console {
                 }
                 combinerDir = file.getParent();
 
-                ParticleInMatterCalculator yourCalculator = new Scatter(dir, visualize);
+                Simulator yourCalculator = new Scatter(dir, visualize);
                 yourCalculator.setDirSubname(dirSubname);
                 String initialize = yourCalculator.initializeModelParameters();
                 if (!initialize.equals("OK")) {
@@ -340,6 +342,9 @@ public class Console {
                                     case "delta":
                                         deltaNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
+                                    case "deltaetoe":
+                                        energyAnalyserBroadening = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
                                     case "deltatheta":
                                         deltaThetaNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
@@ -348,7 +353,7 @@ public class Console {
                                         break;
                                 }
                             }
-                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, thetaNE, deltaThetaNE, sortNE, yourCalculator));
+                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, thetaNE, deltaThetaNE, sortNE, yourCalculator, energyAnalyserBroadening));
                         }
                         break;
                         case "N_Theta": {
@@ -426,7 +431,7 @@ public class Console {
                     if (getTXT) distributions.add(new getTXT(yourCalculator, ""));
                 }
 
-                final ParticleInMatterCalculator calculator = yourCalculator;
+                final Simulator calculator = yourCalculator;
                 Thread newCalculation = new Thread(() -> {
                     calculator.postProcessCalculatedFiles(distributions);
                 });

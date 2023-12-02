@@ -1,7 +1,7 @@
 package ru.mauveferret.Dependencies;
 
 import javafx.application.Platform;
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 import ru.mauveferret.Charts.PolarChart;
 
 import java.io.FileOutputStream;
@@ -15,7 +15,7 @@ public class Polar extends Dependence {
     public final double dPhi;
     public final double dTheta;
 
-    public Polar(double phi, double dPhi, double dTheta, String sort, ParticleInMatterCalculator calculator) {
+    public Polar(double phi, double dPhi, double dTheta, String sort, Simulator calculator) {
         super(calculator, sort);
         //even if user entered phi>180, we will look after the plane with phi<180, which is generally the same
         this.phi = (phi > 180) ? phi-180 : phi;
@@ -30,9 +30,9 @@ public class Polar extends Dependence {
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
-        headerComment = calculator.createHeader();
+        headerComment = simulator.createHeader();
         String addheaderComment = " phi "+phi+"  degrees dPhi "+dPhi+" degrees dTheta "+dTheta+" degrees ";
-        headerComment +=calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n";
+        headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
@@ -90,12 +90,12 @@ public class Polar extends Dependence {
 
         if (!sort.equals("") && doVisualisation)
         Platform.runLater(() -> {
-            String title = calculator.projectileElements+" with "+calculator.projectileMaxEnergy+" eV hits at polar angle of "+
-                    calculator.projectileIncidentPolarAngle +" degrees target of "+
-                    calculator.targetElements+".\n Dependence made at phi " +
-                    calculator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dTheta+" degrees. Chart is for "+
+            String title = simulator.projectileElements+" with "+ simulator.projectileMaxEnergy+" eV hits at polar angle of "+
+                    simulator.projectileIncidentPolarAngle +" degrees target of "+
+                    simulator.targetElements+".\n Dependence made at phi " +
+                    simulator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dTheta+" degrees. Chart is for "+
                     sort+" particles";
-           new PolarChart(title,normDistrToDTheta(distributionArray.get("all")), dTheta, calculator.projectileIncidentPolarAngle, pathsToLog.get("all"));
+           new PolarChart(title,normDistrToDTheta(distributionArray.get("all")), dTheta, simulator.projectileIncidentPolarAngle, pathsToLog.get("all"));
         });
         return  true;
     }

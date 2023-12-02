@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SDTrimSP extends ParticleInMatterCalculator{
+public class SDTrimSP extends Simulator {
 
     ArrayList<String> particDataPath;
 

@@ -5,7 +5,7 @@ import ru.mauveferret.Dependencies.*;
 import java.io.*;
 import java.util.ArrayList;
 
-public class TRIM extends ParticleInMatterCalculator{
+public class TRIM extends Simulator {
 
     String dataPath;
 

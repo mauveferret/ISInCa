@@ -6,7 +6,7 @@ import ru.mauveferret.Dependencies.Polar;
 
 import java.util.ArrayList;
 
-public class CalculationCombiner extends ParticleInMatterCalculator {
+public class CalculationCombiner extends Simulator {
 
     /* used to summary data from several single calculations with common targets
     in order to create model for multi -energy -angle -mass incident beam
@@ -17,9 +17,9 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
     double dTheta1 = 3;
     double dPhi1 = 3;
 
-    private final ArrayList<ParticleInMatterCalculator> calculators;
+    private final ArrayList<Simulator> calculators;
 
-    public CalculationCombiner(String directoryPath, ArrayList<ParticleInMatterCalculator> calculators) {
+    public CalculationCombiner(String directoryPath, ArrayList<Simulator> calculators) {
         super(directoryPath, false);
         this.calculators = calculators;
         elementsList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
             combineCalculatorsVariables();
             initializeCalcVariables();
             modelingID = "COMBO_"+getDirSubname()+"_"+((int) (Math.random()*10000));
-            for (ParticleInMatterCalculator calculator: calculators) {
+            for (Simulator calculator: calculators) {
 
                 System.out.println("        [COMBINER] " + modelingID + " found new calc: " + calculator.modelingID);
             }
@@ -54,7 +54,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
         projectileAmount = 0;
         targetElements = "";
         calcTime = 0;
-        for (ParticleInMatterCalculator calculator: calculators){
+        for (Simulator calculator: calculators){
             if (!calculatorType.contains(calculator.calculatorType)) calculatorType+=calculator.calculatorType+";";
             projectileElements+=calculator.projectileElements+";";
             sProjectileMaxEnergy+=calculator.projectileMaxEnergy+";";
@@ -69,7 +69,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
             calcTime+=calculator.calcTime;
             //System.out.println("        [COMBINER] "+modelingID+" found new calc: "+calculator.modelingID);
         }
-        for (ParticleInMatterCalculator calculator: calculators){
+        for (Simulator calculator: calculators){
             //FIXME maybe you calculate incorrect energy recoil for summ!!!!!
             projectileMaxEnergy=calculator.projectileMaxEnergy*calculator.projectileAmount/projectileAmount;
         }
@@ -101,7 +101,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
                 break;
                 case "energy": dependencies.add(new Energy(((Energy) remoteDep).dE, ((Energy) remoteDep).phi,
                         ((Energy) remoteDep).dPhi*2, ((Energy) remoteDep).theta, ((Energy) remoteDep).dTheta*2,
-                        ((Energy) remoteDep).getSort(), this));
+                        ((Energy) remoteDep).getSort(), this, 0));
                 break;
             }
             //FIXME add another
@@ -110,7 +110,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
         for (Dependence dep: dependencies) {
             try {
                 //find the largest arrays
-                for (ParticleInMatterCalculator calculator : calculators) {
+                for (Simulator calculator : calculators) {
                     for (Dependence dependence : calculator.dependencies) {
                         if (dep.depName.equals(dependence.depName)) {
                             switch (dep.depType) {
@@ -141,7 +141,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
 
     private void combineDependencies(){
         for (Dependence dependence: dependencies){
-            for (ParticleInMatterCalculator calculator: calculators){
+            for (Simulator calculator: calculators){
                 for (Dependence dep: calculator.dependencies){
                     if (dep.depName.equals(dependence.depName)){
                         switch (dependence.depType){
@@ -171,7 +171,7 @@ public class CalculationCombiner extends ParticleInMatterCalculator {
     }
 
     private void combineCalcConstants(){
-        for (ParticleInMatterCalculator calculator: calculators){
+        for (Simulator calculator: calculators){
             for (String element: elementsList){
                 try {
                     particleCount+=calculator.particleCount;

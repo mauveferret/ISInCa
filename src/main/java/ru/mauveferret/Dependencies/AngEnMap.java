@@ -1,6 +1,6 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 import ru.mauveferret.Charts.EnAngColorMap;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ public class AngEnMap extends Dependence {
     private final double dE;
     private final double dTheta;
 
-    public AngEnMap(double dTheta, double dE, String sort, ParticleInMatterCalculator calculator) {
+    public AngEnMap(double dTheta, double dE, String sort, Simulator calculator) {
         super(calculator, sort);
         this.dE = dE;
         this.E0 = calculator.projectileMaxEnergy;
@@ -31,9 +31,9 @@ public class AngEnMap extends Dependence {
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
-        headerComment = calculator.createHeader();
+        headerComment = simulator.createHeader();
         String addheaderComment = " dE "+dE+" eV dTheta "+dTheta+" degrees ";
-        headerComment +=calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n";
+        headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         //headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
@@ -62,11 +62,11 @@ public class AngEnMap extends Dependence {
                 for (int j = 0; j <= (int) Math.round(90 / dTheta); j++) {
                     if (j==0){
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(calculator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
+                                /(simulator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(dTheta/2))));
                     }
                     else {
                         mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(calculator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j*dTheta))));
+                                /(simulator.projectileAmount*dE*dTheta*Math.sin(Math.toRadians(Math.abs(j*dTheta))));
                         //System.out.println(j+" "+calculator.projectileAmount+" "+dE+" "+dTheta+" "+Math.sin(Math.toRadians(Math.abs(j*dTheta))));
                     }
                 }
@@ -109,10 +109,10 @@ public class AngEnMap extends Dependence {
     @Override
     public boolean visualize() {
         if (!sort.equals("") && doVisualisation) EventQueue.invokeLater(() ->
-                new EnAngColorMap(calculator.projectileElements+" with average energy of "+calculator.projectileMaxEnergy/1000
+                new EnAngColorMap(simulator.projectileElements+" with average energy of "+ simulator.projectileMaxEnergy/1000
                         +" keV hits target of "+
-                        calculator.targetElements.replaceAll(" ","")+" at average polar angle of "+
-                        calculator.projectileIncidentPolarAngle +" degrees ",  mapArray.get("all"), E0, dE, dTheta,pathsToLog.get("all")));
+                        simulator.targetElements.replaceAll(" ","")+" at average polar angle of "+
+                        simulator.projectileIncidentPolarAngle +" degrees ",  mapArray.get("all"), E0, dE, dTheta,pathsToLog.get("all")));
         return  true;
     }
 

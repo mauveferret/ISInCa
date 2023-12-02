@@ -1,7 +1,7 @@
 package ru.mauveferret.Dependencies;
 
 
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,9 +11,8 @@ public abstract class Dependence implements Cloneable{
 
     final String sort;
     protected final String fileSep = File.separator;
-    //FIXME move to calculator -> to xml
     final String columnSeparatorInLog = " ";
-     public ParticleInMatterCalculator calculator;
+    public Simulator simulator;
     public String depName;
 
     //flags
@@ -38,11 +37,11 @@ public abstract class Dependence implements Cloneable{
     public int mapArrayYsize;
 
 
-    public Dependence(ParticleInMatterCalculator calculator, String sort) {
+    public Dependence(Simulator simulator, String sort) {
 
-        this.calculator = calculator;
+        this.simulator = simulator;
         this.sort = sort;
-        this.doVisualisation = calculator.doVizualization;
+        this.doVisualisation = simulator.doVizualization;
         depName = this.getClass().getSimpleName().toLowerCase();
     }
 
@@ -53,16 +52,16 @@ public abstract class Dependence implements Cloneable{
 
         //make folder for dep
         try{
-            new File(calculator.directoryPath+fileSep+"ISInCa"+fileSep+calculator.modelingID.toUpperCase()).mkdir();
+            new File(simulator.directoryPath+fileSep+"ISInCa"+fileSep+ simulator.modelingID.toUpperCase()).mkdir();
         }catch (Exception ignored){}
         try{
-            new File(calculator.directoryPath+fileSep+"ISInCa"+fileSep+calculator.modelingID.toUpperCase()+
+            new File(simulator.directoryPath+fileSep+"ISInCa"+fileSep+ simulator.modelingID.toUpperCase()+
                     fileSep+depName.toUpperCase()).mkdir();
         }catch (Exception ignored){}
 
-        String pathToLog = calculator.directoryPath+fileSep+"ISInCa"+fileSep+calculator.modelingID.toUpperCase()+
+        String pathToLog = simulator.directoryPath+fileSep+"ISInCa"+fileSep+ simulator.modelingID.toUpperCase()+
                 fileSep+depName.toUpperCase()+fileSep+
-                calculator.modelingID+"_"+depName.toUpperCase()+"_DEP_"+sort+"_";
+                simulator.modelingID+"_"+depName.toUpperCase()+"_DEP_"+sort+"_";
         switch (depType){
             case "distribution": distributionArray = new HashMap<>();
             break;
@@ -73,7 +72,7 @@ public abstract class Dependence implements Cloneable{
         for (String element: elements){
             pathsToLog.put(element, pathToLog+element+"_"+ endOfPath);
             String addheaderComment = " calculated  for "+element+" elements ";
-            headerComments.put(element, headerComment+calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n");
+            headerComments.put(element, headerComment+ simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n");
             switch (depType){
                 case "distribution": distributionArray.put(element, new double[distributionSize]);
                 break;

@@ -2,7 +2,7 @@ package ru.mauveferret.Dependencies;
 
 import javafx.application.Platform;
 import ru.mauveferret.GUI;
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,7 +18,10 @@ public class Energy extends Dependence {
     public final double dPhi;
     public final double dE;
 
-    public Energy(double dE, double phi, double dPhi, double theta, double dTheta, String sort, ParticleInMatterCalculator calculator) {
+    public final double energyAnalyserBroadening;
+    private double broadening = 0;
+
+    public Energy(double dE, double phi, double dPhi, double theta, double dTheta, String sort, Simulator calculator, double energyAnalyserBroadening) {
         super(calculator, sort);
         this.E0 = calculator.projectileMaxEnergy;
         this.theta = theta;
@@ -27,6 +30,7 @@ public class Energy extends Dependence {
         this.phi = phi;
         this.dPhi = dPhi/2;
         this.dE = dE;
+        this.energyAnalyserBroadening = energyAnalyserBroadening;
 
         depType = "distribution";
         distributionSize = (int) Math.ceil(E0/dE)+1;
@@ -36,10 +40,10 @@ public class Energy extends Dependence {
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
-        headerComment = calculator.createHeader();
+        headerComment = simulator.createHeader();
         String addheaderComment = " delta E "+dE+" eV theta "+theta+" deg dTheta "+dTheta+" deg phi "+
                 phi+" deg dPhi "+dPhi+" deg";
-        headerComment +=calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n";
+        headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Energy particles "+"\n"+"eV  count \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
@@ -48,11 +52,19 @@ public class Energy extends Dependence {
 
         if (sort.contains(someSort)) {
 
-            //if (Math.abs(57.2958*Math.acos(cosa)-phi)<dPhi && Math.abs(57.2958*Math.acos(cosp)-theta)<dTheta)
             if (angles.doesAzimuthAngleMatch(phi, dPhi) && angles.doesPolarAngleMatch(theta, dTheta)) {
-                distributionArray.get(element)[(int) Math.round(E / dE)]++;
-                distributionArray.get("all")[(int) Math.round(E / dE)]++;
-
+                if (energyAnalyserBroadening==0) {
+                    distributionArray.get(element)[(int) Math.round(E / dE)]++;
+                    distributionArray.get("all")[(int) Math.round(E / dE)]++;
+                }
+                else {
+                    //Consider that a particle with specific energy may contribute to different "bins" of the energy analyser due to dE/E = const
+                    broadening = E * energyAnalyserBroadening/2;
+                    for (int local_E=(int) (Math.round((E-broadening)/dE));local_E<=(int) (Math.round((E+broadening)/dE));local_E++){
+                        distributionArray.get(element)[local_E]++;
+                        distributionArray.get("all")[local_E]++;
+                    }
+                }
             }
         }
     }
@@ -99,7 +111,7 @@ public class Energy extends Dependence {
         Platform.runLater(() -> {
 
             if (!sort.equals("") && doVisualisation) new GUI().showGraph(normSpectrum, E0, dE, "Энергетический спектр "+
-                    calculator.projectileElements+" --> "+calculator.targetElements+" phi = "+phi+" theta = "+theta);
+                    simulator.projectileElements+" --> "+ simulator.targetElements+" phi = "+phi+" theta = "+theta);
         });
         return  true;
     }

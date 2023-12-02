@@ -1,6 +1,6 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class CartesianMap extends Dependence {
     double max;
     //double xMax, yMax;
 
-    public CartesianMap(double delta, String mapType, String sort, ParticleInMatterCalculator calculator) {
+    public CartesianMap(double delta, String mapType, String sort, Simulator calculator) {
         super(calculator, sort);
         this.mapType = mapType;
         typeOfX = mapType.charAt(0)+"";
@@ -32,7 +32,7 @@ public class CartesianMap extends Dependence {
         mapArrayYsize = (int) Math.ceil(size/delta)+10;
           }
 
-    public CartesianMap(double delta, int size, String mapType, String sort, ParticleInMatterCalculator calculator) {
+    public CartesianMap(double delta, int size, String mapType, String sort, Simulator calculator) {
         super(calculator, sort);
         this.mapType = mapType;
         typeOfX = mapType.charAt(0)+"";
@@ -50,9 +50,9 @@ public class CartesianMap extends Dependence {
 
     @Override
     public void initializeArrays(ArrayList<String> elements) {
-        headerComment = calculator.createHeader();
+        headerComment = simulator.createHeader();
         String addheaderComment = " delta "+delta+" Angstrom sort "+sort+" type "+ depName;
-        headerComment +=calculator.createLine(addheaderComment)+"*".repeat(calculator.LINE_LENGTH)+"\n";
+        headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }

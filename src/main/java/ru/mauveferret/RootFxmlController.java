@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
-import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.Simulator;
 import ru.mauveferret.Simulators.SDTrimSP;
 import ru.mauveferret.Simulators.Scatter;
 import ru.mauveferret.Simulators.TRIM;
@@ -27,44 +27,29 @@ public class RootFxmlController {
 
     //FileChooser chooser = new FileChooser();
     //private boolean accessGranted=true;
-    ParticleInMatterCalculator yourCalcuator;
+    Simulator yourSimulator;
 
     //Buttons for calculating
     @FXML
     private CheckBox getTXT;
     @FXML
     private CheckBox getSummary;
-    @FXML CheckBox visualize;
+    @FXML
+    CheckBox visualize;
 
     //energy distributions
     @FXML
-    private CheckBox NEB;
-    @FXML
-    private CheckBox NES;
-    @FXML
-    private CheckBox NEI;
-    @FXML
-    private CheckBox NET;
+    private CheckBox NEB,NES,NET;
 
     //polar distributions
     @FXML
-    private CheckBox NThetaB;
-    @FXML
-    private CheckBox NThetaS;
-    @FXML
-    private CheckBox NThetaT;
-    @FXML
-    private CheckBox NThetaI;
+    private CheckBox NBetaB, NBetaS,NBetaT;
 
     //angle map
     @FXML
-    private CheckBox NThetaPhiB;
+    private CheckBox NBetaPhiB, NBetaPhiS, NBetaPhiT;
     @FXML
-    private CheckBox NThetaPhiS;
-    @FXML
-    private CheckBox NThetaPhiI;
-    @FXML
-    private CheckBox NThetaPhiT;
+    private CheckBox NEBetaB, NEBetaS, NEBetaT;
     @FXML
     private CheckBox NzyB, NzyS, NzyI,NzyT, NzyD;
     @FXML
@@ -91,6 +76,8 @@ public class RootFxmlController {
     @FXML
     private TextField energyResolution;
     @FXML
+    private TextField deltaEtoE;
+    @FXML
     private TextField polarAngleNE;
     @FXML
     private TextField dPolarAngleNE;
@@ -111,9 +98,9 @@ public class RootFxmlController {
 
     //Surface particle distribution
     @FXML
-    private TextField NdThetaPhi;
+    private TextField NdThetaPhi, NThetadPhi;
     @FXML
-    private TextField NThetadPhi;
+    private TextField NEBetadBeta, NEBetadE;
 
     // particles coefficients fields
     @FXML
@@ -167,7 +154,7 @@ public class RootFxmlController {
                 String dirPath = new File(myJarPath).getParent();
 
                  chooser = new DirectoryChooser();
-                chooser.setTitle("Choose data files directory (like /out (SCATTER) or /case/.. (SDTrimSP) or /outputs (TRIM)");
+                chooser.setTitle("Choose data files directory (like /out (SCATTER) or case/.. (SDTrimSP) or /outputs (TRIM)");
                 File defaultDirectory = new File(dirPath);
                 //chooser.setInitialDirectory(defaultDirectory);
                 // File selectedDirectory = chooser.showDialog(primaryStage);
@@ -178,16 +165,16 @@ public class RootFxmlController {
             file = chooser.showDialog(button.getScene().getWindow());
             path = file.getAbsolutePath();
 
-            yourCalcuator = new Scatter(path,true);
-            String initialize = yourCalcuator.initializeModelParameters();
+            yourSimulator = new Scatter(path,true);
+            String initialize = yourSimulator.initializeModelParameters();
             if (!initialize.equals("OK")) {
                 //System.out.println(initialize);
-                yourCalcuator = new TRIM(path,true);
-                initialize = yourCalcuator.initializeModelParameters();
+                yourSimulator = new TRIM(path,true);
+                initialize = yourSimulator.initializeModelParameters();
                 if (!initialize.equals("OK")) {
                     //System.out.println(initialize);
-                    yourCalcuator = new SDTrimSP(path, visualize.isSelected(), getSummary.isSelected());
-                    initialize = yourCalcuator.initializeModelParameters();
+                    yourSimulator = new SDTrimSP(path, visualize.isSelected(), getSummary.isSelected());
+                    initialize = yourSimulator.initializeModelParameters();
                     if (!initialize.equals("OK")) {
                         //System.out.println(initialize);
                         new GUI().showNotification("ERROR: "+initialize);
@@ -197,15 +184,17 @@ public class RootFxmlController {
             if (!initialize.equals("OK"))
                 new GUI().showNotification("ERROR: directory doesn't contain all files for calculation");
 
-            numberOfParticlesInScatter.setText(yourCalcuator.projectileAmount + "");
-            E0.setText(yourCalcuator.projectileMaxEnergy + "");
-            energyResolution.setText((yourCalcuator.projectileMaxEnergy/100)+"");
-            polarAngleNE.setText(yourCalcuator.projectileIncidentPolarAngle + "");
-            azimuthAngleNE.setText(yourCalcuator.projectileIncidentAzimuthAngle + "");
+            numberOfParticlesInScatter.setText(yourSimulator.projectileAmount + "");
+            E0.setText(yourSimulator.projectileMaxEnergy + "");
+            energyResolution.setText((yourSimulator.projectileMaxEnergy/100)+"");
+            NEBetadE.setText((yourSimulator.projectileMaxEnergy/100)+"");
+
+            polarAngleNE.setText(yourSimulator.projectileIncidentPolarAngle + "");
+            azimuthAngleNE.setText(yourSimulator.projectileIncidentAzimuthAngle + "");
         }
         catch (Exception e)
         {
-            System.out.println("175: "+e.getMessage());
+            System.out.println("ERROR175: "+e.getMessage());
         }
 }
 
@@ -215,21 +204,20 @@ public class RootFxmlController {
         try {
             double t = Double.parseDouble(polarAngleNE.getText());
             if (t < 0 || t > 90) {
-                polarAngleNE.setText("71");
-
-                new GUI().showNotification("Установите угол  в пределах 0<=t<=90");
+                polarAngleNE.setText("74");
+                new GUI().showNotification("Please set β in a range of  0<=β<=90\n For transmitted particles use T flag.");
             }
         }
         catch (Exception e)
         {
-            polarAngleNE.setText("71");
+            polarAngleNE.setText("74");
         }
         try {
             double t = Double.parseDouble(azimuthAngleNE.getText());
             if (t < 0 || t > 180) {
                 azimuthAngleNE.setText("0");
 
-                new GUI().showNotification("Установите угол  в пределах 0<=t<=180");
+                new GUI().showNotification("Please set φ in a range of  0<=φ<=180");
             }
         }
         catch (Exception e)
@@ -241,7 +229,7 @@ public class RootFxmlController {
             if (t < 0 || t > 179 ) {
                 azimuthAngleNtheta.setText("0");
 
-                new GUI().showNotification("Установите угол  в пределах 0<=t<180");
+                new GUI().showNotification("Please set φ in a range of  0<=φ<=180");
             }
         }
         catch (Exception e)
@@ -256,9 +244,7 @@ public class RootFxmlController {
             double t = Double.parseDouble(dPolarAngleNE.getText());
             if (t <= 0 ) {
                 dPolarAngleNE.setText("2");
-
-                new GUI().showNotification("Установите разброс по углу больше нуля!");
-
+                new GUI().showNotification("Please set positive dβ.");
             }
         }
         catch (Exception e)
@@ -270,7 +256,7 @@ public class RootFxmlController {
             if (t <= 0 ) {
                 dAzimuthAngleNE.setText("2");
 
-                new GUI().showNotification("Установите разброс по углу больше нуля!");
+                new GUI().showNotification("Please set positive dφ.");
 
             }
         }
@@ -283,13 +269,26 @@ public class RootFxmlController {
             if (t <= 0 ) {
                 dAzimuthAngleNtheta.setText("2");
 
-                new GUI().showNotification("Установите разброс по углу больше нуля!");
+                new GUI().showNotification("Please set positive dβ.");
 
             }
         }
         catch (Exception e)
         {
-            dAzimuthAngleNtheta.setText("5");
+            dAzimuthAngleNtheta.setText("2");
+        }
+        try {
+            double t = Double.parseDouble(NEBetadBeta.getText());
+            if (t <= 0 ) {
+                NEBetadBeta.setText("2");
+
+                new GUI().showNotification("Please set positive dβ.");
+
+            }
+        }
+        catch (Exception e)
+        {
+            NEBetadBeta.setText("2");
         }
     }
 
@@ -300,11 +299,6 @@ public class RootFxmlController {
             double E = Double.parseDouble(E0.getText());
             if (E<0) throw new Exception();
             energyResolution.setText((int) (E/100)+"");
-            if (E==100000)
-            {
-                new GUI().Futurama();
-                new GUI().showNotification("ничто не вечно под Луной ... кроме SCATTER");
-            }
         }
         catch (Exception e)
         {
@@ -313,11 +307,6 @@ public class RootFxmlController {
 
     }
 
-    @FXML
-    public void YouDoWhatYouGonnaDo()
-    {
-        Platform.runLater(() -> new GUI().Futurama());
-    }
     @FXML
     public void ResChanged()
     {
@@ -358,12 +347,13 @@ public class RootFxmlController {
                 double E;
                 if (!E0.getText().equals("WAIT"))
                      E=Double.parseDouble(E0.getText());
-                else E=yourCalcuator.projectileMaxEnergy;
+                else E=yourSimulator.projectileMaxEnergy;
 
                 //int energyReturnValue = E;
                 double dE = Double.parseDouble(energyResolution.getText());
                 double thetaNE = Double.parseDouble(polarAngleNE.getText());
                 double dThetaNE = Double.parseDouble(dPolarAngleNE.getText());
+                double energyAnalyserBroadening = Double.parseDouble(deltaEtoE.getText());
                 double phiNE=Double.parseDouble(azimuthAngleNE.getText());
                 double dphiNE=Double.parseDouble(dAzimuthAngleNE.getText());
 
@@ -374,6 +364,8 @@ public class RootFxmlController {
                 double dPhiNTheta=Double.parseDouble(dAzimuthAngleNtheta.getText());
                 double NThetadPhi1 = Double.parseDouble(NThetadPhi.getText());
                 double NdThetaPhi1 = Double.parseDouble(NdThetaPhi.getText());
+                double NEBetadBeta1 = Double.parseDouble(NEBetadBeta.getText());
+                double NEBetadE1 = Double.parseDouble(NEBetadE.getText());
 
                 E0.setText("WAIT");
 
@@ -383,33 +375,31 @@ public class RootFxmlController {
 
                 String sort = (NEB.isSelected()) ? "B" : "";
                 sort += (NES.isSelected()) ? "S" : "";
-                //sort += (NEI.isSelected()) ? "I" : "";
                 sort += (NET.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new Energy(dE,phiNE, dphiNE, thetaNE, dThetaNE,sort, yourCalcuator));
+                    distributions.add(new Energy(dE,phiNE, dphiNE, thetaNE, dThetaNE,sort, yourSimulator, energyAnalyserBroadening));
 
-                sort = (NThetaB.isSelected()) ? "B" : "";
-                sort += (NThetaS.isSelected()) ? "S" : "";
-                sort += (NThetaI.isSelected()) ? "I" : "";
-                sort += (NThetaT.isSelected()) ? "T" : "";
-
-                if (!sort.equals(""))
-                    distributions.add(new Polar(phiNTheta, dPhiNTheta, dThetaNTheta,sort, yourCalcuator));
-
-                sort = (NThetaPhiB.isSelected()) ? "B" : "";
-                sort += (NThetaPhiS.isSelected()) ? "S" : "";
-                sort += (NThetaPhiI.isSelected()) ? "I" : "";
-                sort += (NThetaPhiT.isSelected()) ? "T" : "";
-
+                sort = (NBetaB.isSelected()) ? "B" : "";
+                sort += (NBetaS.isSelected()) ? "S" : "";
+                sort += (NBetaT.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new AngleMap(dPhiNTheta, dThetaNTheta,sort, yourCalcuator));
+                    distributions.add(new Polar(phiNTheta, dPhiNTheta, dThetaNTheta,sort, yourSimulator));
+
+                sort = (NBetaPhiB.isSelected()) ? "B" : "";
+                sort += (NBetaPhiS.isSelected()) ? "S" : "";
+                sort += (NBetaPhiT.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new AngEnMap(dThetaNTheta,dE, sort, yourCalcuator));
+                    distributions.add(new AngleMap(dPhiNTheta, dThetaNTheta,sort, yourSimulator));
 
-                //others
+                sort = (NEBetaB.isSelected()) ? "B" : "";
+                sort += (NEBetaS.isSelected()) ? "S" : "";
+                sort += (NEBetaT.isSelected()) ? "T" : "";
+
+                if (!sort.equals(""))
+                    distributions.add(new AngEnMap(NEBetadBeta1,NEBetadE1, sort, yourSimulator));
 
                 //FIXME full funtional is not presented, not made in Scatter, Trim
 
@@ -419,44 +409,44 @@ public class RootFxmlController {
                 sort += (NzyT.isSelected()) ? "T" : "";
                 sort += (NzyD.isSelected()) ? "D" : "";
 
-                if (!sort.equals("")) distributions.add(new CartesianMap(1, "ZY", sort, yourCalcuator));
+                if (!sort.equals("")) distributions.add(new CartesianMap(1, "ZY", sort, yourSimulator));
 
-                if (getTXT.isSelected()) distributions.add(new getTXT(yourCalcuator, ""));
+                if (getTXT.isSelected()) distributions.add(new getTXT(yourSimulator, ""));
 
-                yourCalcuator.postProcessCalculatedFiles(distributions);
-                yourCalcuator.printAndVisualizeData(distributions);
+                yourSimulator.postProcessCalculatedFiles(distributions);
+                yourSimulator.printAndVisualizeData(distributions);
 
                 //Calculation is ended
 
                 E0.setText(E+"");
                 count.setText(
-                        new BigDecimal(yourCalcuator.particleCount).setScale(5, RoundingMode.UP).doubleValue()+"");
-                time.setText(yourCalcuator.calcTime +"");
+                        new BigDecimal(yourSimulator.particleCount).setScale(5, RoundingMode.UP).doubleValue()+"");
+                time.setText(yourSimulator.calcTime +"");
 
-                scattered.setText(new BigDecimal( yourCalcuator.scattered.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                scattered.setText(new BigDecimal( yourSimulator.scattered.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                sputtered.setText(new BigDecimal(yourCalcuator.sputtered.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                sputtered.setText(new BigDecimal(yourSimulator.sputtered.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                implanted.setText(new BigDecimal(yourCalcuator.implanted.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                implanted.setText(new BigDecimal(yourSimulator.implanted.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                displaced.setText(new BigDecimal(yourCalcuator.displaced.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                displaced.setText(new BigDecimal(yourSimulator.displaced.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                transmitted.setText(new BigDecimal(yourCalcuator.transmitted.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                transmitted.setText(new BigDecimal(yourSimulator.transmitted.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                energyScattering.setText(new BigDecimal(yourCalcuator.energyRecoil.get("all")).setScale(3, RoundingMode.UP).doubleValue()
+                energyScattering.setText(new BigDecimal(yourSimulator.energyRecoil.get("all")).setScale(3, RoundingMode.UP).doubleValue()
                         +"");
 
                 //FIXME to remove: every launch we create new calculator?!
-                for (String element: yourCalcuator.elementsList) {
-                    yourCalcuator.scattered.put(element,0.0);
-                    yourCalcuator.sputtered.put(element, 0.0);
-                    yourCalcuator.implanted.put(element, 0.0);
-                    yourCalcuator.transmitted.put(element, 0.0);
-                    yourCalcuator.displaced.put(element, 0.0);
-                    yourCalcuator.energyRecoil.put(element,0.0);
+                for (String element: yourSimulator.elementsList) {
+                    yourSimulator.scattered.put(element,0.0);
+                    yourSimulator.sputtered.put(element, 0.0);
+                    yourSimulator.implanted.put(element, 0.0);
+                    yourSimulator.transmitted.put(element, 0.0);
+                    yourSimulator.displaced.put(element, 0.0);
+                    yourSimulator.energyRecoil.put(element,0.0);
                 }
 
-                yourCalcuator.particleCount = 0;
+                yourSimulator.particleCount = 0;
 
             }).start();
     }

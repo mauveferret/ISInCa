@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 
-public class Scatter extends ParticleInMatterCalculator {
+public class Scatter extends Simulator {
 
     String dataPath;
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public abstract class ParticleInMatterCalculator{
+public abstract class Simulator {
 
     //how mich lines per FileRead can be processed
     final int STRING_COUNT_PER_CYCLE = 1000;
@@ -56,7 +56,7 @@ public abstract class ParticleInMatterCalculator{
     public HashMap<String, Double>  scattered, sputtered, implanted, transmitted, displaced, energyRecoil;
     public double particleCount;
 
-    public ParticleInMatterCalculator(String directoryPath, boolean doVizualization) {
+    public Simulator(String directoryPath, boolean doVizualization) {
         this.doVizualization = doVizualization;
 
         targetElements = "no elements";
@@ -143,7 +143,7 @@ public abstract class ParticleInMatterCalculator{
         try {
             FileOutputStream summary = new FileOutputStream(pathToLog);
             summary.write((createHeader()+"\n").getBytes());
-            summary.write(("Monte-Carlo model: "+calculatorType+"\n").getBytes());
+            summary.write(("Monte-Carlo code: "+calculatorType+"\n").getBytes());
             summary.write(("modeling ID: "+modelingID+"\n").getBytes());
             summary.write(("ISInCa version: "+ Main.getVersion()+"\n").getBytes());
             summary.write(("ISInCa calculation time, min: "+new BigDecimal(calcTime).setScale(4, RoundingMode.UP)+"\n").getBytes());
