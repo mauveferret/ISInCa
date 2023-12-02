@@ -18,10 +18,10 @@ public class Energy extends Dependence {
     public final double dPhi;
     public final double dE;
 
-    public final double energyAnalyserBroadening;
+    public final double deltaEtoE;
     private double broadening = 0;
 
-    public Energy(double dE, double phi, double dPhi, double beta, double dBeta, String sort, Simulator calculator, double energyAnalyserBroadening) {
+    public Energy(double dE, double phi, double dPhi, double beta, double dBeta, String sort, Simulator calculator, double deltaEtoE) {
         super(calculator, sort);
         this.E0 = calculator.projectileMaxEnergy;
         this.beta = beta;
@@ -30,7 +30,7 @@ public class Energy extends Dependence {
         this.phi = phi;
         this.dPhi = dPhi/2;
         this.dE = dE;
-        this.energyAnalyserBroadening = energyAnalyserBroadening;
+        this.deltaEtoE = deltaEtoE;
 
         depType = "distribution";
         distributionSize = (int) Math.ceil(E0/dE)+1;
@@ -41,7 +41,7 @@ public class Energy extends Dependence {
     @Override
     public void initializeArrays(ArrayList<String> elements) {
         headerComment = simulator.createHeader();
-        String addheaderComment = " delta E "+dE+" eV beta "+beta+" deg dBeta "+dBeta+" deg phi "+
+        String addheaderComment = " delta E "+dE+" eV dE/E"+deltaEtoE+" eV beta "+beta+" deg dBeta "+dBeta+" deg phi "+
                 phi+" deg dPhi "+dPhi+" deg";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Energy particles "+"\n"+"eV  count \n\n"+headerComment+"\n";
@@ -53,16 +53,16 @@ public class Energy extends Dependence {
         if (sort.contains(someSort)) {
 
             if (angles.doesAzimuthAngleMatch(phi, dPhi) && angles.doesPolarAngleMatch(beta, dBeta)) {
-                if (energyAnalyserBroadening==0) {
+                if (deltaEtoE==0) {
                     distributionArray.get(element)[(int) Math.round(E / dE)]++;
                     distributionArray.get("all")[(int) Math.round(E / dE)]++;
                 }
                 else {
                     //Consider that a particle with specific energy may contribute to different "bins" of the energy analyser due to dE/E = const
-                    broadening = E * energyAnalyserBroadening/2;
-                    for (int local_E=(int) (Math.round((E-broadening)/dE));local_E<=(int) (Math.round((E+broadening)/dE));local_E++){
-                        distributionArray.get(element)[local_E]++;
-                        distributionArray.get("all")[local_E]++;
+                    broadening = E * deltaEtoE/2;
+                    for (int E_bins=(int) (Math.round((E-broadening)/dE));E_bins<=(int) (Math.round((E+broadening)/dE));E_bins++){
+                        distributionArray.get(element)[E_bins]++;
+                        distributionArray.get("all")[E_bins]++;
                     }
                 }
             }
@@ -97,8 +97,6 @@ public class Energy extends Dependence {
         }
         return  true;
     }
-
-
 
     @Override
     public boolean visualize() {
