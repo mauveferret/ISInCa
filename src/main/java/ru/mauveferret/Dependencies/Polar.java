@@ -1,8 +1,8 @@
 package ru.mauveferret.Dependencies;
 
 import javafx.application.Platform;
-import ru.mauveferret.Calcuators.ParticleInMatterCalculator;
-import ru.mauveferret.PolarChart;
+import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Charts.PolarChart;
 
 import java.io.FileOutputStream;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package ru.mauveferret;
+package ru.mauveferret.Charts;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;

@@ -1,6 +1,5 @@
-package ru.mauveferret.Calcuators;
+package ru.mauveferret.Simulators;
 
-import javafx.collections.transformation.SortedList;
 import ru.mauveferret.Dependencies.Dependence;
 
 import java.io.File;

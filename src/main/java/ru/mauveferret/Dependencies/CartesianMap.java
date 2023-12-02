@@ -1,6 +1,6 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Calcuators.ParticleInMatterCalculator;
+import ru.mauveferret.Simulators.ParticleInMatterCalculator;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;

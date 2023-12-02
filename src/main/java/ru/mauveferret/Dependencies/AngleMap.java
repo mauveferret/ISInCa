@@ -1,7 +1,7 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Calcuators.ParticleInMatterCalculator;
-import ru.mauveferret.ScatterColorMap;
+import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Charts.ScatterColorMap;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.util.ArrayList;

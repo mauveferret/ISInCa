@@ -1,4 +1,4 @@
-package ru.mauveferret.Calcuators;
+package ru.mauveferret.Simulators;
 
 import ru.mauveferret.Dependencies.*;
 

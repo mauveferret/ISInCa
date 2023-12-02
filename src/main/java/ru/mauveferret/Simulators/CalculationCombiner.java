@@ -1,11 +1,10 @@
-package ru.mauveferret.Calcuators;
+package ru.mauveferret.Simulators;
 
 import ru.mauveferret.Dependencies.Dependence;
 import ru.mauveferret.Dependencies.Energy;
 import ru.mauveferret.Dependencies.Polar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CalculationCombiner extends ParticleInMatterCalculator {
 

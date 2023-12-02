@@ -1,13 +1,10 @@
 package ru.mauveferret.Dependencies;
 
-import ru.mauveferret.Calcuators.ParticleInMatterCalculator;
-import ru.mauveferret.EnAngColorMap;
-import ru.mauveferret.ScatterColorMap;
+import ru.mauveferret.Simulators.ParticleInMatterCalculator;
+import ru.mauveferret.Charts.EnAngColorMap;
 
 import java.awt.*;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import static ru.mauveferret.Console.isConsole;

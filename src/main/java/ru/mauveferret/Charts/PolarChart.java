@@ -1,4 +1,4 @@
-package ru.mauveferret;
+package ru.mauveferret.Charts;
 
 
 import java.awt.*;

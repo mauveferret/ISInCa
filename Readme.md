@@ -1,36 +1,50 @@
 # ISInCa - Ion Surface Interaction Calculator
 
-ISInCA - is a small **Java** tool dedicated to postprocess *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)* calculations. It is planned to gradually widen the list of the supported codes (like TRYDIN, MARLOWE and so on).
+ISInCA - is a **Java** tool dedicated to postprocess *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)* outputs. It is planned to gradually expand the list of supported codes (like TRYDIN, MARLOWE and so on).
 
 ![N|Solid](https://i.ibb.co/0cQrTDm/Croco-Logo.png)
  
 # Basic outputs
 
-Listed codes are created for the analysis of particles with surface interaction. Usually you can set some beam parameters (like mass/angle/energy distribution, doze) and the target composition (and a relief for some exotic codes). Usually such codes generate single or several files, containing tables with scattered, sputtered, transmitted, displaced particles with data on their position, motion direction, sort, energy, pathlength etc. ISInCa code can transform this huge (up to hundreds of GB) data files to familiar and easy for interpretation distributions. In this way, it can calculate:
+ The codes listed above are intended for the simulation of fast particles interaction with solids. 
+ In such codes you can set some beam parameters (like mass/angle/energy distributions, doze) and 
+ multiple target parameters. Such codes usually can generate single or several files, containing tables 
+ with backscattered (B), sputtered (S), transmitted (T), implanted (I) and displaced (D) particles with 
+ data on their position, motion direction, sort, energy, pathlength etc. **ISInCa** allows to transform 
+ this huge (up to hundreds of GB) data files to familiar and easy for interpretation distributions. 
+ In this way, it can generate:
 
- - Energy distributions dN/dE(E) for any solid angles with any energy step **(backscattered primary particles, sputtered and transmitted particles)**
- - Angle distributions dN/dTheta(Theta) **(backscattered primary particles, sputtered and transmitted particles)**
- - ~~Depth distributions for primary particles~~ **In process**
- - Polar Maps 
- - Cartesian Maps 
+Distributions:
+ - Energy distributions N(E) for any solid angles with any energy step 
+**(for backscattered and trasmitted primary particles and sputtered particles of target)**
+ - Angle distributions dN/dθ(θ) **(backscattered and transmitted primary particles and sputtered particles of target)**
+ - ~~Depth distributions for primary implanted and target displaced particles~~ <span style="color:#ff0000">under development</span>
+ 
+Maps:
+ - Polar Map N(θ, φ) for backscattered and trasmitted primary particles and sputtered particles of target   
+ - Cartesian Maps N(Z, Y), N(Z, X)
+ - EneAng Maps N(E, θ) for backscattered and trasmitted primary particles and sputtered particles of target
  - Integral coefficients:
    - Scattered coefficient (amount of scattered divided by amount of incident)
    - Sputtered coefficient (amount of sputtered divided by amount of incident)
-   - Implanted coefficient 
-   - Transmitted coefficient
-   - Energy recoil coefficient
+   - Implanted coefficient (amount of implanted divided by amount of incident)
+   - Transmitted coefficient (amount of transmitted divided by amount of incident)
+   - Energy recoil coefficient (sum of energies of scattered divided by sum of energies of incident particles)
    - Displaced coefficient
-   - ...
-   - 
-All data is available for different combination of particles (scattered - B, sputtered - S, implanted - I , transmitted - T  and displaced - D). You should take into account, that the amount of particle's types depend on the specific code. As example, `SDTrimSP` supports all types, `Scatter` only B,S and I.
-Since version *[`2020.4.0`](https://github.com/mauveferret/ISInCa/commit/d3d1506027f252289089755e8020599890d4b4ca)* ISInCa can calculate data separatly for every particle from incident beam or a target. Also an opportunity for combining results from several calculations has appeared.
+ - ...
+
+All data is available for different combination of particles (scattered - B, sputtered - S, implanted - I ,
+transmitted - T  and displaced - D). You should take into account, that the number of available particle's
+types depends on the specific code. As example, `SDTrimSP` supports all types, `Scatter` only B,S and I.
+Since version *[`2020.4.0`](https://github.com/mauveferret/ISInCa/commit/d3d1506027f252289089755e8020599890d4b4ca)* ISInCa can calculate data separately for every particle from incident beam or a target. 
+Also an opportunity for combining results from several calculations was added.
 
 # Installation
-ISInCa is fully `JAVA` program so it can be launched in any OS on every processor architecture!  
-Executable files for the latest version are located in *[`/out`](https://github.com/mauveferret/ISInCa/tree/master/out)* directory:
-- For "easy mode" in Windows OS you can download an executable file *[`ISInCa.exe`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.exe)* (for GUI mode only with limiting calculation capabilities!)
-- For all OS you can take *[`isinca.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*, which provides full functionality of ISInCa
-- For console mode you will also need a template for config file: *[`isinca.xml`](https://github.com/mauveferret/ISInCa/blob/master/out/isinca.xml)*
+ISInCa is fully `JAVA` program, so it can be launched in any OS on every processor architecture.  
+Executable files for the latest version are located in **[/out](https://github.com/mauveferret/ISInCa/tree/master/out)** directory:
+- For "easy mode" in Windows OS you can download an executable file **[ISInCa.exe](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.exe)** (works only in GUI mode  with limited capabilities)
+- For all OS you can use **[isinca.jar](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)**, which provides full functionality of ISInCa
+- For console mode you will also need a template for config file: **[isinca.xml](https://github.com/mauveferret/ISInCa/blob/master/out/isinca.xml)**
 
 In any case you need to have a **Java Virtual Machine** (version **11** or newer) installed on your computer. To check whether the JVM was already installed, open the terminal (in Windows OS press "Win"+"R", then type "cmd" in an appeared window, then press enter) and type `java -version`, then press "enter". If the output looks like 
 > Java is not recognized as an internal or external command
@@ -48,7 +62,7 @@ GUI is the default mode so there is no need in any launch arguments, so just run
 
 The interface seems to be user-friendly.
 
-###**calculation algorithm**
+### **calculation algorithm**
 
 1. Press "Choose directory bottom". Select the folder with the files, genereted by your Monte-Carlo program. In case of `Scatter` it is most likely `/out`  folder inside SCATTER folder. It should contain 
 `SC*****.dat` file. In case of`SDTrimSP` the folder should contain `tri.inp` and `partic_***.dat` files. 
@@ -152,6 +166,6 @@ Imagine a situation: you want to estimate the sputtering of steel by some multic
 
 **not finished yet**
 
-## Direcories structure
+## Directories structure
 
 **...will describe later...** 
