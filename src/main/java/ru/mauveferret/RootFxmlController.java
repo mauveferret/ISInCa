@@ -304,9 +304,14 @@ public class RootFxmlController {
         {
             E0.setText("25000");
         }
+    }
+
+    @FXML
+    public void dEtoEChanged()
+    {
 
         try {
-            double E = Double.parseDouble(deltaEtoE.getText());
+            double E = Double.parseDouble(deltaEtoE.getText().replace(",","."));
             if (E<0) throw new Exception();
         }
         catch (Exception e)

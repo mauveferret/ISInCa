@@ -108,7 +108,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="deltaEtoE" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="56.0" prefWidth="99.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                    <TextField fx:id="deltaEtoE" alignment="CENTER" onKeyReleased="#dEtoEChanged" prefHeight="56.0" prefWidth="99.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="26.0" />
                                        </font>
