@@ -82,7 +82,7 @@ public class GUI extends Application {
     {
         Stage NotificationStage = new Stage();
         NotificationStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        NotificationStage.setTitle("Предупреждение");
+        NotificationStage.setTitle("Notification");
         NotificationStage.initModality(Modality.NONE);
         Label notification = new Label();
         notification.setText(""+notificationText);
