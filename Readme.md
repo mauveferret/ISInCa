@@ -11,10 +11,10 @@ ISInCA - is **Java** tool dedicated to postprocess outputs of *[`SCATTER`](https
  multiple target parameters. Such codes usually can generate single or several files, containing tables 
  with backscattered (B), sputtered (S), transmitted (T), implanted (I) and displaced (D) particles with 
  data on their position, motion direction, sort, energy, pathlength etc. **ISInCa** allows to transform 
- this huge (up to hundreds of GB) data files to easy for interpretation distributions. 
+ this huge (up to hundreds of GB) data files to easy for interpretation data. 
  In this way, it can generate:
 
-### **Distributions:**
+### **Graphs:**
  - Energy distributions N(E) for any solid angle and any energy step 
 **(for backscattered and transmitted primary particles and sputtered particles of target)**
  - Angle distributions dN/dβ(β) **(backscattered and transmitted primary particles and sputtered particles of target)**
@@ -40,8 +40,11 @@ An opportunity for combining results from several calculations was also added.
 
 You can read more about features in the corresponding docs:
 
-
-
+ - **[More on the available distributions](https://github.com/mauveferret/ISInCa/tree/master/docs/distributions.md)**
+ -  **[Considering energy analyser distortions](https://github.com/mauveferret/ISInCa/tree/master/docs/spectra_distortions.md)**
+ -  **[Postprocessing multiple simulations at once](https://github.com/mauveferret/ISInCa/tree/master/docs/console_mode.md)**
+ -  **[Combining multiple simulation's results](https://github.com/mauveferret/ISInCa/tree/master/docs/simulations_combination.md)**
+ - 
 
 # Installation
 ISInCa is fully `JAVA`  program, so it can be launched in any OS on every processor architecture.  
@@ -87,8 +90,6 @@ The main feature of the GUI mode os the possibility to visualize postprocessed d
 [![N|Solid](https://i.ibb.co/Ykvbk2N/10-10-2020-180630.png)](https://github.com/mauveferret)
 
 
-### Combine mode
-Imagine a situation: you want to estimate the sputtering of steel by some multicomponent beam/plasma. In this way, you might have different energy/angle distributions for different masses. Or imagine, that you use code, which doesn't support beam aenergy/angle sitributions at all. In such cases you have no choice but to do several calculations with various parameters. But you need to combine them in "one": several sputter distributions for, e.g., one-component beam/plasma transform to sputter distribution for multi-component. So, **Combine mode**  transforms corresponding dependencies for calculations in every `<dir>` into one dependency: all energy distributions - in one energy distributions, all maps - in one map. Output directory for "multi-component" dependencies will be so in which the first `<dir>` lies.
 
 ## Generate mode
 
