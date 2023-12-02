@@ -66,7 +66,7 @@ For your convenience **CONSOLE** and **GUI** modes were made in ISInCA. GUI is b
 
 GUI is the default mode so there is no need in any launch arguments, so just run it... Main window of the GUI mode looks like:
 
-![gui](https://github.com/mauveferret/ISInCa/blob/master/out/pics/gui_main.png?raw=true)
+![gui](https://github.com/mauveferret/ISInCa/blob/master/docs/pics/gui_main.png?raw=true)
 
 The interface seems to be user-friendly.
 
