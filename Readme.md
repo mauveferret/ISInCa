@@ -2,7 +2,8 @@
 
 ISInCA - is **Java** tool dedicated to postprocess outputs of *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)* Monte-Carlo codes. It is planned to gradually expand the list of supported codes (like TRYDIN, MARLOWE and so on).
 
-![N|Solid](https://i.ibb.co/0cQrTDm/Croco-Logo.png)
+![header](https://github.com/mauveferret/ISInCa/blob/master/docs/pics/header.png?raw=true)
+
  
 # Key features
 
