@@ -1,8 +1,7 @@
 package ru.mauveferret.Dependencies;
 
 import javafx.application.Platform;
-import ru.mauveferret.Charts.GRAL_XYChart;
-import ru.mauveferret.GUI;
+import ru.mauveferret.Charts.JFree_XYChart;
 import ru.mauveferret.Simulators.Simulator;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
@@ -42,7 +41,7 @@ public class Energy extends Dependence {
     @Override
     public void initializeArrays(ArrayList<String> elements) {
         headerComment = simulator.createHeader();
-        String addheaderComment = " delta E "+dE+" eV dE/E"+deltaEtoE+" eV beta "+beta+" deg dBeta "+dBeta+" deg phi "+
+        String addheaderComment = " delta E "+dE+" eV dE/E "+deltaEtoE+" eV beta "+beta+" deg dBeta "+dBeta+" deg phi "+
                 phi+" deg dPhi "+dPhi+" deg";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
         headerComment= "Energy particles "+"\n"+"eV  count \n\n"+headerComment+"\n";
@@ -117,8 +116,15 @@ public class Energy extends Dependence {
 
                  */
 
+
+                /*
                 new GRAL_XYChart(normSpectrum, E0,  dE, simulator.projectileElements+" with E0="+(int) (E0/1000)+" keV strikes "+
                         simulator.targetElements+" target under φ = "+phi+"±"+dPhi+" deg β = "+beta+"±"+dBeta+"deg dE/E= "+deltaEtoE).showInFrame();
+
+                 */
+
+                new JFree_XYChart( normSpectrum,  E0,  dE,  simulator.projectileElements+" with E0="+(int) (E0/1000)+" keV strikes "+
+                        simulator.targetElements+" target under \n φ = "+phi+"±"+dPhi+" deg β = "+beta+"±"+dBeta+"deg dE/E= "+deltaEtoE,pathsToLog.get("all"));
 
             }
         });

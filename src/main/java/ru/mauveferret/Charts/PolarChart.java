@@ -2,6 +2,7 @@ package ru.mauveferret.Charts;
 
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class PolarChart extends ApplicationFrame {
         ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(860, 650);
+                return new Dimension(880, 650);
             }
         };
         JFreeChart chart = chartPanel.getChart();
@@ -73,7 +74,7 @@ public class PolarChart extends ApplicationFrame {
         chartPanel.setHorizontalAxisTrace(true);
         chartPanel.setVerticalAxisTrace(true);
 
-        //FIXME produce bug: doubled legend. Don't  know how to fix
+        //FIXME produce bug: doubled legend. Seems to be JfreeChart bug. Disappears after shifting
         try {
             OutputStream ff = new FileOutputStream(new File(path));
             ChartUtilities.writeChartAsPNG(ff,
@@ -123,11 +124,11 @@ public class PolarChart extends ApplicationFrame {
         final JFreeChart chart =  ChartFactory.createPolarChart(
               "Polar Chart of: "+title, dataset, true, true, true);
         PolarPlot polPlot =(PolarPlot)  chart.getPlot();
-        polPlot.setAngleGridlinePaint(Color.GREEN);
+        polPlot.setAngleGridlinePaint(Color.WHITE);
         DecimalFormat df2 = new DecimalFormat("0");
 
         polPlot.setAngleTickUnit(new NumberTickUnit(15, df2, 4));
-        polPlot.setRadiusGridlinePaint(Color.GREEN);
+        polPlot.setRadiusGridlinePaint(Color.WHITE);
         Font font = new Font("Verdana", Font.BOLD, 24);
         polPlot.setAngleLabelPaint(Color.WHITE);
         polPlot.setAngleLabelFont(font);
@@ -156,9 +157,8 @@ public class PolarChart extends ApplicationFrame {
         renderer.setSeriesFilled(2,false);
 
 
-
-        renderer.setSeriesPaint(0, Color.RED);
-        renderer.setSeriesPaint(1,Color.CYAN);
+        renderer.setSeriesPaint(0,  new Color(0, 180, 0, 170));
+        renderer.setSeriesPaint(1,Color.WHITE);
         renderer.setSeriesPaint(2,Color.YELLOW);
 
         return chart;

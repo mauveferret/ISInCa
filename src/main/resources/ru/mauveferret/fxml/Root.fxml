@@ -125,7 +125,7 @@
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font></Label>
-                              <Label layoutX="13.0" layoutY="140.0" prefHeight="27.0" prefWidth="697.0" text="2. Choose distributions in the matrix below. Set it parameters in the corresponding tabs. Press &quot;start calculation. Wait&quot;.">
+                              <Label layoutX="13.0" layoutY="140.0" prefHeight="27.0" prefWidth="697.0" text="2. Choose distributions in the matrix below. Set it parameters in the corresponding tabs. Press &quot;start calculation&quot;. Wait.">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font>
@@ -201,7 +201,7 @@
                                  </font>
                               </TextField>
                               <Label layoutX="57.0" layoutY="10.0" text="delta E" />
-                              <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
+                              <Label layoutX="250.0" layoutY="46.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -280,14 +280,14 @@
                      <content>
                         <AnchorPane prefHeight="150.0" prefWidth="583.0">
                            <children>
-                              <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showHelp" text="Axes" />
-                              <Label layoutX="64.0" layoutY="13.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= picture with axes" />
+                              <Button layoutX="20.0" layoutY="25.0" mnemonicParsing="false" onAction="#showHelp" text="Axes" />
+                              <Label layoutX="70.0" layoutY="24.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= picture with axes" />
                               <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;convert *.dat&quot; converts  SCATTER binary file to ASCII " />
                               <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(β) shows scattering(sputtering) if  0&lt;β&lt;180 and implantation if 180&lt;β&lt;360 (not made)" />
                               <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="You can get integral distributions by setting large  dφ, dβ " />
                               <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta β - is step, not dispersion" />
                               <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" visible="false" />
-                              <Button layoutX="296.0" layoutY="14.0" mnemonicParsing="false" onAction="#openGIT" text="HELP" />
+                              <Button layoutX="302.0" layoutY="25.0" mnemonicParsing="false" onAction="#openGIT" text="HELP" />
                            </children></AnchorPane>
                      </content>
                   </Tab>

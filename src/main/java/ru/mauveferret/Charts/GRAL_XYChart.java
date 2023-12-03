@@ -21,7 +21,6 @@ import de.erichseifert.gral.util.GraphicsUtils;
 import de.erichseifert.gral.graphics.Insets2D;
 import de.erichseifert.gral.plots.areas.AreaRenderer;
 import de.erichseifert.gral.plots.areas.DefaultAreaRenderer2D;
-import de.erichseifert.gral.plots.areas.LineAreaRenderer2D;
 
 public class GRAL_XYChart extends GRAL_Panel {
 
@@ -29,6 +28,7 @@ public class GRAL_XYChart extends GRAL_Panel {
 
     @SuppressWarnings("unchecked")
     public GRAL_XYChart(double spectra[], double E0, double dE, String name) {
+
 
         this.name = name;
 
@@ -69,7 +69,7 @@ public class GRAL_XYChart extends GRAL_Panel {
         Label linearAxisLabelX = new Label("Energy, keV");
         linearAxisLabelX.setFont(new Font ("TimesRoman", Font.PLAIN, 18));
 
-        axisRendererX.setTicksAutoSpaced(true);
+        axisRendererX.setTicksAutoSpaced(false);
         axisRendererX.setTickLabelsOutside(false);
         axisRendererX.setShapeStroke(new BasicStroke(3f));
         axisRendererX.setLabel(linearAxisLabelX);
@@ -98,9 +98,6 @@ public class GRAL_XYChart extends GRAL_Panel {
                5.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
                 10.0f, new float[] {3f, 6f}, 0.0f));
         plot.setLineRenderers(seriesLin, discreteRenderer);
-
-
-
 
         InteractivePanel panel = new InteractivePanel(plot);
         panel.setPopupMenuEnabled(true);

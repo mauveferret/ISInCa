@@ -1,13 +1,11 @@
 package ru.mauveferret.Charts;
 
 
-import javafx.scene.image.Image;
 import ru.mauveferret.Main;
 
 import java.awt.*;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
