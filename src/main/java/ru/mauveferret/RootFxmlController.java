@@ -338,8 +338,7 @@ public class RootFxmlController {
     public void secretLaunch()
     {
         if (secret.getText().equals("А не попить ли чаю?")) secret.setText("");
-        else
-        secret.setText("А не попить ли чаю?");
+        else secret.setText("А не попить ли чаю?");
     }
 
     @FXML

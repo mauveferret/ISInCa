@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <groupId>ru.mauveferret</groupId>
     <artifactId>ISInCa</artifactId>
-    <version>2023.12.3</version>
+    <version>2023.12.4</version>
     <properties>
         <javafx.version>[15,)</javafx.version>
     </properties>
@@ -24,7 +24,11 @@
             <artifactId>jcommon</artifactId>
             <version>1.0.16</version>
         </dependency>
-
+        <dependency>
+            <groupId>de.erichseifert.gral</groupId>
+            <artifactId>gral-core</artifactId>
+            <version>0.11</version>
+        </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>

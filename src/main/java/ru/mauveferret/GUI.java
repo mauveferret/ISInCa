@@ -16,9 +16,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ru.mauveferret.Charts.*;
 
 import java.io.InputStream;
-
 
 public class GUI extends Application {
     @Override
@@ -38,6 +38,8 @@ public class GUI extends Application {
 
     public void showGraph(double spectra[], double E0, double dE, String name)
     {
+
+
         Stage dialogStage = new Stage();
         dialogStage.setTitle("ENERGY SPECTRUM");
         dialogStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
@@ -53,7 +55,6 @@ public class GUI extends Application {
         }
 
         series1.setData(datas);
-
         Scene scene = new Scene(spectra1, 600,600);
         spectra1.getData().add(series1);
         dialogStage.setScene(scene);

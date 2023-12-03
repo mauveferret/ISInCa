@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import javafx.application.Platform;
 import javafx.scene.chart.Chart;
@@ -27,6 +28,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleEdge;
+import ru.mauveferret.Main;
 
 import javax.swing.*;
 
@@ -48,16 +50,16 @@ public class PolarChart extends ApplicationFrame {
 
         JFrame f = new JFrame("ISInCa: Polar Dependence");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("pics/CrocoLogo.png")));
-        f.setLayout(new BorderLayout(0, 5));
 
+        ImageIcon icon = new ImageIcon(Main.class.getResource("pics/CrocoLogo.png").getPath());
+        f.setIconImage(icon.getImage());
+        f.setLayout(new BorderLayout(0, 5));
         ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(860, 650);
             }
         };
-
         JFreeChart chart = chartPanel.getChart();
         chart.getPlot().setBackgroundPaint(Color.BLACK);
         chart.getPlot().setOutlinePaint(Color.WHITE);
