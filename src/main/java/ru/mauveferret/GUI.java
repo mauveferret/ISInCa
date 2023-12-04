@@ -69,12 +69,12 @@ public class GUI extends Application {
         HelpStage.setTitle("Help");
         HelpStage.initModality(Modality.WINDOW_MODAL);
         InputStream input2 = clazz.getResourceAsStream(pictureName);
-        Image image2 = new Image(input2, 900, 600, false, true);
+        Image image2 = new Image(input2, 800, 600, false, true);
         ImageView imageView2 = new ImageView(image2);
         FlowPane root = new FlowPane();
         //root.setPadding(new Insets(20));
         root.getChildren().add(imageView2);
-        Scene scene2 = new Scene(root,900,600);
+        Scene scene2 = new Scene(root,800,600);
         HelpStage.setScene(scene2);
         HelpStage.setResizable(false);
         HelpStage.show();

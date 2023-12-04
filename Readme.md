@@ -19,7 +19,7 @@ ISInCA - is **Java** tool dedicated to postprocess outputs of *[`SCATTER`](https
  - Energy distributions N(E) for any solid angle and any energy step 
 **(for backscattered and transmitted primary particles and sputtered particles of target)**
  - Angle distributions dN/dβ(β) **(backscattered and transmitted primary particles and sputtered particles of target)**
- - ~~Depth distributions for primary implanted and target displaced particles~~ <span style="color:#ff0000">under development</span>
+ - ~~Depth distributions for primary implanted and target displaced particles~~ `under development`
  
 ### **Maps:**
  - Polar Map N(β, φ) for backscattered and transmitted primary particles and sputtered particles of target
