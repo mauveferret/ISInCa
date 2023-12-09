@@ -82,10 +82,15 @@ public class JFree_EnergyChart extends ApplicationFrame{
         plot.setRenderer(renderer);
 
         //Set scale for Y axis to max in a range  of (400 eV, Emax), as 0-400 eV is useless high sputter tail
-        ValueAxis axis =  plot.getRangeAxis();
+        ValueAxis axisX =  plot.getRangeAxis();
         double maxEnergy = 0;
         for (int i=(int) (400/dE); i<spectra.length; i++) maxEnergy= Math.max(maxEnergy, spectra[i]);
-        axis.setRange(0, maxEnergy*1.08);
+        axisX.setRange(0, maxEnergy*1.08);
+
+        ValueAxis axisY =  plot.getDomainAxis();
+        axisY.setRange(0, E0/1000);
+
+
         plot.setBackgroundPaint(Color.BLACK);
         setContentPane( chartPanel );
 
