@@ -63,7 +63,7 @@
                                           <Font size="26.0" />
                                        </font>
                                     </TextField>
-                                    <Label text="dE, eV" GridPane.columnIndex="1">
+                                    <Label text="deltaE, eV" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -127,7 +127,7 @@
                                           <Font size="26.0" />
                                        </font>
                                     </TextField>
-                                    <Label fx:id="call121" text="deltaE/E" GridPane.columnIndex="6">
+                                    <Label fx:id="call121" text="dE/E" GridPane.columnIndex="6">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

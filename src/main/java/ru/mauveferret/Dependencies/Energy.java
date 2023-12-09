@@ -61,7 +61,6 @@ public class Energy extends Dependence {
                 else {
                     //Consider that a particle with specific energy may contribute to different "bins" of the energy analyser due to dE/E = const
                     broadening = E * deltaEtoE/2;
-                    //System.out.println(broadening);
                     for (int E_bins=(int) (Math.round((E-broadening)/dE));E_bins<=(int) (Math.round((E+broadening)/dE)) && E_bins<distributionSize;E_bins++){
                         distributionArray.get(element)[E_bins]++;
                         distributionArray.get("all")[E_bins]++;
