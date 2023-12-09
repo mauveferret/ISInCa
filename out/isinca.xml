@@ -4,9 +4,7 @@
 	    <getTXT>false</getTXT>
         <getSummary>true</getSummary>
         <visualize>false</visualize>
-        <combine>true</combine>
-		<dirSubname>angle</dirSubname>
-		<combSum>Fe,Cr,Ni,Ti</combSum>
+        <combine>false</combine>
     </pref>
     <calcs>
         <!-- First "calc" params can be used for other
@@ -48,14 +46,14 @@
                 <deltaBeta>3</deltaBeta>
             </N_E>
             <N_Beta>
+                <delta>3</delta>
                 <sort>S</sort>
                 <phi>0</phi>
                 <deltaPhi>3</deltaPhi>
-                <deltaBeta>3</deltaBeta>
             </N_Beta>
             <polar_Map>
-                <sort>S</sort>
                 <delta>3</delta>
+                <sort>S</sort>
             </polar_Map>
             <eneang_Map>
                 <sort>BS</sort>
@@ -63,9 +61,9 @@
                 <deltaA>3</deltaA>
             </eneang_Map>
             <cartesian_Map>
+                <delta>1</delta>
                 <sort>S</sort>
                 <MapSize>1000</MapSize>
-                <delta>1</delta>
                 <cartesianMapType>ZY</cartesianMapType>
             </cartesian_Map>
         </calc>

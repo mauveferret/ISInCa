@@ -2,35 +2,20 @@ package ru.mauveferret.Charts;
 
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
-import java.util.Locale;
-
-import javafx.application.Platform;
-import javafx.scene.chart.Chart;
 import org.jfree.chart.*;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
-import org.jfree.chart.axis.TickUnits;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PolarPlot;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
-import org.jfree.chart.renderer.PolarItemRenderer;
-import org.jfree.chart.renderer.xy.XYBlockRenderer;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RectangleEdge;
 import ru.mauveferret.Main;
-
 import javax.swing.*;
 
 
@@ -49,10 +34,10 @@ public class PolarChart extends ApplicationFrame {
         this.dBeta = dBeta;
         this.Beta = Beta;
 
-        JFrame f = new JFrame("ISInCa: Polar Dependence");
+        JFrame f = new JFrame("ISInCa: Polar Distribution");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        ImageIcon icon = new ImageIcon(Main.class.getResource("pics/CrocoLogo.png").getPath());
+        ImageIcon icon = new ImageIcon(Main.class.getResource("pics/CrocoLogo.png"));
         f.setIconImage(icon.getImage());
         f.setLayout(new BorderLayout(0, 5));
         ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
@@ -83,14 +68,14 @@ public class PolarChart extends ApplicationFrame {
                     chartPanel.getHeight());
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("[ERROR 127]"+ex.getMessage());
         }
 
     }
 
     private XYDataset createDataset() {
         final XYSeriesCollection data = new XYSeriesCollection();
-        XYSeries mainSeries = new XYSeries("calculation");
+        XYSeries mainSeries = new XYSeries("simulation");
         double max = 0;
         for (int i=0; i<betaDistr.length; i++) {
             if (Math.abs(i * dBeta -90)!= 0)
@@ -122,7 +107,7 @@ public class PolarChart extends ApplicationFrame {
     private JFreeChart createChart(XYDataset dataset) {
 
         final JFreeChart chart =  ChartFactory.createPolarChart(
-              "Polar Chart of: "+title, dataset, true, true, true);
+              "Polar distribution for: "+title, dataset, true, true, true);
         PolarPlot polPlot =(PolarPlot)  chart.getPlot();
         polPlot.setAngleGridlinePaint(Color.WHITE);
         DecimalFormat df2 = new DecimalFormat("0");

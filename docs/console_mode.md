@@ -1,7 +1,18 @@
 # Console mode in ISInCa
 
 
-This mode provides more functionality for postprocessing of calculated files, but needs little bit more computer skills from the user.Console mode is launched by the command  ` java -jar ISInCa.jar -argument `,  where `java` is the call to the JVM, `-jar` is command to execute file *[`ISInCa.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*, and ` -argument ` is some command line argument. There are several possible arguments:
+This mode provides more functionality for postprocessing of calculated files, 
+but needs little bit more computer skills from the user. 
+Console mode is launched by the command  
+>java -jar ISInCa.jar -argument
+
+where 
+
+`java` is the call to the JVM, 
+
+`-jar` is command to execute file *[`ISInCa.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*,
+
+` -argument ` is some command line argument. There are several possible arguments:
 
 argument                  | alias             | brief description
 :------------------------:|:-----------------:|:------
@@ -15,7 +26,9 @@ In this way, to launch posprocessing of same calculation you should type in the 
 
 ` java -jar isinca.jar -c configs/isinca.xml`
 
-where  `configs/isinca.xml` is the path to the config file named *[`isinca.xml`](https://github.com/mauveferret/ISInCa/blob/master/out/isinca.xml)* (by and large, the config file name may be any) with instructions for ISInCa. You can specify the path to config either relatively to executable (without slash in the beginning, like in example) or absolutely.
+where  `configs/isinca.xml` is the path to the config file named *[`isinca.xml`](https://github.com/mauveferret/ISInCa/blob/master/out/isinca.xml)* 
+(the config file name may be any) with instructions for ISInCa. 
+You can specify the path to config either relatively to executable (without slash in the beginning, like in example) or absolutely.
 
 ### Configuration file
 
@@ -33,7 +46,20 @@ flag             |   values             | brief description
 `<combine>`      | *true, false*        |sets whether to combine files from one `<calc>` section (look for "Combine mode" further)
 `<dirSubname>`   | *angle, energy, ...* | adds an incident angle/energy... of calcs. to combine's mode dir
 `<combSum>`      | *W,Au,Fe,Cl,U,...*   | list of elements for **combSum** mode: summarizes combines
-The flags need some clarification. Monte-Carlo Codes like Scatter generate outputs which can't be opened with a plain text editors. So if you want to posptprocess this files by yourself, you need to transform the outputs to some readable format. For this `<getTXT>` was made. It doesn't provide any calculation, just transform ouputs of the codes to **txt* file with common **UTF-8** encoding. Then, some codes like SDTrimSP generate several outputs files, which corresponds to different particle sort. In this way, if you only want to calculate energy spectrum of scattered, you don't have to process files with sputtered or displaced particles. So `<getSummary>` helps you to economy time for posprocessing, which can be very usefull for case of huge outputs. But you should understand that in this case no calculation of some constants would be provided, because not all of particles were postprocessed. For our example, you would't get sputter and displace coefficient. So if integral coefficients are important for you - leave the `<getSummary>` to be **true**, else - make it **false**.
+The flags need some clarification. Monte-Carlo Codes like Scatter generate outputs which can't be opened with a plain
+text editors. So if you want to post-process this files by yourself, 
+you need to transform the outputs to some readable format. For this `<getTXT>` was made.
+It doesn't provide any calculation, just transform outputs of the codes to **txt* file with common **UTF-8** encoding.
+This is useful for `SCATTER` code, which saves data in not readable binary format.
+Then, some codes like SDTrimSP generate several outputs files, which corresponds to different particle sort. 
+In this way, if you only want to calculate energy spectrum of scattered, you don't have to process files with
+sputtered or displaced particles. So `<getSummary>` helps you to economy time for posprocessing, 
+which can be very usefull for case of huge outputs. 
+But you should understand that in this case no calculation of some constants would be provided,
+because not all particles would be postprocessed. For our example, you would not get sputter and displace coefficient. 
+So if integral coefficients are important for you - leave the `<getSummary>` to be **true**, 
+else - make it **false**.
+
 ```xml
 <pref>
     <getTXT>false</getTXT>
@@ -52,7 +78,7 @@ After `<pref>` section you might have several `<calc>` sections, which correspon
     ...
 </calc>
 ```
-Preferences are mainly related to distributions, integral coefficients are calculated independantly. You can specify needed dependencies by their tags: `<N_E>` - for energy sitribution, `<N_Beta>` - for polat distribution, `<polar_Map>` - for particles motion direction plotting in polar coordinates and etc. (**additional dependencies would be added soon 11.11.20**). There are several tags inside each of dependencies, which allow some customization: you can specify sorts of particles (**B** - for backscattered, **S** - for sputtered, **I** - for implanted, **D** - for displaced, **T** - for passed through the target or any of their combinations). It should be noted, that not all codes support all of this types,  so,  for example, you wouldn't get implanted coefficient for SCATTER calculation as scatter has no flag for implanted particles. Then, you may specify specific angles (by tags `<phi>` and `<beta>`) and distributions steps (by tags `<deltaPhi>`, `<deltaBeta>` and `<delta>` - for energy distribution and for steps in polar map).
+Preferences are mainly related to distributions, integral coefficients are calculated independently. You can specify needed dependencies by their tags: `<N_E>` - for energy sitribution, `<N_Beta>` - for polat distribution, `<polar_Map>` - for particles motion direction plotting in polar coordinates and etc. (**additional dependencies would be added soon 11.11.20**). There are several tags inside each of dependencies, which allow some customization: you can specify sorts of particles (**B** - for backscattered, **S** - for sputtered, **I** - for implanted, **D** - for displaced, **T** - for passed through the target or any of their combinations). It should be noted, that not all codes support all of this types,  so,  for example, you wouldn't get implanted coefficient for SCATTER calculation as scatter has no flag for implanted particles. Then, you may specify specific angles (by tags `<phi>` and `<beta>`) and distributions steps (by tags `<deltaPhi>`, `<deltaBeta>` and `<delta>` - for energy distribution and for steps in polar map).
 ```xml
 <calc id="0">
     <dir>...</dir>

@@ -426,8 +426,19 @@ public class RootFxmlController {
 
                 if (getTXT.isSelected()) distributions.add(new getTXT(yourSimulator, ""));
 
-                yourSimulator.postProcessCalculatedFiles(distributions);
-                yourSimulator.printAndVisualizeData(distributions);
+
+                //Initialize the simulator again only to update the calculation ID every time "start calc" is pressed
+                yourSimulator.initializeModelParameters();
+
+                //start calculation
+                try {
+                    yourSimulator.postProcessCalculatedFiles(distributions);
+                    yourSimulator.printAndVisualizeData(distributions);
+                }
+                catch (NullPointerException ex) {
+                    System.out.println("[ERROR 176] "+ex.getMessage());
+                    System.out.println("[ERROR 176] Directory was not chosen or incorrect?");
+                }
 
                 //Calculation is ended
 
@@ -449,7 +460,6 @@ public class RootFxmlController {
                 energyScattering.setText(new BigDecimal(yourSimulator.energyRecoil.get("all")).setScale(3, RoundingMode.UP).doubleValue()
                         +"");
 
-                //FIXME to remove: every launch we create new calculator?!
                 for (String element: yourSimulator.elementsList) {
                     yourSimulator.scattered.put(element,0.0);
                     yourSimulator.sputtered.put(element, 0.0);

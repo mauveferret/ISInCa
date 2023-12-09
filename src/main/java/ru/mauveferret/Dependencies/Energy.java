@@ -1,7 +1,7 @@
 package ru.mauveferret.Dependencies;
 
 import javafx.application.Platform;
-import ru.mauveferret.Charts.JFree_XYChart;
+import ru.mauveferret.Charts.JFree_EnergyChart;
 import ru.mauveferret.Simulators.Simulator;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
@@ -34,7 +34,7 @@ public class Energy extends Dependence {
 
         depType = "distribution";
         distributionSize = (int) Math.ceil(E0/dE)+1;
-        endOfPath="_beta "+beta+"_phi "+phi+"_dE"+dE+"_time "+ ((int ) (Math.random()*100))+".txt";
+        endOfPath="_beta "+beta+"_phi "+phi+"_dE"+dE+".txt";
 
     }
 
@@ -123,8 +123,10 @@ public class Energy extends Dependence {
 
                  */
 
-                new JFree_XYChart( normSpectrum,  E0,  dE,  simulator.projectileElements+" with E0="+(int) (E0/1000)+" keV strikes "+
-                        simulator.targetElements+" target under \n φ = "+phi+"±"+dPhi+" deg β = "+beta+"±"+dBeta+"deg dE/E= "+deltaEtoE,pathsToLog.get("all"));
+                new JFree_EnergyChart( normSpectrum,  E0,  dE,  simulator.projectileElements+" with E0 = "+E0/1000+" keV that hit "+
+                        simulator.targetElements+" target under β = "+simulator.projectileIncidentPolarAngle+" deg. \n" +
+                        "The spectrum is calculated for φ = "+phi+"±"+dPhi+" deg, β = "+beta+"±"+dBeta+" deg"+
+                        ((deltaEtoE!=0.0)?" , dE/E = "+deltaEtoE:"")+" for " + sort+" particles", pathsToLog.get("all"));
 
             }
         });

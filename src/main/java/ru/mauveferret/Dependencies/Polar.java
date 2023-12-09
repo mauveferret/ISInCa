@@ -90,11 +90,10 @@ public class Polar extends Dependence {
 
         if (!sort.equals("") && doVisualisation)
         Platform.runLater(() -> {
-            String title = simulator.projectileElements+" with "+ simulator.projectileMaxEnergy+" eV hits at polar angle of "+
-                    simulator.projectileIncidentPolarAngle +" degrees target of "+
-                    simulator.targetElements+".\n Dependence made at phi " +
-                    simulator.projectileIncidentAzimuthAngle+" degrees. Delta is "+dBeta+" degrees. Chart is for "+
-                    sort+" particles";
+            String title = simulator.projectileElements+" with E0 = "+ simulator.projectileMaxEnergy/1000+" keV that hit"+
+                    simulator.targetElements+" target under β = "+simulator.projectileIncidentPolarAngle+" deg.\n"+"The spectrum is calculated for " +
+                    "φ = "+phi+"±"+dPhi+" deg, delta β = "+dBeta+" deg"+
+                    " for " + sort+" particles";
            new PolarChart(title,normDistrToDBeta(distributionArray.get("all")), dBeta, simulator.projectileIncidentPolarAngle, pathsToLog.get("all"));
         });
         return  true;

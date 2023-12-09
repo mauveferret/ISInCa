@@ -16,6 +16,10 @@ public class AngEnMap extends Dependence {
     private final double dBeta;
 
     public AngEnMap(double dBeta, double dE, String sort, Simulator calculator) {
+
+
+        //TODO Add the phi and deltaPhi to calculate for specific azimuth
+
         super(calculator, sort);
         this.dE = dE;
         this.E0 = calculator.projectileMaxEnergy;

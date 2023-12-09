@@ -24,9 +24,9 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Root.fxml"));
-        primaryStage.setTitle("ISInCa - Ion Surface Interaction Calculation "+Main.getVersion());
+        primaryStage.setTitle("ISInCa - Ion Surface Interaction Calculator "+Main.getVersion());
         primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        primaryStage.setScene(new Scene(root, 800, 520));
+        primaryStage.setScene(new Scene(root, 790, 490));
         primaryStage.show();
     }
 
@@ -101,7 +101,7 @@ public class GUI extends Application {
         NotificationStage.setTitle("Notification");
         NotificationStage.initModality(Modality.NONE);
         Label notification = new Label();
-        notification.setText("Choose file!");
+        notification.setText("Choose correct directory!");
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);

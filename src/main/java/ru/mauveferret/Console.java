@@ -26,7 +26,7 @@ public class Console {
     //params
     private double betaNE, phiNE, phiNBeta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaBetaNE, deltaPhiNBeta, deltaBetaNBeta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
     private String  sortNE, sortNBeta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
-    private String dirSubname;
+    private String dirSubname="empty";
     //Preferences
     private boolean getTXT, getSummary, visualize, combine;
     //local
@@ -362,7 +362,7 @@ public class Console {
                                     case "sort":
                                         sortNBeta = distrPars.item(j).getTextContent();
                                         break;
-                                    case "deltabeta":
+                                    case "delta":
                                         deltaBetaNBeta = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                     case "phi":

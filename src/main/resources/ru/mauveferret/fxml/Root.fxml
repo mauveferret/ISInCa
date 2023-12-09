@@ -18,14 +18,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="505.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="493.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
    <children>
-      <ImageView fitHeight="250.0" fitWidth="380.0" layoutX="415.0" layoutY="230.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="250.0" fitWidth="380.0" layoutX="407.0" layoutY="208.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pics/CrocoLogo.png" />
          </image>
       </ImageView>
-      <SplitPane layoutX="11.0" layoutY="26.0" prefHeight="199.0" prefWidth="775.0">
+      <SplitPane layoutX="8.0" layoutY="11.0" prefHeight="199.0" prefWidth="775.0">
          <items>
             <TabPane prefHeight="197.0" prefWidth="736.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -67,6 +67,13 @@
                                        <font>
                                           <Font size="15.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip text="Step in eV in the energy spectrum">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
                                     </Label>
                                     <TextField fx:id="E0" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="182.0" text="25000" GridPane.rowIndex="1">
                                        <font>
@@ -87,6 +94,13 @@
                                        <font>
                                           <Font size="15.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip text="Full delta β registration angle (see help)">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip>
                                     </Label>
                                     <TextField fx:id="dAzimuthAngleNE" alignment="CENTER" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="81.0" text="3" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                        <font>
@@ -117,11 +131,14 @@
                                        <font>
                                           <Font size="15.0" />
                                        </font>
+                                       <tooltip>
+                                          <Tooltip text="Distortion (Broadening) due to hardware function" />
+                                       </tooltip>
                                     </Label>
                                  </children>
                               </GridPane>
-                              <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="β is defined relative to the surface normal (both for B,S and T), φ is relative to Z axis  (see help tab)!" />
-                              <Label layoutX="14.0" layoutY="119.0" prefHeight="27.0" prefWidth="667.0" text="1. Just choose directory, where simulated output data is located, ISInCA will  find out some  simulation parameters.">
+                              <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="β is defined relative to the surface normal (both for B,S and T), φ is relative to Z axis  (see help tab)." />
+                              <Label layoutX="14.0" layoutY="119.0" prefHeight="27.0" prefWidth="667.0" text="1. Choose the directory, where simulated data is located.">
                                  <font>
                                     <Font name="System Bold Italic" size="12.0" />
                                  </font></Label>
@@ -157,7 +174,7 @@
                               </TextField>
                               <Label fx:id="call123" layoutX="225.0" layoutY="14.0" text="dφ" />
                               <Label layoutX="154.0" layoutY="14.0" text="φ" />
-                              <Label layoutX="280.0" layoutY="67.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 " />
+                              <Label layoutX="280.0" layoutY="61.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 " />
                               <Label layoutX="280.0" layoutY="34.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;180" />
                            </children>
                         </AnchorPane>
@@ -206,7 +223,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="coefficients">
+                  <Tab text="Coefficients">
                      <content>
                         <AnchorPane prefHeight="135.0" prefWidth="583.0">
                            <children>
@@ -217,8 +234,8 @@
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="79.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="118.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -230,14 +247,14 @@
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="backscattered (B)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="Backscattered (B)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <TextField fx:id="count" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="132.0" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="total particles amount" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <Label alignment="CENTER" text="sputtered (S)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="Postprocessed particles amount" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="Sputtered (S)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <TextField fx:id="sputtered" alignment="CENTER" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="87.0" text="0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
@@ -248,46 +265,46 @@
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="implanted (I)" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <TextField fx:id="energyScattering" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="89.0" text="0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Label alignment="CENTER" text="Implanted (I)" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <TextField fx:id="energyScattering" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="130.0" text="0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="energy scattered" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="Displaced (D)" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                     <TextField fx:id="transmitted" alignment="CENTER" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="87.0" text="0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="transmitted (T)" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <TextField fx:id="displaced" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="145.0" text="0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                    <Label alignment="CENTER" text="Transmitted (T)" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                    <Label alignment="CENTER" text="Energy scattered" GridPane.columnIndex="6" />
+                                    <TextField fx:id="displaced" alignment="CENTER" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="85.0" text="0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <Label alignment="CENTER" text="displaced (D)" GridPane.columnIndex="6" />
                                  </children>
                               </GridPane>
                               <Label layoutX="18.0" layoutY="100.0" prefHeight="24.0" prefWidth="481.0" text="Note that for plausible values you have to set enough large sizes of correspond files" />
                               <Label layoutX="18.0" layoutY="118.0" prefHeight="24.0" prefWidth="491.0" text="For Scatter you should mark Sputter and Profiles (netter more than 100 nm) in the left top " />
-                              <Label layoutX="18.0" layoutY="135.0" prefHeight="24.0" prefWidth="491.0" text="of the GUI. On SDTrimSP you should set enough amount of particles in the &quot;partic_*.dat&quot; file" />
+                              <Label layoutX="18.0" layoutY="135.0" prefHeight="24.0" prefWidth="491.0" text="of the GUI. In SDTrimSP you should set enough amount of particles in the &quot;partic_*.dat&quot; file" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="help">
+                  <Tab text="Help">
                      <content>
                         <AnchorPane prefHeight="150.0" prefWidth="583.0">
                            <children>
                               <Button layoutX="20.0" layoutY="25.0" mnemonicParsing="false" onAction="#showHelp" text="Axes" />
-                              <Label layoutX="70.0" layoutY="24.0" prefHeight="27.0" prefWidth="365.0" text="&lt;= picture with axes" />
-                              <Label layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="563.0" text="&quot;convert *.dat&quot; converts  SCATTER binary file to ASCII " />
+                              <Label layoutX="70.0" layoutY="23.0" prefHeight="27.0" prefWidth="217.0" text="&lt;= picture with clarification of angles" />
                               <Label layoutX="14.0" layoutY="82.0" prefHeight="27.0" prefWidth="524.0" text="N(β) shows scattering(sputtering) if  0&lt;β&lt;180 and implantation if 180&lt;β&lt;360 (not made)" />
                               <Label layoutX="14.0" layoutY="102.0" prefHeight="27.0" prefWidth="524.0" text="You can get integral distributions by setting large  dφ, dβ " />
                               <Label layoutX="14.0" layoutY="125.0" prefHeight="27.0" prefWidth="524.0" text="delta E, delta φ, delta β - is step, not dispersion" />
                               <Button layoutX="384.0" layoutY="14.0" mnemonicParsing="false" onAction="#readme" text="oldHelp" visible="false" />
                               <Button layoutX="302.0" layoutY="25.0" mnemonicParsing="false" onAction="#openGIT" text="HELP" />
+                              <Label layoutX="360.0" layoutY="22.0" prefHeight="27.0" prefWidth="217.0" text="&lt;= Online documentation" />
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -295,7 +312,7 @@
             </TabPane>
          </items>
       </SplitPane>
-      <SplitPane layoutX="12.0" layoutY="237.0" prefHeight="259.0" prefWidth="398.0">
+      <SplitPane layoutX="8.0" layoutY="223.0" prefHeight="259.0" prefWidth="398.0">
          <items>
             <Pane prefHeight="261.0" prefWidth="361.0">
                <children>
@@ -349,14 +366,14 @@
                         <CheckBox fx:id="NBetaS" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <Label text="B" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <tooltip>
-                              <Tooltip text="scattered particles">
+                              <Tooltip text="Backscattered particles">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Tooltip>
                            </tooltip></Label>
                         <Label text="S" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <tooltip>
-                              <Tooltip text="sputtered particles">
+                              <Tooltip text="Sputtered particles">
                                  <font>
                                     <Font size="14.0" />
                                  </font></Tooltip>
@@ -400,8 +417,22 @@
                                  </font>
                               </Tooltip>
                            </tooltip></Label>
-                        <Label text="N(Z,Y)" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
-                        <Label text="N(Z,X)" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
+                        <Label text="N(Z,Y)" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+                           <tooltip>
+                              <Tooltip text="Cartesian map">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Label>
+                        <Label text="N(Z,X)" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+                           <tooltip>
+                              <Tooltip text="Cartesian map">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Label>
                         <CheckBox fx:id="NzyB" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <CheckBox fx:id="NzxB" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <CheckBox fx:id="NzyS" mnemonicParsing="false" prefHeight="27.0" prefWidth="13.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
@@ -411,7 +442,14 @@
                         <CheckBox fx:id="NzyT" mnemonicParsing="false" prefHeight="29.0" prefWidth="9.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                         <CheckBox fx:id="NzxT" mnemonicParsing="false" prefHeight="29.0" prefWidth="9.0" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                         <CheckBox fx:id="NzyD" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                        <Label text="N(E, β)" GridPane.rowIndex="5" />
+                        <Label text="N(E, β)" GridPane.rowIndex="5">
+                           <tooltip>
+                              <Tooltip text="EneAng Map (energy - Y axis, β - X axis)">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Label>
                         <CheckBox fx:id="NEBetaB" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <CheckBox fx:id="NEBetaI" alignment="CENTER_RIGHT" contentDisplay="BOTTOM" disable="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                         <CheckBox fx:id="NEBetaT" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
@@ -430,7 +468,7 @@
                      <font>
                         <Font size="19.0" />
                      </font></TextField>
-                  <Label layoutX="47.0" layoutY="187.0" text="projectiles amount" textAlignment="CENTER" />
+                  <Label layoutX="28.0" layoutY="185.0" text="total projectiles amount" textAlignment="CENTER" />
                   <Separator layoutX="184.0" layoutY="180.0" prefHeight="1.0" prefWidth="205.0" />
                   <TextField fx:id="codeName" alignment="CENTER" layoutX="14.0" layoutY="141.0" prefHeight="41.0" prefWidth="94.0" promptText="choose dir">
                      <font>
@@ -438,7 +476,14 @@
                      </font></TextField>
                   <Label layoutX="189.0" layoutY="189.0" text="visualize data" />
                   <CheckBox fx:id="visualize" layoutX="270.0" layoutY="185.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
-                  <Label layoutX="190.0" layoutY="210.0" text="convert *.dat " />
+                  <Label layoutX="190.0" layoutY="210.0" text="convert *.dat ">
+                     <tooltip>
+                        <Tooltip text="Converts  SCATTER binary file to ASCII ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip></Label>
                   <CheckBox fx:id="getTXT" layoutX="270.0" layoutY="205.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" />
                   <CheckBox fx:id="getSummary" layoutX="270.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
                   <Label layoutX="190.0" layoutY="229.0" text="get summary" />
@@ -446,6 +491,6 @@
             </Pane>
          </items>
       </SplitPane>
-      <Label fx:id="secret" layoutX="519.0" layoutY="475.0" prefHeight="17.0" prefWidth="168.0" textOverrun="WORD_ELLIPSIS" />
+      <Label fx:id="secret" layoutX="463.0" layoutY="457.0" prefHeight="17.0" prefWidth="168.0" textOverrun="WORD_ELLIPSIS" />
    </children>
 </Pane>
