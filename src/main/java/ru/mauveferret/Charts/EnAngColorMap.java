@@ -11,6 +11,7 @@ import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
+import ru.mauveferret.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -49,8 +50,8 @@ public class EnAngColorMap {
         }
         try{
             JFrame f = new JFrame("ISInCa: energy/angle colored map");
-            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("pics/CrocoLogo.png")));
+            ImageIcon icon = new ImageIcon(Main.class.getResource("pics/CrocoLogo.png"));
+            f.setIconImage(icon.getImage());
             ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
                 @Override
                 public Dimension getPreferredSize() {
@@ -67,7 +68,8 @@ public class EnAngColorMap {
             maxParticlesCount=5;
         }
         catch (Exception e){
-            System.out.println("[WARNING ] Are you in GUI mode?! No X11 DISPLAY variable was set. Check EnAngColorMap.");
+            System.out.println("[WARNING 145]" + e.getMessage());
+            System.out.println("[WARNING 145] Are you in GUI mode?! No X11 DISPLAY variable was set. Check EneAngMap.");
         }
     }
 

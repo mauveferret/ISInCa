@@ -1,7 +1,7 @@
 package ru.mauveferret.Dependencies;
 
 import ru.mauveferret.Simulators.Simulator;
-import ru.mauveferret.Charts.ScatterColorMap;
+import ru.mauveferret.Charts.JFree_AngleMap;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class AngleMap extends Dependence {
     @Override
     public boolean visualize() {
         if (!sort.equals("") && doVisualisation) EventQueue.invokeLater(() ->
-                new ScatterColorMap("ISInCa",  mapArray.get("all"), dPhi, dBeta, pathsToLog.get("all")));
+                new JFree_AngleMap("ISInCa",  mapArray.get("all"), dPhi, dBeta, pathsToLog.get("all")));
         return  true;
     }
 

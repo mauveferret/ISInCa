@@ -10,6 +10,7 @@ import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
+import ru.mauveferret.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class ScatterColorMap {
+public class JFree_AngleMap {
 
 
     private static double maxParticlesCount = 5;
@@ -29,7 +30,7 @@ public class ScatterColorMap {
 
    static  String pathToLog = "";
 
-    public ScatterColorMap(String title, double[][] array, double dPhi, double dBeta, String pathToLog) {
+    public JFree_AngleMap(String title, double[][] array, double dPhi, double dBeta, String pathToLog) {
         this.array = array;
         this.dPhi = dPhi;
         this.dBeta = dBeta;
@@ -46,8 +47,8 @@ public class ScatterColorMap {
 
         try{
             JFrame f = new JFrame(title);
-            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            f.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("pics/CrocoLogo.png")));
+            ImageIcon icon = new ImageIcon(Main.class.getResource("pics/CrocoLogo.png"));
+            f.setIconImage(icon.getImage());
             ChartPanel chartPanel = new ChartPanel(createChart(createDataset())) {
                 @Override
                 public Dimension getPreferredSize() {
@@ -55,6 +56,7 @@ public class ScatterColorMap {
                 }
             };
             chartPanel.setMouseZoomable(true, false);
+
             f.add(chartPanel);
             f.pack();
             f.setLocationRelativeTo(null);
@@ -63,7 +65,8 @@ public class ScatterColorMap {
             maxParticlesCount=5;
         }
         catch (Exception e){
-            System.out.println("[WARNING] Are you in GUI mode?! No X11 DISPLAY variable was set. Check ScatteredColorMap.");
+            System.out.println("[WARNING 183]" + e.getMessage());
+            System.out.println("[WARNING 183] Are you in GUI mode?! No X11 DISPLAY variable was set. Check ScatteredColorMap.");
         }
 
 
@@ -88,7 +91,6 @@ public class ScatterColorMap {
         PaintScaleLegend legend = new PaintScaleLegend(ps, scaleAxis);
         legend.setSubdivisionCount(126);
         legend.setMargin(10, 10, 10, 10);
-
 
         legend.setStripWidth(40);
 
