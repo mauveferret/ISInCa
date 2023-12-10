@@ -182,7 +182,7 @@ public class RootFxmlController {
                 } else codeName.setText("TRIM");
             } else codeName.setText("SCATTER");
             if (!initialize.equals("OK"))
-                new GUI().showNotification("ERROR: directory doesn't contain all files for calculation");
+                new GUI().showNotification("ERROR: directory doesn't contain some files for calculation");
 
             numberOfParticlesInScatter.setText(yourSimulator.projectileAmount + "");
             E0.setText(yourSimulator.projectileMaxEnergy + "");

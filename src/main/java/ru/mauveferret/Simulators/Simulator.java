@@ -30,6 +30,10 @@ public abstract class Simulator {
     //like SCATTER, TRIM, SDTrimSP
     public String calculatorType;
     ArrayList<Dependence> dependencies;
+
+    // array with absolute paths to files with particles data (like BACKSCAT, SPUT, partic_back.dat etc.)
+    ArrayList<String> particDataPathsList;
+
     public double calcTime;
 
     //primary beam
@@ -66,6 +70,7 @@ public abstract class Simulator {
         projectileIncidentAzimuthAngle = 0;
         projectileIncidentPolarAngle = -1;
         projectileAmount = -1;
+        particDataPathsList = new ArrayList<>();
 
         this.directoryPath = directoryPath;
         try{

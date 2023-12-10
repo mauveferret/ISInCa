@@ -11,16 +11,16 @@ import java.util.Arrays;
 
 public class SDTrimSP extends Simulator {
 
-    ArrayList<String> particDataPath;
+
 
     public SDTrimSP(String directoryPath, boolean doVizualization, boolean getSummary) {
         super(directoryPath, doVizualization);
         this.getSummary = getSummary;
-        particDataPath = new ArrayList<>();
     }
 
     @Override
     public String initializeModelParameters() {
+        particDataPathsList = new ArrayList<>();
         calculatorType = "SDTrimSP";
         File dataDirectory = new File(directoryPath);
         if (dataDirectory.isDirectory()){
@@ -34,7 +34,7 @@ public class SDTrimSP extends Simulator {
                         triConfig = file.getAbsolutePath();
                     }
                     if (file.getName().contains("partic")){
-                        particDataPath.add(file.getAbsolutePath());
+                        particDataPathsList.add(file.getAbsolutePath());
                     }
                 }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(triConfig)));
@@ -48,7 +48,6 @@ public class SDTrimSP extends Simulator {
 
 
                 try {
-
 
                     while (reader.ready()) {
                         line = reader.readLine();
@@ -64,19 +63,6 @@ public class SDTrimSP extends Simulator {
                             //all elements are in projectileElements variable, in form "H","W"
                              projectileElements = projectileElements.replaceAll("\"","");
                              elements = projectileElements.split(",");
-
-
-                             /*
-                             //FIXME What is it for?
-                            try {
-                                for (int i = 0; i < elements.length; i++)
-                                    elements[i] = elements[i].substring(1, elements[i].length() - 1);
-                            } catch (Exception e) {
-                                //System.out.println("73");
-                                System.out.println("[WARNING] SDTrimSP75 : "+e.getMessage());
-                            }
-
-                              */
 
                         }
 
@@ -141,7 +127,7 @@ public class SDTrimSP extends Simulator {
             //check whether the *.dat file exist
 
             try {
-                for (String someDataFilePath: particDataPath) {
+                for (String someDataFilePath: particDataPathsList) {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(someDataFilePath)));
                     reader.close();
                 }
@@ -181,12 +167,11 @@ public class SDTrimSP extends Simulator {
 
             ArrayList<Thread> fileThreads = new ArrayList<>();
 
-            for (String someDataFilePath: particDataPath) {
+            for (String someDataFilePath: particDataPathsList) {
 
                 Thread newFile = new Thread(()->{
 
                     try {
-
 
                         DataInputStream br = new DataInputStream(new FileInputStream(someDataFilePath));
                         byte[] bufLarge = new byte[STRING_COUNT_PER_CYCLE *LINE_BYTES_AMOUNT];
@@ -197,30 +182,7 @@ public class SDTrimSP extends Simulator {
 
                         br.read(bufSmall12);
 
-                        //System.out.println(new String( bufSmall12, StandardCharsets.UTF_8 ));
-
-                       /* byte[] bufSmall1 = new byte[274];
-                        br.read(bufSmall1);
-                        System.out.println("23fvwe");
-                        String p = new String( bufSmall1, StandardCharsets.UTF_8 );
-                        System.out.println("$"+p+"$");
-                        //System.out.println("*1  897*-"+p+"!1");
-                        br.read(bufSmall1);
-                        System.out.println("*2"+new String( bufSmall1, StandardCharsets.UTF_8 )+"!2");
-                        br.read(bufSmall1);
-                        System.out.println("*3"+new String( bufSmall1, StandardCharsets.UTF_8 )+"!3");
-                        br.read(bufSmall1);
-                        System.out.println("*4"+new String( bufSmall1, StandardCharsets.UTF_8 )+"!4");
-                        br.read(bufSmall1);
-                        System.out.println("*5"+new String( bufSmall1, StandardCharsets.UTF_8 )+"!5");
-                        System.exit(0);
-
-
-                        */
-
                         //now lets sort
-
-                        String[] datas;
 
                         String particlesType = someDataFilePath.substring(someDataFilePath.indexOf(File.separator));
                         particlesType = particlesType.substring(particlesType.indexOf("_"), particlesType.lastIndexOf("."));
