@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="493.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="493.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
    <children>
       <ImageView fitHeight="250.0" fitWidth="380.0" layoutX="407.0" layoutY="208.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -58,12 +58,12 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="energyResolution" alignment="CENTER" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="101.0" text="250" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <TextField fx:id="Estep" alignment="CENTER" onKeyReleased="#ResChanged" prefHeight="51.0" prefWidth="101.0" text="250" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="26.0" />
                                        </font>
                                     </TextField>
-                                    <Label text="deltaE, eV" GridPane.columnIndex="1">
+                                    <Label text="Estep, eV" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -127,14 +127,22 @@
                                           <Font size="26.0" />
                                        </font>
                                     </TextField>
-                                    <Label fx:id="call121" text="dE/E" GridPane.columnIndex="6">
+                                    <Label fx:id="label_dEtoE" text="dE/E" GridPane.columnIndex="6">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                        <tooltip>
-                                          <Tooltip text="Distortion (Broadening) due to hardware function" />
+                                          <Tooltip fx:id="tooltip_dEtoE" text="Distortion (Broadening) due to hardware function" />
                                        </tooltip>
                                     </Label>
+                                    <CheckBox fx:id="IsdEconst" mnemonicParsing="false" onAction="#dEisConst" prefHeight="17.0" prefWidth="7.0" GridPane.columnIndex="6" GridPane.halignment="LEFT">
+                                       <tooltip>
+                                          <Tooltip text="Flag &quot;IsdEChosen&quot; for switching between modes of the virtual energy analyzer">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Tooltip>
+                                       </tooltip></CheckBox>
                                  </children>
                               </GridPane>
                               <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="557.0" text="β is defined relative to the surface normal (both for B,S and T), φ is relative to Z axis  (see help tab)." />
@@ -161,7 +169,7 @@
 
                                  </font>
                               </TextField>
-                              <Label fx:id="call1" layoutX="44.0" layoutY="14.0" text="delta β" />
+                              <Label fx:id="call1" layoutX="44.0" layoutY="14.0" text="β step" />
                               <TextField fx:id="dAzimuthAngleNbeta" alignment="CENTER" layoutX="198.0" layoutY="38.0" onKeyReleased="#DeltaChanged" prefHeight="51.0" prefWidth="69.0" text="3">
                                  <font>
                                     <Font size="24.0" />
@@ -189,13 +197,13 @@
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="161.0" layoutY="10.0" text="delta β" />
+                              <Label layoutX="161.0" layoutY="10.0" text="β step" />
                               <TextField fx:id="NBetadPhi" alignment="CENTER" layoutX="22.0" layoutY="34.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="101.0" text="3">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="57.0" layoutY="10.0" text="delta φ" />
+                              <Label layoutX="57.0" layoutY="10.0" text="φ step" />
                               <Label layoutX="254.0" layoutY="21.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;φ&lt;360 (first column)" />
                               <Label layoutX="254.0" layoutY="60.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
                            </children>
@@ -211,13 +219,13 @@
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="161.0" layoutY="10.0" text="delta β" />
+                              <Label layoutX="161.0" layoutY="10.0" text="β step" />
                               <TextField fx:id="NEBetadE" alignment="CENTER" layoutX="22.0" layoutY="34.0" onKeyReleased="#EChanged" prefHeight="51.0" prefWidth="101.0" text="250">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </TextField>
-                              <Label layoutX="57.0" layoutY="10.0" text="delta E" />
+                              <Label layoutX="57.0" layoutY="10.0" text="E step" />
                               <Label layoutX="250.0" layoutY="46.0" prefHeight="27.0" prefWidth="274.0" text="0&lt;β&lt;90 (first row)" />
                            </children>
                         </AnchorPane>

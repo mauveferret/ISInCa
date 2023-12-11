@@ -43,7 +43,7 @@ An opportunity for combining results from several calculations was also added.
 You can read more about features in the corresponding docs:
 
  - **[More on the available distributions](https://github.com/mauveferret/ISInCa/tree/master/docs/distributions.md)**
- -  **[On the energy analyser distortions](https://github.com/mauveferret/ISInCa/tree/master/docs/spectra_distortions.md)**
+ -  **[On the energy analyser distortions](https://github.com/mauveferret/ISInCa/tree/master/docs/energy_spectra_distortions.md)**
  -  **[Postprocessing multiple simulations at once](https://github.com/mauveferret/ISInCa/tree/master/docs/console_mode.md)**
  -  **[Combining multiple simulation's results](https://github.com/mauveferret/ISInCa/tree/master/docs/simulations_combination.md)**
 

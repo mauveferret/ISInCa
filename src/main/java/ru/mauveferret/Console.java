@@ -353,7 +353,7 @@ public class Console {
                                         break;
                                 }
                             }
-                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, betaNE, deltaBetaNE, sortNE, yourCalculator, energyAnalyserBroadening));
+                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, betaNE, deltaBetaNE, sortNE, yourCalculator, energyAnalyserBroadening, false));
                         }
                         break;
                         case "N_Beta": {

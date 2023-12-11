@@ -99,9 +99,9 @@ public class CalculationCombiner extends Simulator {
                dBeta1 =   ((Polar) remoteDep).dBeta;
                     dPhi1 = ((Polar) remoteDep).dPhi;
                 break;
-                case "energy": dependencies.add(new Energy(((Energy) remoteDep).dE, ((Energy) remoteDep).phi,
+                case "energy": dependencies.add(new Energy(((Energy) remoteDep).Estep, ((Energy) remoteDep).phi,
                         ((Energy) remoteDep).dPhi*2, ((Energy) remoteDep).beta, ((Energy) remoteDep).dBeta*2,
-                        ((Energy) remoteDep).getSort(), this, 0));
+                        ((Energy) remoteDep).getSort(), this, 0, false));
                 break;
             }
             //FIXME add another

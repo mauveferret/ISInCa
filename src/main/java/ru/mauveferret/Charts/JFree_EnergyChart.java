@@ -43,7 +43,7 @@ public class JFree_EnergyChart extends ApplicationFrame{
         JFreeChart xylineChart = ChartFactory.createXYLineChart(
                 "Energy spectrum for: "+name ,
                 "Energy, keV" ,
-                "Intensity, particles/dE" ,
+                "Intensity, particles" ,
 
                 createDataset( spectra,  E0,  dE) ,
                 PlotOrientation.VERTICAL ,

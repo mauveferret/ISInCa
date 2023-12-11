@@ -74,9 +74,15 @@ public class RootFxmlController {
     @FXML
     private TextField E0;
     @FXML
-    private TextField energyResolution;
+    private TextField Estep;
     @FXML
     private TextField deltaEtoE;
+    @FXML
+    private CheckBox IsdEconst;
+    @FXML
+    private Label label_dEtoE;
+    @FXML
+    private Tooltip tooltip_dEtoE;
     @FXML
     private TextField polarAngleNE;
     @FXML
@@ -186,7 +192,7 @@ public class RootFxmlController {
 
             numberOfParticlesInScatter.setText(yourSimulator.projectileAmount + "");
             E0.setText(yourSimulator.projectileMaxEnergy + "");
-            energyResolution.setText((yourSimulator.projectileMaxEnergy/100)+"");
+            Estep.setText((yourSimulator.projectileMaxEnergy/100)+"");
             NEBetadE.setText((yourSimulator.projectileMaxEnergy/100)+"");
 
             polarAngleNE.setText(yourSimulator.projectileIncidentPolarAngle + "");
@@ -298,7 +304,7 @@ public class RootFxmlController {
         try {
             double E = Double.parseDouble(E0.getText());
             if (E<0) throw new Exception();
-            energyResolution.setText((int) (E/100)+"");
+            Estep.setText((int) (E/100)+"");
         }
         catch (Exception e)
         {
@@ -325,12 +331,26 @@ public class RootFxmlController {
     public void ResChanged()
     {
         try {
-            double E = Double.parseDouble(energyResolution.getText());
+            double E = Double.parseDouble(Estep.getText());
             if (E<0) throw new Exception();
         }
         catch (Exception e)
         {
-            energyResolution.setText("250");
+            Estep.setText("250");
+        }
+    }
+
+    @FXML
+    public void dEisConst()
+    {
+        if (IsdEconst.isSelected()){
+
+            tooltip_dEtoE.setText("Energy width on every Estep step in eV");
+            label_dEtoE.setText("dE, eV");
+        }
+        else {
+            tooltip_dEtoE.setText("Distortion (Broadening) due to hardware function");
+            label_dEtoE.setText("dE/E");
         }
     }
 
@@ -363,9 +383,10 @@ public class RootFxmlController {
                 else E=yourSimulator.projectileMaxEnergy;
 
                 //int energyReturnValue = E;
-                double dE = Double.parseDouble(energyResolution.getText());
+                double Estep1 = Double.parseDouble(Estep.getText());
                 double betaNE = Double.parseDouble(polarAngleNE.getText());
                 double dBetaNE = Double.parseDouble(dPolarAngleNE.getText());
+                boolean IsdEconstChosen = IsdEconst.isSelected();
                 double energyAnalyserBroadening = Double.parseDouble(deltaEtoE.getText().replace(",","."));
                 double phiNE=Double.parseDouble(azimuthAngleNE.getText());
                 double dphiNE=Double.parseDouble(dAzimuthAngleNE.getText());
@@ -391,7 +412,7 @@ public class RootFxmlController {
                 sort += (NET.isSelected()) ? "T" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new Energy(dE,phiNE, dphiNE, betaNE, dBetaNE,sort, yourSimulator, energyAnalyserBroadening));
+                    distributions.add(new Energy(Estep1,phiNE, dphiNE, betaNE, dBetaNE,sort, yourSimulator, energyAnalyserBroadening, IsdEconstChosen));
 
                 sort = (NBetaB.isSelected()) ? "B" : "";
                 sort += (NBetaS.isSelected()) ? "S" : "";

@@ -91,7 +91,6 @@ public class TRIM extends Simulator {
 
             }
             catch (FileNotFoundException ex){
-                System.out.println("[ERROR783]"+ex.getMessage());
                 return "\"TRIM.IN\" config is not found";
             }
             catch (IOException ex){
