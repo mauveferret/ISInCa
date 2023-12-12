@@ -7,8 +7,9 @@ public class PolarAngles {
     //from 0 to 360 from Z axis (in which the beam strikes)
     private double azimuth;
 
-    //for SDTrimSP input
     public PolarAngles(double polarCos, double azimuthCos, double x,double y) {
+
+        //for SDTrimSP input
 
         azimuth = 57.2958*Math.acos(azimuthCos);
         polar = 57.2958*Math.acos(polarCos);
@@ -51,6 +52,4 @@ public class PolarAngles {
 
        polar = Math.atan(Math.sqrt(cosx * cosx + cosy * cosy)/Math.abs(cosz))*57.2958;
     }
-
-
 }
