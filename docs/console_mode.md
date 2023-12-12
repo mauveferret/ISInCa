@@ -10,7 +10,7 @@ where
 
 `java` is the call to the JVM, 
 
-`-jar` is command to execute file *[`ISInCa.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*,
+`-jar` is command to execute jar file *[`ISInCa.jar`](https://github.com/mauveferret/ISInCa/blob/master/out/ISInCa.jar)*,
 
 ` -argument ` is some command line argument. There are several possible arguments:
 
@@ -78,13 +78,27 @@ After `<pref>` section you might have several `<calc>` sections, which correspon
     ...
 </calc>
 ```
-Preferences are mainly related to distributions, integral coefficients are calculated independently. You can specify needed dependencies by their tags: `<N_E>` - for energy sitribution, `<N_Beta>` - for polat distribution, `<polar_Map>` - for particles motion direction plotting in polar coordinates and etc. (**additional dependencies would be added soon 11.11.20**). There are several tags inside each of dependencies, which allow some customization: you can specify sorts of particles (**B** - for backscattered, **S** - for sputtered, **I** - for implanted, **D** - for displaced, **T** - for passed through the target or any of their combinations). It should be noted, that not all codes support all of this types,  so,  for example, you wouldn't get implanted coefficient for SCATTER calculation as scatter has no flag for implanted particles. Then, you may specify specific angles (by tags `<phi>` and `<beta>`) and distributions steps (by tags `<deltaPhi>`, `<deltaBeta>` and `<delta>` - for energy distribution and for steps in polar map).
+Preferences are mainly related to distributions,
+integral coefficients are calculated independently.
+You can specify needed dependencies by their tags: 
+`<N_E>` - for energy sitribution, `<N_Beta>` - for polar distribution, 
+`<polar_Map>` - for particles motion direction plotting in polar coordinates etc. 
+There are several tags inside each of dependencies, 
+that allow some customization: you can specify sorts of particles
+(**B** - for backscattered, **S** - for sputtered, **I** - for implanted, **D** - for displaced, **T** - for passed 
+through the target or any of their combinations). 
+It should be noted, that not all codes support all of these types,  so,  
+for example, you wouldn't get implanted coefficient for SCATTER calculation as scatter has no flag 
+for implanted particles. Then, you may specify specific angles (by tags `<phi>` and `<beta>`) and 
+distributions steps (by tags `<deltaPhi>`, `<deltaBeta>` and `<delta>` - for energy distribution and 
+for steps in polar map).
 ```xml
 <calc id="0">
     <dir>...</dir>
     <N_E>
         <sort>B</sort>
         <phi>0</phi>
+        <delta>20</delta>
         <deltaPhi>3</deltaPhi>
         <deltaBeta>3</deltaBeta>
     </N_E>

@@ -25,8 +25,28 @@ As can be seen frome the figure above, in this mode our virtual energy analyzer
 covers the entire measuring range and the sum of the signal of channels will give the total number
 of particles, flying into the analyzer.
 
-This is a basic mode of ISInCa. All you need to specify in GUI
-is the `Estep`, while `dE` and/or `dE/E` should be zero (default value).
+
+
+
+### How to configure?
+
+This is a basic mode of ISInCa. All you need in GUI is to specify 
+ the `Estep`, while `dE` and/or `dE/E` should be zero (default value).
+In the same way, in Console mode you can only specify `<delta>` node.
+
+```xml
+<calc id="0">
+    <dir>...</dir>
+    <N_E>
+        <sort>B</sort>
+        <phi>0</phi>
+        <delta>20</delta>
+        <deltaPhi>3</deltaPhi>
+        <deltaBeta>3</deltaBeta>
+    </N_E>
+</calc>
+```
+
 
 ## ISInCa virtual energy analyzer with dE=const
 
@@ -39,7 +59,26 @@ as the most preferrable from the point of view of obtaining the true particle en
 If `dE>Estep`,the sum of particles in channels would be even more, than the total number of particles, fying
 into the virtual analyzer. 
 
-In this case you need to enable flag dE=const in GUI and enter the value of the `dE` in the nearly located textfield.
+### How to configure?
+
+In this case you need to enable flag dE=const in GUI and enter the value of the `dE` in the corresponding textfield, 
+which appears on enabling the flag.
+
+In Console mode you can specify it with `<de>` node.
+
+```xml
+<calc id="0">
+    <dir>...</dir>
+    <N_E>
+        <sort>B</sort>
+        <phi>0</phi>
+        <delta>50</delta>
+        <de>20</de>
+        <deltaPhi>3</deltaPhi>
+        <deltaBeta>3</deltaBeta>
+    </N_E>
+</calc>
+```
 
 ## ISInCa virtual energy analyzer with dE/E=const
 
@@ -50,9 +89,26 @@ energy. This case is the most relevant to the experiment, where electrostatic en
 causes undesirable distortions in the spectrum. Inter alia it may influence the ratio of peak intensities located at 
 sufficiently different  energies and reduce the accuracy of LEIS diagnostics. 
 
+### How to configure?
+
 To enable this regime you need to specify the value of the `dE/E`. The typical values for good electrostatic analysers
 are in the range from 0.001 to 0.01. Lower values will correspond to spectra of similar form in compare to the mode
 `dE=const & dE<Estep`, the higher will lead to the broadening of the peaks on the spectra.
+In console mode you should add `<deltaetoe>` node with the value.
+
+```xml
+<calc id="0">
+    <dir>...</dir>
+    <N_E>
+        <sort>B</sort>
+        <phi>0</phi>
+        <delta>50</delta>
+        <deltaetoe>20</deltaetoe>
+        <deltaPhi>3</deltaPhi>
+        <deltaBeta>3</deltaBeta>
+    </N_E>
+</calc>
+```
 
 
 ## What mode should I choose?
@@ -61,3 +117,7 @@ The answer depends on your purposes for providing the simulation. In case of exp
 simulation, the  modes  `dE=Estep` or `dE=const & dE<Estep` are acceptable. 
 If you want to explore your facility with it real energy analyser, you can try to use modes `dE=const & dE>Estep` or
 `dE/E=const`
+
+
+
+```

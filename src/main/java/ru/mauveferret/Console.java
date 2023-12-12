@@ -327,6 +327,7 @@ public class Console {
                         case "N_E": {
                             deltaNE = yourCalculator.projectileMaxEnergy / 100;
                             betaNE = yourCalculator.projectileIncidentPolarAngle;
+                            boolean isDeConstChosen = false;
 
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {
@@ -345,6 +346,12 @@ public class Console {
                                     case "deltaetoe":
                                         energyAnalyserBroadening = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
+                                    case "de":
+                                    {
+                                        energyAnalyserBroadening  = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        isDeConstChosen = true;
+                                    }
+                                    break;
                                     case "deltabeta":
                                         deltaBetaNE = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
@@ -353,7 +360,7 @@ public class Console {
                                         break;
                                 }
                             }
-                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, betaNE, deltaBetaNE, sortNE, yourCalculator, energyAnalyserBroadening, false));
+                            distributions.add(new Energy(deltaNE, phiNE, deltaPhiNE, betaNE, deltaBetaNE, sortNE, yourCalculator, energyAnalyserBroadening, isDeConstChosen));
                         }
                         break;
                         case "N_Beta": {

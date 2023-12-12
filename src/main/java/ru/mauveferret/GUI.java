@@ -31,7 +31,6 @@ public class GUI extends Application {
     }
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
@@ -102,20 +101,6 @@ public class GUI extends Application {
         NotificationStage.initModality(Modality.NONE);
         Label notification = new Label();
         notification.setText("Choose correct directory!");
-        StackPane root = new StackPane();
-        root.getChildren().add(notification);
-        Scene scene2 = new Scene(root,300,70);
-        NotificationStage.setScene(scene2);
-        NotificationStage.show();
-    }
-    public void showNotificationAboutFileType()
-    {
-        Stage NotificationStage = new Stage();
-        NotificationStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        NotificationStage.setTitle("Notification");
-        NotificationStage.initModality(Modality.NONE);
-        Label notification = new Label();
-        notification.setText("This is not the file you are looking for!");
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);

@@ -156,8 +156,8 @@ public class TRIM extends Simulator {
                         //two rubbish lines must be excluded
                         br.readLine();
                         br.readLine();
-                        //now lets sort
 
+                        //now lets sort
                         while (br.ready()) analyse(br.readLine(), dependencies, sort);
                         br.close();
                         }
@@ -173,7 +173,6 @@ public class TRIM extends Simulator {
             fileThreads.add(newFile);
         }
 
-
         for (Thread thread: fileThreads) thread.start();
 
         finishCalcVariables();
@@ -182,93 +181,68 @@ public class TRIM extends Simulator {
 
     private void analyse(String line, ArrayList<Dependence> distributions, String sort){
 
-        //find all TRIM-related distributions
-        float en = 0, cosx, cosy, cosz;
-        double  collisionsAmount = 0, fluence = 0, xEnd = 0, yEnd = 0, zEnd = 0, cosP = 0, cosA = 0, path = 0;
+        float en, cosx, cosy, cosz;
         String element = "";
-        if (!line.contains("end")) {
 
+        line = line.replace(line.substring(0,1),line.substring(0,1)+" ");
+        line = line.replaceAll("- ", " ");
+        line = line.replaceAll("\\h+"," ");
+        line = line.replaceAll("\\n", "").trim();
+        line = line.replaceAll(",","0.");
+        String[] partData = line.split(" ");
 
+        en = Float.parseFloat(partData[3]);
+        cosx = Float.parseFloat(partData[7]);
+        cosy = Float.parseFloat(partData[8]);
+        cosz = Float.parseFloat(partData[9]);
 
-            line = line.substring(line.indexOf(","));
-            en = Float.parseFloat(line.substring(0, line.indexOf(" ")).replace(",", "0."));
-            //find "cosz" column
-            if (line.endsWith(" ")) line = line.substring(0, line.length() - 1);
-            cosy = Float.parseFloat(line.substring(line.lastIndexOf(" ") + 1).replace(",", "0."));
-            //find "cosy" column
-            line = line.substring(0, line.lastIndexOf(" "));
-            if (line.endsWith(" ")) line = line.substring(0, line.length() - 1);
-            cosx = Float.parseFloat(line.substring(line.lastIndexOf(" ") + 1).replace(",", "0."));
-            //find "cosx" column
-            line = line.substring(0, line.lastIndexOf(" "));
-            if (line.endsWith(" ")) line = line.substring(0, line.length() - 1);
-            cosz = -1 * Float.parseFloat(line.substring(line.lastIndexOf(" ") + 1).replace(",", "0."));
+        PolarAngles angles = new PolarAngles(cosz,-cosy,-cosx);
 
-            //отвергаем "оборванную" строку
-            if (cosx > 1 || cosy > 1 || cosz > 1) {
-                cosx = 0;
-                cosy = 0;
-                cosz = 0;  //одна битая точка никому не повредит 2018
+        //FIXME all coefficients goes to zero target element
+        element=(sort.equals("B"))?projectileElements:elementsList.get(0);
+
+        //System.out.println(cosP+" "+cosA );
+
+        for (Dependence distr: distributions){
+            switch (distr.getDepName())
+            {
+                case "energy": ((Energy) distr).check(angles,sort,en, projectileElements);
+                    break;
+                case "polar": ((Polar) distr).check(angles,sort, projectileElements);
+                    break;
+                case "anglemap": ((AngleMap) distr).check(angles,sort, projectileElements);
+                    break;
+                case "gettxt": ((getTXT) distr).check(angles,sort,en);
             }
+        }
 
-            PolarAngles angles = new PolarAngles(cosx,cosy,cosz);
+        //calculate some scattering constants
+        if (!sort.contains("S") && !sort.contains("D")) particleCount++;
 
-            //FIXME all coefficients goes to zero target element
-            element=(sort.equals("B"))?projectileElements:elementsList.get(0);
 
-            //System.out.println(cosP+" "+cosA );
-
-            for (Dependence distr: distributions){
-                switch (distr.getDepName())
-                {
-                    case "energy": ((Energy) distr).check(angles,sort,en, projectileElements);
-                        break;
-                    case "polar": ((Polar) distr).check(angles,sort, projectileElements);
-                        break;
-                    case "anglemap": ((AngleMap) distr).check(angles,sort, projectileElements);
-                        break;
-                    case "gettxt": ((getTXT) distr).check(angles,sort,en);
-                }
-            }
-
-            //calculate some scattering constants
-            if (!sort.contains("S") && !sort.contains("D")) particleCount++;
-
-            if (sort.equals("B")) {
+        switch (sort) {
+            case "B":
+                scattered.put(element, scattered.get(element) + 1);
+                energyRecoil.put(element, energyRecoil.get(element) + en);
                 scattered.put("all", scattered.get("all") + 1);
                 energyRecoil.put("all", energyRecoil.get("all") + en);
-            }
-            else if (sort.equals("S")) sputtered.put("all", sputtered.get("all") + 1);
-            else if (sort.equals("I")) implanted.put("all", implanted.get("all") + 1);
-
-
-            //calculate some scattering constants
-            if (!sort.contains("S") && !sort.contains("D") && !sort.contains("T")) particleCount++;
-
-            switch (sort) {
-                case "B":
-                    scattered.put(element, scattered.get(element) + 1);
-                    energyRecoil.put(element, energyRecoil.get(element) + en);
-                    scattered.put("all", scattered.get("all") + 1);
-                    energyRecoil.put("all", energyRecoil.get("all") + en);
-                    break;
-                case "S":
-                    sputtered.put(element, sputtered.get(element) + 1);
-                    sputtered.put("all", sputtered.get("all") + 1);
-                    break;
-                case "I":
-                    implanted.put(element, implanted.get(element) + 1);
-                    implanted.put("all", implanted.get("all") + 1);
-                    break;
-                case "T":
-                    transmitted.put(element, transmitted.get(element) + 1);
-                    transmitted.put("all", transmitted.get("all") + 1);
-                    break;
-                case "D":
-                    displaced.put(element, displaced.get(element) + 1);
-                    displaced.put("all", displaced.get("all") + 1);
-                    break;
-            }
+                break;
+            case "S":
+                sputtered.put(element, sputtered.get(element) + 1);
+                sputtered.put("all", sputtered.get("all") + 1);
+                break;
+            case "I":
+                implanted.put(element, implanted.get(element) + 1);
+                implanted.put("all", implanted.get("all") + 1);
+                break;
+            case "T":
+                transmitted.put(element, transmitted.get(element) + 1);
+                transmitted.put("all", transmitted.get("all") + 1);
+                break;
+            case "D":
+                displaced.put(element, displaced.get(element) + 1);
+                displaced.put("all", displaced.get("all") + 1);
+                break;
         }
     }
 
