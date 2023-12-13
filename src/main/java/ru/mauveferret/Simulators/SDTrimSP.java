@@ -288,13 +288,10 @@ public class SDTrimSP extends Simulator {
             }
             catch (Exception ex) {//ex.printStackTrace();}
             }
-            //System.out.println(en +"   "+cosA+"   "+cosP+"   "+element);
 
             //Here is several spectra calculators
 
-            PolarAngles angles = new PolarAngles(cosP, cosA, xEnd, yEnd);
-
-           //System.out.println(cosP+" "+cosA );
+            PolarAngles angles = new PolarAngles(cosP, cosA, xEnd, yEnd, zEnd);
 
             for (Dependence distr : distributions) {
                 switch (distr.getDepName()) {

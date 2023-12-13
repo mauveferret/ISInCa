@@ -1,50 +1,53 @@
 # ISInCa - Ion Surface Interaction Calculator
 
-ISInCA - is **Java** tool dedicated to postprocess outputs of
-*[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*, *[`TRIM`](http://www.srim.org/)*, *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)* Monte-Carlo particle-surface interaction codes. 
-It is planned to gradually expand the list of supported codes (like TRYDIN, MARLOWE and so on).
+ISInCA - is the cross-platform tool, intended for the post-procession of outputs of particle-surface interaction codes, as
+*[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*,
+*[`TRIM`](http://www.srim.org/)*, 
+*[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)*. 
+It allows to generate, visualise and export various differential ind integral characteristics of particles scattering,
+sputtering and implantation for the specific ranges of energies and angles.
 
 ![header](https://github.com/mauveferret/ISInCa/blob/master/docs/pics/header.png?raw=true)
  
-# Key features
+# Basic outputs
 
  The codes listed above are intended for the simulation of  particle beams interaction with solids. 
  In such codes you can set some beam parameters (like mass/angle/energy distributions, doze) and 
- multiple target parameters. Such codes usually can generate single or several files, containing tables 
+ multiple target parameters. Such codes usually generate single or several files, containing tables 
  with backscattered (B), sputtered (S), transmitted (T), implanted (I) and displaced (D) particles with 
- data on their position, motion direction, sort, energy, pathlength etc. **ISInCa** allows to transform 
+ data on their position, motion direction, sort, energy, path length etc. `ISInCa` allows to transform 
  this huge (up to hundreds of GB) data files to easy for interpretation data. it can generate:
 
 ### **Graphs:**
- - Energy distributions N(E) for any solid angle and any energy step 
-**(for backscattered and transmitted primary particles and sputtered particles of target)**
- - Angle distributions dN/dβ(β) **(backscattered and transmitted primary particles and sputtered particles of target)**
- - ~~Depth distributions for primary implanted and target displaced particles~~ `under development`
+ - `Energy distributions` dN/dE(E) for any solid angle and any energy step and resolution. 
+**(for backscattered and transmitted primary particles and sputtered particles of a target)**
+ - `Angle distributions` dN/dβ(β) **(backscattered and transmitted primary particles and sputtered particles of target)**
+ - ~~`Depth distributions` for primary implanted and target displaced particles~~ `under development`
  
 ### **Maps:**
- - Polar Map N(β, φ) for backscattered and transmitted primary particles and sputtered particles of target
- - EneAng Maps N(E, β) for backscattered and transmitted primary particles and sputtered particles of target
- - Cartesian Maps N(Z, Y), N(Z, X)
+ - `Polar Map` N(β, φ) for backscattered and transmitted primary particles and sputtered particles of target
+ - `EneAng Maps` N(E, β) for backscattered and transmitted primary particles and sputtered particles of target
+ - `Cartesian Maps` N(Z, Y), N(Z, X)
 
 ### **Integral coefficients:**
-   - Scattered coefficient (number of scattered divided by number of incident)
-   - Sputtered coefficient (number of sputtered divided by number of incident)
-   - Implanted coefficient (number of implanted divided by number of incident)
-   - Transmitted coefficient (number of transmitted divided by number of incident)
+   - `Scattered` coefficient R (number of scattered particles divided by number of incident particles)
+   - `Sputtered` coefficient Y (number of sputtered particles divided by number of incident particles)
+   - `Implanted` coefficient I (number of implanted particles divided by number of incident particles)
+   - `Transmitted` coefficient T (number of transmitted particles divided by number of incident particles)
 c
 
-All distributions can be both visualised with the embedded `JFreeChart` plotter and saved locally as text file. All data is available for different combinations of particles (scattered - B, sputtered - S, implanted - I ,
+All distributions can be both visualised with the embedded `JFreeChart` plotter and saved locally as 
+the conventional "*.txt" text file. All data is available for different combinations of particles (scattered - B, sputtered - S, implanted - I ,
 transmitted - T  and displaced - D). 
 You should take into account, that the number of available types of particles
 depends on the specific code. As example, `SDTrimSP` supports all types, `Scatter` only B,S and I.
-Since version *[`2020.4.0`](https://github.com/mauveferret/ISInCa/commit/d3d1506027f252289089755e8020599890d4b4ca)* ISInCa can calculate data separately for every chemical element from incident beam or a target. 
-An opportunity for combining results from several calculations was also added.
+An opportunity for combining results of different calculations is also presented.
 
-You can read more about features in the corresponding docs:
+You can read more on the features in the corresponding docs:
 
  - **[More on the available distributions](https://github.com/mauveferret/ISInCa/tree/master/docs/distributions.md)**
  -  **[On the energy analyser distortions](https://github.com/mauveferret/ISInCa/tree/master/docs/energy_spectra_distortions.md)**
- -  **[Postprocessing multiple simulations at once](https://github.com/mauveferret/ISInCa/tree/master/docs/console_mode.md)**
+ -  **[Simultaneous post-processing of multiple files](https://github.com/mauveferret/ISInCa/tree/master/docs/console_mode.md)**
  -  **[Combining multiple simulation's results](https://github.com/mauveferret/ISInCa/tree/master/docs/simulations_combination.md)**
 
 # Installation
@@ -127,4 +130,4 @@ some parameters (as sort of particles, registration angle, step etc.).
 All calculated data files are in `.txt` format. Each file contain a header with detailed information.
 
 Fun fact for attentive readers: The name of this tool is actually a reference to the artificial 
-intelligence from the russian literature project "Ethnogenesis".
+intelligence mentioned in russian literature project "Ethnogenesis".

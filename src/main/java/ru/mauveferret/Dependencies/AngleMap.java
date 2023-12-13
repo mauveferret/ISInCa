@@ -40,9 +40,6 @@ public class AngleMap extends Dependence {
         {
             mapArray.get(element)[(int) (Math.round(angles.getAzimuth() / dPhi))][(int) Math.round( angles.getPolar()/ dBeta)]++;
             mapArray.get("all")[(int) (Math.round(angles.getAzimuth() / dPhi))][(int) Math.round( angles.getPolar()/ dBeta)]++;
-            //FIXME ITS  A TRAP!!!
-            mapArray.get(element)[(int) (Math.round((360-angles.getAzimuth())/ dPhi))][(int) Math.round( angles.getPolar()/ dBeta)]++;
-            mapArray.get("all")[(int) (Math.round((360-angles.getAzimuth())/ dPhi))][(int) Math.round( angles.getPolar()/ dBeta)]++;
         }
     }
 

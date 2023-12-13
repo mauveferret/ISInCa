@@ -28,7 +28,6 @@ public class Scatter extends Simulator {
             String tscConfig = "";
 
             //get info from *.tsk file
-
             try {
                 for (File file:  dataDirectory.listFiles()){
                     if (file.getName().matches("SC\\d+.tsk")){
@@ -50,7 +49,6 @@ public class Scatter extends Simulator {
                 String lastElementOf2Layer = "qwerty12345678";
                 String lastElementOf3Layer = "qwerty123456789";
 
-
                 while (reader.ready()){
                     line = reader.readLine();
                     if (line.contains("=")) someParameter = line.substring(line.indexOf("=")+1).trim();
@@ -58,7 +56,6 @@ public class Scatter extends Simulator {
                         projectileElements= someParameter;
                         elementsList.add(someParameter);
                     }
-
 
                     if (line.contains("Component")&&line.contains("L1"))  lastElementOf1Layer = someParameter;
                     if (line.contains("Component")&&line.contains("L2")) lastElementOf2Layer = someParameter;
@@ -134,16 +131,12 @@ public class Scatter extends Simulator {
     @Override
     public void postProcessCalculatedFiles(ArrayList<Dependence> depr) {
 
-
-        //for (String elements: elementsList) System.out.println(elements+" ");
-
         dependencies = depr;
         for (Dependence dep: dependencies) dep.initializeArrays(elementsList);
 
         calcTime = System.currentTimeMillis();
 
         //find all SCATTER-related distributions
-
         float  floatSort, en = 0, cosx, cosy, cosz;
         String sort = "U";
 

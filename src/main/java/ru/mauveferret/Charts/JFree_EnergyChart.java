@@ -32,7 +32,6 @@ public class JFree_EnergyChart extends ApplicationFrame{
         this.name = name;
         path = path.replace(".txt", ".png");
 
-
         JFrame f = new JFrame("ISInCa: Energy spectrum");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setResizable(true);
@@ -99,7 +98,7 @@ public class JFree_EnergyChart extends ApplicationFrame{
         f.setVisible(true);
 
         try {
-            OutputStream ff = new FileOutputStream(new File(path));
+            OutputStream ff = new FileOutputStream(path);
             ChartUtilities.writeChartAsPNG(ff,
                     xylineChart,
                     chartPanel.getWidth(),

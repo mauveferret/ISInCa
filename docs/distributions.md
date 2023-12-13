@@ -6,7 +6,7 @@ There are several types of distributions in ISInCa:
 
 ### **Graphs**
 
-- Energy distributions N(E) 
+- Energy distributions dN/dE(E) 
 - Angle distributions dN/dβ(β) 
 - ~~Depth distributions for primary implanted and target displaced particles~~ <span style="color:#ff0000">under development</span>
 
@@ -37,7 +37,6 @@ The main parameters are:
 the signal on the spectrum, but the capability to distinguish closely located energy peaks would reduce.
  - `β [deg]`, that is the polar registration angle relative to the surface normal.
  - `dβ [deg]`, that defines  the energy analyzer registration angle in  scattering plane.
- -  `β [deg]`, that is the polar registration angle relative to the surface normal.
  -  `dβ [deg]`, that defines  the width of the β registration angle
  - `φ [deg]`, that is the azimuth registration angle relative to the Z axis.
  - `dφ [deg]`, that defines  the width of the φ registration angle.
@@ -47,7 +46,7 @@ it is discussed in **[energy spectra distortions](https://github.com/mauveferret
 ### There are several points to be mentioned here:
 
 1. The formation of this distribution in ISInCa occurs by creating a one-dimensional array with the number of elements 
-equal to `E0/dE`. Then, for each particle from the simulation output tables, the condition for matching the sort and solid angle is checked, 
+equal to `E0/Estep`. Then, for each particle from the simulation output tables, the condition for matching the sort and solid angle is checked, 
 and in case of matching 1 is added to the array element defined as `Math.round(E/dE)`, where E is particle's energy. 
 2. After postprocessing all simulation tables the values of the array, which are integer numbers, which are actually
 the number of particles.

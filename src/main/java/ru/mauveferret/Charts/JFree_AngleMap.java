@@ -68,9 +68,6 @@ public class JFree_AngleMap {
             System.out.println("[WARNING 183]" + e.getMessage());
             System.out.println("[WARNING 183] Are you in GUI mode?! No X11 DISPLAY variable was set. Check ScatteredColorMap.");
         }
-
-
-
     }
 
     private static JFreeChart createChart(XYDataset dataset) {
@@ -102,18 +99,14 @@ public class JFree_AngleMap {
 
     private  XYZDataset createDataset() {
         DefaultXYZDataset dataset = new DefaultXYZDataset();
-        int n=0;
         for (int i = 0; i < (int) (360/dPhi)+1; i++) {  //azimuth angle
             double[][] data = new double[3][1000];
             for (int j = 0; j < (int) (90/dBeta); j++) {    //polar angle
                 data[0][j] = j*dBeta * Math.cos(i*dPhi*2*3.14/360);
                 data[1][j] = j*dBeta * Math.sin(i*dPhi*2*3.14/360);
-                //if (i>(int) (180/dPhi)) n = i/2;
-                //else n = i;
                 data[2][j] = array[i][j];
                 //finding optimal ColorScale
                 if (array[i][j]>maxParticlesCount) maxParticlesCount = array[i][j];
-
             }
             dataset.addSeries("series" + i, data);
         }

@@ -25,8 +25,7 @@ import java.util.ArrayList;
 
 public class RootFxmlController {
 
-    //FileChooser chooser = new FileChooser();
-    //private boolean accessGranted=true;
+
     Simulator yourSimulator;
 
     //Buttons for calculating
@@ -220,10 +219,10 @@ public class RootFxmlController {
         }
         try {
             double t = Double.parseDouble(azimuthAngleNE.getText());
-            if (t < 0 || t > 180) {
+            if (t < 0 || t > 360) {
                 azimuthAngleNE.setText("0");
 
-                new GUI().showNotification("Please set φ in a range of  0<=φ<=180");
+                new GUI().showNotification("Please set φ in a range of  0<=φ<=360");
             }
         }
         catch (Exception e)
@@ -232,10 +231,9 @@ public class RootFxmlController {
         }
         try {
             double t = Double.parseDouble(azimuthAngleNbeta.getText());
-            if (t < 0 || t > 179 ) {
+            if (t < 0 || t > 360) {
                 azimuthAngleNbeta.setText("0");
-
-                new GUI().showNotification("Please set φ in a range of  0<=φ<=180");
+                new GUI().showNotification("Please set φ in a range of  0<=φ<=360");
             }
         }
         catch (Exception e)

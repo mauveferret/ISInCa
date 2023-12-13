@@ -40,7 +40,7 @@ public class Main  {
     }
 
     public static String getVersion(){
-        String version = "v2023.12.8";
+        String version = "v2023.12.9";
         return  version;
     }
 

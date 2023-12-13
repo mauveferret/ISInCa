@@ -196,7 +196,7 @@ public class TRIM extends Simulator {
         cosy = Float.parseFloat(partData[8]);
         cosz = Float.parseFloat(partData[9]);
 
-        PolarAngles angles = new PolarAngles(cosz,-cosy,-cosx);
+        PolarAngles angles = new PolarAngles(cosy,cosz,-cosx);
 
         //FIXME all coefficients goes to zero target element
         element=(sort.equals("B"))?projectileElements:elementsList.get(0);

@@ -7,17 +7,19 @@ public class PolarAngles {
     //from 0 to 360 from Z axis (in which the beam strikes)
     private double azimuth;
 
-    public PolarAngles(double polarCos, double azimuthCos, double x,double y) {
+    public PolarAngles(double polarCos, double azimuthCos, double x,double y, double z) {
 
         //for SDTrimSP input
-
         azimuth = 57.2958*Math.acos(azimuthCos);
         polar = 57.2958*Math.acos(polarCos);
-        //FIXME
-        //if (y<0) azimuth =360-azimuth;
+
+        //It is supposed in TRIM and SDTrimSP, that phi=0 is the XY plane
+        if (z<0) azimuth =360-azimuth;
     }
 
     public PolarAngles(double cosx, double cosy, double cosz) {
+
+        //for Scatter Input
         cartesianToAngles(cosx,cosy,cosz);
     }
 
@@ -30,8 +32,6 @@ public class PolarAngles {
     }
 
     public boolean doesAzimuthAngleMatch(double phi, double dPhi){
-
-        //FIXME WTF   if ((phi>dPhi && phi<360-dPhi) || (phi>45))
         if ((phi>dPhi && phi<360-dPhi) || (dPhi>45))
             return (Math.abs(phi - azimuth)<dPhi);
         else return (azimuth < dPhi || azimuth>360-dPhi);
