@@ -1,14 +1,32 @@
 ## On the spectra broadening due to the hardware function of the electrostatic analysers
 
-As every scientific worker knows, depending on the settings of the measuring equipment, 
+As every scientists knows, depending on the settings of the measuring equipment, 
 you can obtain a significantly different signal from the same object under study.
-The same goes for modeling. Here we can imagine outputs of the particle-in-matter simulation 
+The same goes for computer simulation. 
+
+Let's imagine outputs of the particle-in-matter simulation 
 codes as an object under study, and the ISInCa - as the measurement instrument, which allows
 to obtain some values, charts and maps, which characterises is some way the outputs of the simulation.
 And like any such instrument, ISInCa has a set of parameters that affect the received data.
 
-In this section discussion is provided on the operation of the module responsible for 
-generating energy spectra. We can imagine this virtual energyanalyzer as an array of channels,
+In this section discussion is provided on the module responsible for 
+generating energy spectra. The most common energy analyzers in the area of keV particle's analysis are
+electrostatic and magnetic separators with homogeneous field. You can read about it in 
+[[1](https://doi.org/10.1016/S1076-5670(09)01606-1)], [[2](https://arc.aiaa.org/doi/10.2514/1.B35413)].
+As the most  spectrometers, these analyzers influence the signal. Thus, even if the particle beam is completely
+mono-energetic, its spectra would not look like a delta-function, it would have some "energy width" and some shape.
+Such spectrum is called a hardware function of the analyzer, and it is unique for every device. 
+
+It is a good  practice to consider the influence of the energy analyzer on the spectrum, in other words, 
+to restore "the true" energy spectrum with the measured one and the hardware function.
+However, it might be tricky for a number of reasons. The description of the way for reconstruction of energy spectra
+is given in [[3](https://doi.org/10.1134/S1063785010050196)]. In some ways this procedure can be simplified 
+to the normalization of the spectra on the energy in every dot(?)
+
+
+
+
+We can imagine this virtual energyanalyzer as an array of channels,
 each of those is associated with some range of measurable energies. Let's think for the 
 simplicity that the channels are equally distributed, in other words, the distance between 
 the centers of the energy channels is constant. Let's refer to it as to Estep [eV].
