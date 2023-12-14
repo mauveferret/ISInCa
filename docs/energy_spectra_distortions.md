@@ -21,15 +21,16 @@ It is a good  practice to consider the influence of the energy analyzer on the s
 to restore "the true" energy spectrum with the measured one and the hardware function.
 However, it might be tricky for a number of reasons. The description of the way for reconstruction of energy spectra
 is given in [[3](https://doi.org/10.1134/S1063785010050196)]. In some ways this procedure can be simplified 
-to the normalization of the spectra on the energy in every dot(?)
+to the normalization of the spectra on the energy in every point [[4](https://doi.org/10.1016/C2009-0-07296-1)].
 
 
 
 
-We can imagine this virtual energyanalyzer as an array of channels,
-each of those is associated with some range of measurable energies. Let's think for the 
-simplicity that the channels are equally distributed, in other words, the distance between 
-the centers of the energy channels is constant. Let's refer to it as to Estep [eV].
+ Thus, ISInCa module, which is responsible for generating energy spectra can be imagined as virtual 
+ energyanalyzer: an array of channels, each of those is associated with some range of measurable energies. 
+ Let's think for the simplicity that the channels are equally distributed, in other words, the distance between 
+the centers of the energy channels is constant. This is quite typical for real analyzers. 
+ Let's refer to it as to Estep [eV].
 So, if the maximum energy of the ions of interest is E0, the number of channels would be E0/Estep.
 Meanwhile, the energy width of the channels do not have to be equal.  Let's refer to it as to dE [eV].
 We can distinguish several modes of such analyzer.
