@@ -62,15 +62,22 @@ public class AngEnMap extends Dependence {
                 for (int j = 0; j <= (int) Math.round(90 / dBeta); j++) {
                     if (j==0){
                         mapArray.get(element)[i][j] /=
-                                (simulator.projectileAmount*dE*dBeta/2*Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                                (simulator.projectileAmount*dE*dBeta/2*Math.sin(Math.toRadians(Math.abs(dBeta/4))));
                     }
-                    else {
+                    // fix by @Aksiradmir
+                    else if (j == (int) Math.round(90 / dBeta))
+                    {
+                        mapArray.get(element)[i][j] /=
+                                (simulator.projectileAmount*dE*dBeta/2*Math.sin(Math.PI/2- Math.toRadians(Math.abs(dBeta/4))));
+                    }
+                    else
+                    {
                         mapArray.get(element)[i][j] /=
                                 (simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(j*dBeta))));
                         //System.out.println(j+" "+calculator.projectileAmount+" "+dE+" "+dBeta+" "+Math.sin(Math.toRadians(Math.abs(j*dBeta))));
                     }
                     // fix by @Aksiradmir
-                    if (i==0) mapArray.get(element)[i][j] *= 2;
+                    if (i ==0 || i == (int) Math.round(E0 / dE)) mapArray.get(element)[i][j] *= 2;
                 }
             }
 
