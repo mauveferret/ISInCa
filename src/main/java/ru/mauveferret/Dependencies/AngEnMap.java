@@ -55,24 +55,22 @@ public class AngEnMap extends Dependence {
     @Override
     public boolean logDependencies() {
 
-        //FIXME ITS A TRAP!!!
         for (String element: elements) {
-
-
-
             // from probability distr. to angle
 
             for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
                 for (int j = 0; j <= (int) Math.round(90 / dBeta); j++) {
                     if (j==0){
-                        mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                        mapArray.get(element)[i][j] /=
+                                (simulator.projectileAmount*dE*dBeta/2*Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                     }
                     else {
-                        mapArray.get(element)[i][j] = mapArray.get(element)[i][j]
-                                /(simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(j*dBeta))));
+                        mapArray.get(element)[i][j] /=
+                                (simulator.projectileAmount*dE*dBeta*Math.sin(Math.toRadians(Math.abs(j*dBeta))));
                         //System.out.println(j+" "+calculator.projectileAmount+" "+dE+" "+dBeta+" "+Math.sin(Math.toRadians(Math.abs(j*dBeta))));
                     }
+                    // fix by @Aksiradmir
+                    if (i==0) mapArray.get(element)[i][j] *= 2;
                 }
             }
 

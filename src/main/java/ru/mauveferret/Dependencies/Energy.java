@@ -89,7 +89,12 @@ public class Energy extends Dependence {
 
             if (!isNumeric(element)) {
                 double[] newArray = new double[distributionArray.get(element).length];
-                for (int j = 0; j < newArray.length; j++) newArray[j] = distributionArray.get(element)[j];
+                for (int j = 0; j < newArray.length; j++) {
+                    newArray[j] = distributionArray.get(element)[j];
+                    // fix by @Aksiradmir
+                    if (j==0 || j==newArray.length-1) newArray[j] *=2;
+                }
+
 
                 try {
                     FileOutputStream energyWriter = new FileOutputStream(pathsToLog.get(element));
