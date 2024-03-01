@@ -161,11 +161,12 @@ public class Scatter extends Simulator {
                     cosy = ByteBuffer.wrap(ArraySubPart(buf, 10 + shift, 13 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                     cosz = ByteBuffer.wrap(ArraySubPart(buf, 14 + shift, 17 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 
-                    if (floatSort>=0 && cosz>=0 ) sort = "S"; else
                     if (floatSort<0 && cosz>0) sort = "B"; else
-                    if (floatSort<0 && cosz<0 && en<100) sort = "I"; else
-                    if (floatSort<0 && cosz<0 && en>100) sort = "T"; else
-                    if (floatSort>=0 && cosz<=0 ) sort = "D";
+                    if (floatSort<0 && cosz<0 && en<50) sort = "I"; else
+                    if (floatSort<0 && cosz<0 && en>50) sort = "T"; else
+                    if (floatSort>=0 && en<50) sort = "D"; else
+                    if (floatSort>=0 && en>50) sort = "S";
+
                     else sort = "S"; // for particles with "NaN" coordinates.
 
                     //Here is several spectra calculators
