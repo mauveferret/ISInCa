@@ -130,6 +130,7 @@ public class CartesianMap extends Dependence {
                     stroka = stroka + columnSeparatorInLog + (int) ((i - center) * delta);
                 }
                 stroka = stroka + "\n";
+                stroka = stroka.replaceAll(",",".");
                 surfaceWriter.write(stroka.getBytes());
 
                 for (int i = leftEdge; i <= rightEdge; i++) {
@@ -138,6 +139,7 @@ public class CartesianMap extends Dependence {
                         stroka = stroka + mapArray.get(element)[i][j] + columnSeparatorInLog;
                     }
                     stroka = stroka + "\n";
+                    stroka = stroka.replaceAll(",",".");
                     surfaceWriter.write(stroka.getBytes());
                 }
                 surfaceWriter.close();

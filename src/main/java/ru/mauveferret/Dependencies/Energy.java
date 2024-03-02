@@ -104,6 +104,7 @@ public class Energy extends Dependence {
                         stroka = String.format("%.2f",i * Estep) + columnSeparatorInLog
                                 + new BigDecimal(newArray[i]).
                                 setScale(3, RoundingMode.UP) + "\n";
+                        stroka = stroka.replaceAll(",",".");
                         energyWriter.write(stroka.getBytes());
                     }
                     energyWriter.close();

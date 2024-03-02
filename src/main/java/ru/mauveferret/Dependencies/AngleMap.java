@@ -69,6 +69,7 @@ public class AngleMap extends Dependence {
                     stroka = stroka + columnSeparatorInLog + (int) (i * dBeta);
                 }
                 stroka = stroka + "\n";
+                stroka = stroka.replaceAll(",",".");
                 surfaceWriter.write(stroka.getBytes());
 
                 for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
@@ -78,6 +79,7 @@ public class AngleMap extends Dependence {
                         else stroka = stroka + mapArray.get(element)[i - 1][j] + columnSeparatorInLog;
                     }
                     stroka = stroka + "\n";
+                    stroka = stroka.replaceAll(",",".");
                     surfaceWriter.write(stroka.getBytes());
                 }
                 surfaceWriter.close();

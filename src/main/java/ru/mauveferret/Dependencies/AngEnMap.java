@@ -89,6 +89,7 @@ public class AngEnMap extends Dependence {
                     stroka = stroka + columnSeparatorInLog + (int) (i * dBeta);
                 }
                 stroka = stroka + "\n";
+                stroka = stroka.replaceAll(",",".");
                 surfaceWriter.write(stroka.getBytes());
 
                 for (int i = 0; i <= (int) Math.round(E0 / dE); i++) {
@@ -97,6 +98,7 @@ public class AngEnMap extends Dependence {
                         stroka = stroka + String.format("%12.4e",mapArray.get(element)[i][j])  + columnSeparatorInLog;
                     }
                     stroka = stroka + "\n";
+                    stroka = stroka.replaceAll(",",".");
                     surfaceWriter.write(stroka.getBytes());
                 }
                 surfaceWriter.close();

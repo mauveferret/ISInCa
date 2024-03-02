@@ -71,6 +71,7 @@ public class Polar extends Dependence {
                 for (int i = 0; i <= (int) Math.round(180 / dBeta); i++) {
                     stroka = ((i * dBeta - 90)) + columnSeparatorInLog
                             + new BigDecimal(newArray[i]).setScale(3, RoundingMode.UP) + "\n";
+                    stroka = stroka.replaceAll(",",".");
                     if (i * dBeta != 90) polarWriter.write(stroka.getBytes());
                 }
                 polarWriter.close();
