@@ -57,7 +57,7 @@ public abstract class Simulator {
     public String targetElements;
 
     //some scattering variables
-    public HashMap<String, Double>  scattered, sputtered, implanted, transmitted, displaced, energyRecoil;
+    public HashMap<String, Double>  scattered, sputtered, implanted, transmitted_B,transmitted_S, displaced, energyRecoil;
     public double particleCount;
 
     public Simulator(String directoryPath, boolean doVizualization) {
@@ -98,7 +98,8 @@ public abstract class Simulator {
         scattered = new HashMap<>();
         sputtered = new HashMap<>();
         implanted = new HashMap<>();
-        transmitted = new HashMap<>();
+        transmitted_B = new HashMap<>();
+        transmitted_S = new HashMap<>();
         displaced = new HashMap<>();
         energyRecoil = new HashMap<>();
 
@@ -106,7 +107,8 @@ public abstract class Simulator {
             scattered.put(element,0.0);
             sputtered.put(element, 0.0);
             implanted.put(element, 0.0);
-            transmitted.put(element, 0.0);
+            transmitted_B.put(element, 0.0);
+            transmitted_S.put(element, 0.0);
             displaced.put(element, 0.0);
             energyRecoil.put(element,0.0);
         }
@@ -117,7 +119,8 @@ public abstract class Simulator {
             scattered.put(element, scattered.get(element) / projectileAmount);
             sputtered.put(element, sputtered.get(element) / projectileAmount);
             implanted.put(element, implanted.get(element) / projectileAmount);
-            transmitted.put(element, transmitted.get(element) / projectileAmount);
+            transmitted_B.put(element, transmitted_B.get(element) / projectileAmount);
+            transmitted_S.put(element, transmitted_S.get(element) / projectileAmount);
             displaced.put(element, displaced.get(element) / projectileAmount);
             energyRecoil.put(element,energyRecoil.get(element) / (projectileMaxEnergy * projectileAmount));
         }
@@ -156,7 +159,7 @@ public abstract class Simulator {
             summary.write(("*".repeat(LINE_LENGTH)+"\n").getBytes());
 
             summary.write((cl("element")+cl("backscattered")+cl("sputtered")+cl("implanted")+
-                            cl("transmitted")+cl("displaced")+cl("energy recoil")+"\n").getBytes());
+                            cl("transmitted_B")+cl("transmitted_S")+cl("displaced")+cl("energy recoil")+"\n").getBytes());
             for (String element: elementsList) {
                 //"%-10s %-10s %-10s\n", "osne", "two", "thredsfe"
 
@@ -164,7 +167,8 @@ public abstract class Simulator {
                         cl(new BigDecimal(scattered.get(element)).setScale(4, RoundingMode.UP)+"")+
                         cl(new BigDecimal(sputtered.get(element)).setScale(4, RoundingMode.UP)+"")+
                         cl(new BigDecimal(implanted.get(element)).setScale(4, RoundingMode.UP)+"")+
-                        cl(new BigDecimal(transmitted.get(element)).setScale(4, RoundingMode.UP)+"")+
+                        cl(new BigDecimal(transmitted_B.get(element)).setScale(4, RoundingMode.UP)+"")+
+                        cl(new BigDecimal(transmitted_S.get(element)).setScale(4, RoundingMode.UP)+"")+
                         cl(new BigDecimal(displaced.get(element)).setScale(4, RoundingMode.UP)+"")+
                         cl(new BigDecimal(energyRecoil.get(element)).setScale(4, RoundingMode.UP)+"")+"\n"
                 ).getBytes());

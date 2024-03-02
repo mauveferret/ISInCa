@@ -3,7 +3,6 @@ package ru.mauveferret.Simulators;
 import ru.mauveferret.Dependencies.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class TRIM extends Simulator {
@@ -236,8 +235,8 @@ public class TRIM extends Simulator {
                 implanted.put("all", implanted.get("all") + 1);
                 break;
             case "T":
-                transmitted.put(element, transmitted.get(element) + 1);
-                transmitted.put("all", transmitted.get("all") + 1);
+                transmitted_B.put(element, transmitted_B.get(element) + 1);
+                transmitted_B.put("all", transmitted_B.get("all") + 1);
                 break;
             case "D":
                 displaced.put(element, displaced.get(element) + 1);

@@ -178,7 +178,7 @@ public class CalculationCombiner extends Simulator {
                     scattered.put(element, scattered.get(element) + calculator.scattered.get(element) * calculator.projectileAmount);
                     sputtered.put(element, sputtered.get(element) + calculator.sputtered.get(element) * calculator.projectileAmount);
                     implanted.put(element, implanted.get(element) + calculator.implanted.get(element) * calculator.projectileAmount);
-                    transmitted.put(element, transmitted.get(element) + calculator.transmitted.get(element) * calculator.projectileAmount);
+                    transmitted_B.put(element, transmitted_B.get(element) + calculator.transmitted_B.get(element) * calculator.projectileAmount);
                     displaced.put(element, displaced.get(element) + calculator.displaced.get(element) * calculator.projectileAmount);
                     energyRecoil.put(element, energyRecoil.get(element)+calculator.energyRecoil.get(element)*
                             calculator.projectileMaxEnergy*calculator.projectileAmount);

@@ -131,6 +131,7 @@ public class Scatter extends Simulator {
     @Override
     public void postProcessCalculatedFiles(ArrayList<Dependence> depr) {
 
+
         dependencies = depr;
         for (Dependence dep: dependencies) dep.initializeArrays(elementsList);
 
@@ -161,12 +162,12 @@ public class Scatter extends Simulator {
                     cosy = ByteBuffer.wrap(ArraySubPart(buf, 10 + shift, 13 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
                     cosz = ByteBuffer.wrap(ArraySubPart(buf, 14 + shift, 17 + shift)).order(ByteOrder.LITTLE_ENDIAN).getFloat();
 
-                    if (floatSort<0 && cosz>0) sort = "B"; else
-                    if (floatSort<0 && cosz<0 && en<50) sort = "I"; else
-                    if (floatSort<0 && cosz<0 && en>50) sort = "T"; else
-                    if (floatSort>=0 && en<50) sort = "D"; else
-                    if (floatSort>=0 && en>50) sort = "S";
-
+                    if (floatSort<0 && cosz>0) sort = "B";
+                    else if (floatSort<0 && cosz<0 && en<50) sort = "I";
+                    else if (floatSort<0 && cosz<0 && en>50) sort = "T";
+                    else if (floatSort>=0 && cosz>0) sort = "S";
+                    else if (floatSort>=0 && cosz<0 && en>50) sort = "R";
+                    else if (floatSort>=0 && cosz<0 && en<50) sort = "D";
                     else sort = "S"; // for particles with "NaN" coordinates.
 
                     //Here is several spectra calculators
@@ -209,8 +210,12 @@ public class Scatter extends Simulator {
                             implanted.put("all", implanted.get("all") + 1);
                             break;
                         case "T":
-                            transmitted.put(element, transmitted.get(element) + 1);
-                            transmitted.put("all", transmitted.get("all") + 1);
+                            transmitted_B.put(element, transmitted_B.get(element) + 1);
+                            transmitted_B.put("all", transmitted_B.get("all") + 1);
+                            break;
+                        case "R":
+                            transmitted_S.put(element, transmitted_S.get(element) + 1);
+                            transmitted_S.put("all", transmitted_S.get("all") + 1);
                             break;
                         case "D":
                             displaced.put(element, displaced.get(element) + 1);

@@ -38,7 +38,7 @@ public class RootFxmlController {
 
     //energy distributions
     @FXML
-    private CheckBox NEB,NES,NET;
+    private CheckBox NEB,NES,NET, NER;
 
     //polar distributions
     @FXML
@@ -117,7 +117,7 @@ public class RootFxmlController {
     @FXML
     private TextField implanted;
     @FXML
-    private TextField transmitted;
+    private TextField transmitted, transmitted_S;
     @FXML
     private TextField displaced;
     @FXML
@@ -355,8 +355,8 @@ public class RootFxmlController {
     @FXML
     public void secretLaunch()
     {
-        if (secret.getText().equals("А не попить ли чаю?")) secret.setText("");
-        else secret.setText("А не попить ли чаю?");
+        if (secret.getText().equals("Why don't you have a cup of tea?")) secret.setText("");
+        else secret.setText("Why don't you have a cup of tea?");
     }
 
     @FXML
@@ -408,6 +408,7 @@ public class RootFxmlController {
                 String sort = (NEB.isSelected()) ? "B" : "";
                 sort += (NES.isSelected()) ? "S" : "";
                 sort += (NET.isSelected()) ? "T" : "";
+                sort += (NER.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
                     distributions.add(new Energy(Estep1,phiNE, dphiNE, betaNE, dBetaNE,sort, yourSimulator, energyAnalyserBroadening, IsdEconstChosen));
@@ -474,7 +475,9 @@ public class RootFxmlController {
                         +"");
                 displaced.setText(new BigDecimal(yourSimulator.displaced.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
-                transmitted.setText(new BigDecimal(yourSimulator.transmitted.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                transmitted.setText(new BigDecimal(yourSimulator.transmitted_B.get("all")).setScale(4, RoundingMode.UP).doubleValue()
+                        +"");
+                transmitted_S.setText(new BigDecimal(yourSimulator.transmitted_S.get("all")).setScale(4, RoundingMode.UP).doubleValue()
                         +"");
                 energyScattering.setText(new BigDecimal(yourSimulator.energyRecoil.get("all")).setScale(3, RoundingMode.UP).doubleValue()
                         +"");
@@ -483,7 +486,8 @@ public class RootFxmlController {
                     yourSimulator.scattered.put(element,0.0);
                     yourSimulator.sputtered.put(element, 0.0);
                     yourSimulator.implanted.put(element, 0.0);
-                    yourSimulator.transmitted.put(element, 0.0);
+                    yourSimulator.transmitted_B.put(element, 0.0);
+                    yourSimulator.transmitted_S.put(element, 0.0);
                     yourSimulator.displaced.put(element, 0.0);
                     yourSimulator.energyRecoil.put(element,0.0);
                 }

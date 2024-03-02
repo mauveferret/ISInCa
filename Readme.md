@@ -38,7 +38,7 @@ c
 
 All distributions can be both visualised with the embedded `JFreeChart` plotter and saved locally as 
 the conventional "*.txt" text file. All data is available for different combinations of particles (scattered - B, sputtered - S, implanted - I ,
-transmitted - T  and displaced - D). 
+transmitted particles of the initial beam - T, transmitted particles of the target - R,  and displaced - D). 
 You should take into account, that the number of available types of particles
 depends on the specific code. As example, `SDTrimSP` supports all types, `Scatter` only B,S and I.
 An opportunity for combining results of different calculations is also presented.

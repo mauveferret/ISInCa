@@ -192,7 +192,9 @@ public class SDTrimSP extends Simulator {
                         else if (particlesType.contains("back_r")) sort = "S";
                         else if (particlesType.contains("stop_p")) sort = "I";
                         else if (particlesType.contains("stop_r")) sort = "D";
-                        else if (particlesType.contains("tran")) sort = "T";
+                        else if (particlesType.contains("tran_p")) sort = "T";
+                        else if (particlesType.contains("tran_r")) sort = "R";
+
 
                         String sorts = "";
                         for (Dependence someDistr : dependencies) sorts += someDistr.getSort();
@@ -334,8 +336,12 @@ public class SDTrimSP extends Simulator {
                     implanted.put("all", implanted.get("all") + 1);
                     break;
                 case "T":
-                    transmitted.put(element, transmitted.get(element) + 1);
-                    transmitted.put("all", transmitted.get("all") + 1);
+                    transmitted_B.put(element, transmitted_B.get(element) + 1);
+                    transmitted_B.put("all", transmitted_B.get("all") + 1);
+                    break;
+                case "R":
+                    transmitted_S.put(element, transmitted_S.get(element) + 1);
+                    transmitted_S.put("all", transmitted_S.get("all") + 1);
                     break;
                 case "D":
                     displaced.put(element, displaced.get(element) + 1);
