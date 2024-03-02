@@ -22,7 +22,7 @@ argument                  | alias             | brief description
 `-generate`               | `-g`              | generates config file for launching SCATTER/SDTrimSP calculations (**NOT READY YET**)
 `-gui`                    | ---               | launch graphical  mode (also can be launched without any arguments)
 
-In this way, to launch posprocessing of same calculation you should type in the terminal:
+~~In thi~~s way, to launch posprocessing of same calculation you should type in the terminal:
 
 ` java -jar isinca.jar -c configs/isinca.xml`
 
@@ -46,6 +46,8 @@ flag             |   values             | brief description
 `<combine>`      | *true, false*        |sets whether to combine files from one `<calc>` section (look for "Combine mode" further)
 `<dirSubname>`   | *angle, energy, ...* | adds an incident angle/energy... of calcs. to combine's mode dir
 `<combSum>`      | *W,Au,Fe,Cl,U,...*   | list of elements for **combSum** mode: summarizes combines
+
+
 The flags need some clarification. Monte-Carlo Codes like Scatter generate outputs which can't be opened with a plain
 text editors. So if you want to post-process this files by yourself, 
 you need to transform the outputs to some readable format. For this `<getTXT>` was made.
