@@ -20,7 +20,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="339.0" prefHeight="493.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mauveferret.RootFxmlController">
    <children>
-      <ImageView fitHeight="250.0" fitWidth="373.0" layoutX="420.0" layoutY="196.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="249.0" fitWidth="366.0" layoutX="427.0" layoutY="199.0" onMouseClicked="#secretLaunch" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pics/CrocoLogo.png" />
          </image>
@@ -336,9 +336,9 @@
             </TabPane>
          </items>
       </SplitPane>
-      <SplitPane layoutX="8.0" layoutY="223.0" prefHeight="259.0" prefWidth="416.0">
+      <SplitPane layoutX="8.0" layoutY="223.0" prefHeight="259.0" prefWidth="422.0">
          <items>
-            <Pane prefHeight="257.0" prefWidth="420.0">
+            <Pane prefHeight="257.0" prefWidth="423.0">
                <children>
                   <Button fx:id="go" layoutX="12.0" layoutY="68.0" mnemonicParsing="false" onAction="#runCalculation" prefHeight="41.0" prefWidth="157.0" text="start calculation" textAlignment="CENTER" textFill="#0a0a0a">
                      <font>
@@ -348,25 +348,25 @@
                   <Label layoutX="116.0" layoutY="121.0" text="time, min" />
                   <Label layoutX="33.0" layoutY="121.0" text="code type" />
                   <Separator layoutX="178.0" orientation="VERTICAL" prefHeight="250.0" prefWidth="4.0" />
-                  <GridPane alignment="CENTER" layoutX="186.0" layoutY="8.0" prefHeight="174.0" prefWidth="226.0">
+                  <GridPane alignment="CENTER" layoutX="189.0" layoutY="6.0" prefHeight="174.0" prefWidth="226.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="LEFT" maxWidth="60.0" minWidth="10.0" prefWidth="58.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="39.0" minWidth="10.0" prefWidth="23.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="41.0" minWidth="10.0" prefWidth="35.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="30.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="32.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="22.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="39.0" minWidth="10.0" prefWidth="25.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="41.0" minWidth="10.0" prefWidth="25.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="45.0" minWidth="10.0" prefWidth="25.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="25.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="59.0" minWidth="10.0" prefWidth="25.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="77.0" minWidth="10.0" prefWidth="25.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="22.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="23.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="NEVER" />
+                        <RowConstraints maxHeight="5.0" minHeight="1.0" prefHeight="1.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints fillHeight="false" maxHeight="26.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="25.0" valignment="CENTER" vgrow="NEVER" />
                      </rowConstraints>
                      <children>
                         <CheckBox fx:id="NBetaB" mnemonicParsing="false" prefHeight="17.0" prefWidth="7.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -491,6 +491,11 @@
                            </tooltip>
                         </Label>
                         <CheckBox fx:id="NER" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="NBetaR" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="NBetaPhiR" mnemonicParsing="false" prefHeight="29.0" prefWidth="9.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="NEBetaR" mnemonicParsing="false" prefHeight="27.0" prefWidth="10.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="NzyR" disable="true" mnemonicParsing="false" prefHeight="29.0" prefWidth="9.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="NzxR" disable="true" mnemonicParsing="false" prefHeight="29.0" prefWidth="9.0" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
                   <TextField fx:id="time" alignment="CENTER" layoutX="116.0" layoutY="141.0" prefHeight="41.0" prefWidth="52.0" promptText="?" />
@@ -504,14 +509,14 @@
                         <Font size="19.0" />
                      </font></TextField>
                   <Label layoutX="28.0" layoutY="185.0" text="total projectiles amount" textAlignment="CENTER" />
-                  <Separator layoutX="184.0" layoutY="180.0" prefHeight="1.0" prefWidth="205.0" />
+                  <Separator layoutX="184.0" layoutY="185.0" prefHeight="3.0" prefWidth="226.0" />
                   <TextField fx:id="codeName" alignment="CENTER" layoutX="14.0" layoutY="141.0" prefHeight="41.0" prefWidth="94.0" promptText="choose dir">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
-                  <Label layoutX="189.0" layoutY="189.0" text="visualize data" />
-                  <CheckBox fx:id="visualize" layoutX="270.0" layoutY="185.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
-                  <Label layoutX="190.0" layoutY="210.0" text="convert *.dat ">
+                  <Label layoutX="189.0" layoutY="193.0" text="visualize data" />
+                  <CheckBox fx:id="visualize" layoutX="270.0" layoutY="189.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
+                  <Label layoutX="190.0" layoutY="214.0" text="convert *.dat ">
                      <tooltip>
                         <Tooltip text="Converts  SCATTER binary file to ASCII ">
                            <font>
@@ -519,9 +524,9 @@
                            </font>
                         </Tooltip>
                      </tooltip></Label>
-                  <CheckBox fx:id="getTXT" layoutX="270.0" layoutY="205.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" />
-                  <CheckBox fx:id="getSummary" layoutX="270.0" layoutY="225.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
-                  <Label layoutX="190.0" layoutY="229.0" text="get summary" />
+                  <CheckBox fx:id="getTXT" layoutX="270.0" layoutY="209.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" />
+                  <CheckBox fx:id="getSummary" layoutX="270.0" layoutY="229.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="21.0" selected="true" />
+                  <Label layoutX="190.0" layoutY="233.0" text="get summary" />
                </children>
             </Pane>
          </items>

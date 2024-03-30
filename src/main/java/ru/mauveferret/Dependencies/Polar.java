@@ -91,7 +91,7 @@ public class Polar extends Dependence {
 
         if (!sort.equals("") && doVisualisation)
         Platform.runLater(() -> {
-            String title = simulator.projectileElements+" with E0 = "+ simulator.projectileMaxEnergy/1000+" keV that hit"+
+            String title = simulator.projectileElements+" with E0 = "+ simulator.projectileMaxEnergy/1000+" keV that hit "+
                     simulator.targetElements+" target under β = "+simulator.projectileIncidentPolarAngle+" deg.\n"+"The spectrum is calculated for " +
                     "φ = "+phi+"±"+dPhi+" deg, delta β = "+dBeta+" deg"+
                     " for " + sort+" particles";

@@ -23,6 +23,7 @@ public class Scatter extends Simulator {
         elements = new String[]{"all"};
         elementsList = new ArrayList<>();
         elementsList.add("all");
+        targetElements = "";
         File dataDirectory = new File(directoryPath);
         if (dataDirectory.isDirectory()){
             String tscConfig = "";

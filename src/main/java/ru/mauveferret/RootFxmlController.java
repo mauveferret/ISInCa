@@ -42,13 +42,13 @@ public class RootFxmlController {
 
     //polar distributions
     @FXML
-    private CheckBox NBetaB, NBetaS,NBetaT;
+    private CheckBox NBetaB, NBetaS,NBetaT, NBetaR;
 
     //angle map
     @FXML
-    private CheckBox NBetaPhiB, NBetaPhiS, NBetaPhiT;
+    private CheckBox NBetaPhiB, NBetaPhiS, NBetaPhiT, NBetaPhiR ;
     @FXML
-    private CheckBox NEBetaB, NEBetaS, NEBetaT;
+    private CheckBox NEBetaB, NEBetaS, NEBetaT, NEBetaR;
     @FXML
     private CheckBox NzyB, NzyS, NzyI,NzyT, NzyD;
     @FXML
@@ -476,6 +476,7 @@ public class RootFxmlController {
                 sort = (NBetaB.isSelected()) ? "B" : "";
                 sort += (NBetaS.isSelected()) ? "S" : "";
                 sort += (NBetaT.isSelected()) ? "T" : "";
+                sort += (NBetaR.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
                     distributions.add(new Polar(phiNBeta, dPhiNBeta, dBetaNBeta,sort, yourSimulator));
@@ -483,6 +484,7 @@ public class RootFxmlController {
                 sort = (NBetaPhiB.isSelected()) ? "B" : "";
                 sort += (NBetaPhiS.isSelected()) ? "S" : "";
                 sort += (NBetaPhiT.isSelected()) ? "T" : "";
+                sort += (NBetaPhiR.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
                     distributions.add(new AngleMap(dPhiNBeta, dBetaNBeta,sort, yourSimulator));
@@ -490,6 +492,7 @@ public class RootFxmlController {
                 sort = (NEBetaB.isSelected()) ? "B" : "";
                 sort += (NEBetaS.isSelected()) ? "S" : "";
                 sort += (NEBetaT.isSelected()) ? "T" : "";
+                sort += (NEBetaR.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
                     distributions.add(new AngEnMap(NEBetadBeta1,NEBetadE1, sort, yourSimulator));

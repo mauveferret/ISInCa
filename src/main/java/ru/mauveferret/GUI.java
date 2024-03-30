@@ -1,8 +1,10 @@
 package ru.mauveferret;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +18,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import ru.mauveferret.Charts.*;
 
 import java.io.InputStream;
@@ -27,7 +30,11 @@ public class GUI extends Application {
         primaryStage.setTitle("ISInCa - Ion Surface Interaction Calculator "+Main.getVersion());
         primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
         primaryStage.setScene(new Scene(root, 790, 490));
+        primaryStage.setOnCloseRequest(ev -> {
+            System.exit(0);
+        });
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
