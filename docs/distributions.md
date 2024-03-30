@@ -16,6 +16,7 @@ There are several types of distributions in ISInCa:
 - Cartesian Maps N(Z, Y), N(Z, X)
 
 ### **Summary**
+
 - Scattered coefficient 
 - Sputtered coefficient 
 - Implanted coefficient 
@@ -25,6 +26,8 @@ Each type has features of configuration and output, which will be discussed here
 established names of angles, that can be seen in the  figure below.
 
 ![N|Solid](https://github.com/mauveferret/ISInCa/blob/master/src/main/resources/ru/mauveferret/pics/axes.png?raw=true)
+
+![N|Solid](https://github.com/mauveferret/ISInCa/blob/master/src/main/resources/ru/mauveferret/pics/part_types.png?raw=true)
 
 
 ## Energy distributions dN/dE(E)

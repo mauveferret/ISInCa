@@ -14,7 +14,7 @@ sputtering and implantation for the specific ranges of energies and angles.
  The codes listed above are intended for the simulation of  particle beams interaction with solids. 
  In such codes you can set some beam parameters (like mass/angle/energy distributions, doze) and 
  multiple target parameters. Such codes usually generate single or several files, containing tables 
- with backscattered (B), sputtered (S), transmitted (T), implanted (I) and displaced (D) particles with 
+ with backscattered (B), sputtered (S), transmitted (T and R), implanted (I) and displaced (D) particles with 
  data on their position, motion direction, sort, energy, path length etc. `ISInCa` allows to transform 
  this huge (up to hundreds of GB) data files to easy for interpretation data. it can generate:
 
@@ -34,7 +34,6 @@ sputtering and implantation for the specific ranges of energies and angles.
    - `Sputtered` coefficient Y (number of sputtered particles divided by number of incident particles)
    - `Implanted` coefficient I (number of implanted particles divided by number of incident particles)
    - `Transmitted` coefficient T (number of transmitted particles divided by number of incident particles)
-c
 
 All distributions can be both visualised with the embedded `JFreeChart` plotter and saved locally as 
 the conventional "*.txt" text file. All data is available for different combinations of particles (scattered - B, sputtered - S, implanted - I ,
@@ -65,6 +64,39 @@ or the version is less than **11**, you need to download/upgrade JVM. For Window
 Installation of the JDK (which includes JVM + libraries) seems not to be tricky (see the *[`tutorial`](https://docs.oracle.com/javase/9/install/installation-jdk-and-jre-microsoft-windows-platforms.htm#JSJIG-GUID-2B9D2A17-176B-4BC8-AE2D-FD884161C958)*). 
 In Linux, you can get it just by typing `sudo apt install default-jdk` in the shell. 
 ISInCa executable does not need special installation, so you can run ISInCa right after downloading and installing JVM.
+
+
+
+# Angle and particles definitions
+
+It is worth firstly clarifying names of angles and particles types, that would be further used 
+in this manual. The angle of incidence α is measured from the normal to the surface and is 
+not directly used in ISInCa calculations. When calculating, the azimuthal angle of incidence 
+is considered to be 180 degrees. Polar β and azimuthal φ registration angles are used 
+in the calculation. The β angle is also measured from the surface normal. At the same time, 
+it can be set in the program from 0 to 90 degrees.The φ angle is  measured from Z axis
+(see the picture below). It can be set in the program from 0 to 360 degrees. The angle registration width
+dβ can be up to 90 degrees, while dφ - up to 360 degrees. Notice that it is width but not a deviation.
+
+![N|Solid](https://github.com/mauveferret/ISInCa/blob/master/src/main/resources/ru/mauveferret/pics/axes.png?raw=true)
+
+
+When calculating the distributions for particles transmitted through thin targets, instead 
+of specifying a larger than 90 β angle, it is necessary to use flags responsible 
+for the types of particles. There are 6 flags in total:
+
+- B - particles of the  beam, backscattered from the target
+- S - particles of the target sputtered in the upward from the target
+- I - implanted particles of the initial beam
+- D - displaced particles of the target, that have not left the target
+- T - transmitted through the target particles of the  beam
+- R - particles of the target, that were sputtered(recoiled)  downward the target
+
+The picture below may help to understand the difference between B and T, and S and R.
+
+
+![N|Solid](https://github.com/mauveferret/ISInCa/blob/master/src/main/resources/ru/mauveferret/pics/part_types.png?raw=true)
+
 
 # Launch
 

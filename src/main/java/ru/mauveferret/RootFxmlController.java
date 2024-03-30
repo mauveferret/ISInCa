@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import ru.mauveferret.Simulators.Simulator;
 import ru.mauveferret.Simulators.SDTrimSP;
@@ -27,6 +29,12 @@ public class RootFxmlController {
 
 
     Simulator yourSimulator;
+
+    @FXML
+    private BorderPane parent;
+
+
+    private boolean isLightTheme = true;
 
     //Buttons for calculating
     @FXML
@@ -136,6 +144,7 @@ public class RootFxmlController {
 
     @FXML
     public void openGIT(){
+
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/mauveferret/ISInCa/blob/master/Readme.md").toURI());
         } catch (IOException e) {
@@ -407,11 +416,38 @@ public class RootFxmlController {
         }
     }
 
+
+    @FXML
+    public void changeTheme(){
+        if (isLightTheme){
+            isLightTheme= false;
+            parent.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
+        }
+        else {
+            isLightTheme = true;
+            parent.getStylesheets().remove(getClass().getResource("fxml/dark_theme.css").toString());
+        }
+    }
+
     @FXML
     public void secretLaunch()
     {
-        if (secret.getText().equals("Why don't you have a cup of tea?")) secret.setText("");
-        else secret.setText("Why don't you have a cup of tea?");
+
+        String secret_text = "Why don't you have a cup of tea?";
+        if (secret.getText().equals(secret_text)) {
+            secret.setText("");
+            if (!isLightTheme) {
+                parent.getStylesheets().remove(getClass().getResource("fxml/dark_theme.css").toString());
+                isLightTheme = true;
+            }
+        }
+        else {
+            secret.setText(secret_text);
+            if (isLightTheme){
+                isLightTheme= false;
+                parent.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
+            }
+        }
     }
 
     @FXML

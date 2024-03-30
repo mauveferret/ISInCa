@@ -29,12 +29,14 @@ public class GUI extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Root.fxml"));
         primaryStage.setTitle("ISInCa - Ion Surface Interaction Calculator "+Main.getVersion());
         primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
-        primaryStage.setScene(new Scene(root, 790, 490));
+        Scene scene = new Scene(root, 790, 490);
+        //dark theme
+        //scene.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
+        primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(ev -> {
             System.exit(0);
         });
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
@@ -44,8 +46,6 @@ public class GUI extends Application {
 
     public void showGraph(double spectra[], double E0, double dE, String name)
     {
-
-
         Stage dialogStage = new Stage();
         dialogStage.setTitle("ENERGY SPECTRUM");
         dialogStage.getIcons().add(new Image( Main.class.getResourceAsStream( "pics/CrocoLogo.png" )));
@@ -81,6 +81,8 @@ public class GUI extends Application {
         //root.setPadding(new Insets(20));
         root.getChildren().add(imageView2);
         Scene scene2 = new Scene(root,800,600);
+        scene2.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
+
         HelpStage.setScene(scene2);
         HelpStage.setResizable(false);
         HelpStage.show();
@@ -96,6 +98,7 @@ public class GUI extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);
+        scene2.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
         NotificationStage.setScene(scene2);
         NotificationStage.show();
     }
@@ -111,6 +114,7 @@ public class GUI extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(notification);
         Scene scene2 = new Scene(root,300,70);
+        scene2.getStylesheets().add(getClass().getResource("fxml/dark_theme.css").toString());
         NotificationStage.setScene(scene2);
         NotificationStage.show();
     }
