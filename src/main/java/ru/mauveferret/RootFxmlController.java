@@ -210,7 +210,7 @@ public class RootFxmlController {
             double t = Double.parseDouble(polarAngleNE.getText());
             if (t < 0 || t > 90) {
                 polarAngleNE.setText("74");
-                new GUI().showNotification("Please set β in a range of  0<=β<=90\n For transmitted particles use T flag.");
+                new GUI().showNotification("Please set β in the range of  0<=β<=90\n For transmitted particles use T or R flags.");
             }
         }
         catch (Exception e)
@@ -222,7 +222,7 @@ public class RootFxmlController {
             if (t < 0 || t > 360) {
                 azimuthAngleNE.setText("0");
 
-                new GUI().showNotification("Please set φ in a range of  0<=φ<=360");
+                new GUI().showNotification("Please set φ in the range of  0<=φ<=360");
             }
         }
         catch (Exception e)
@@ -233,7 +233,7 @@ public class RootFxmlController {
             double t = Double.parseDouble(azimuthAngleNbeta.getText());
             if (t < 0 || t > 360) {
                 azimuthAngleNbeta.setText("0");
-                new GUI().showNotification("Please set φ in a range of  0<=φ<=360");
+                new GUI().showNotification("Please set φ in the range of  0<=φ<=360");
             }
         }
         catch (Exception e)
@@ -246,9 +246,9 @@ public class RootFxmlController {
     {
         try {
             double t = Double.parseDouble(dPolarAngleNE.getText());
-            if (t <= 0 ) {
+            if (t <= 0 || t > 180) {
                 dPolarAngleNE.setText("2");
-                new GUI().showNotification("Please set positive dβ.");
+                new GUI().showNotification("Please set dβ in the range of  0<=dβ<=180");
             }
         }
         catch (Exception e)
@@ -257,10 +257,10 @@ public class RootFxmlController {
         }
         try {
             double t = Double.parseDouble(dAzimuthAngleNE.getText());
-            if (t <= 0 ) {
+            if (t <= 0 || t > 400) {
                 dAzimuthAngleNE.setText("2");
 
-                new GUI().showNotification("Please set positive dφ.");
+                new GUI().showNotification("Please set positive dφ in the range of 0<=dφ<=360");
 
             }
         }
@@ -293,6 +293,61 @@ public class RootFxmlController {
         catch (Exception e)
         {
             NEBetadBeta.setText("2");
+        }
+        try {
+            double t = Double.parseDouble(dPolarAngleNbeta.getText());
+            if (t <= 0 ) {
+                dPolarAngleNbeta.setText("3");
+
+                new GUI().showNotification("Please set positive β step.");
+
+            }
+        }
+        catch (Exception e)
+        {
+            dPolarAngleNbeta.setText("3");
+        }
+        try {
+            double t = Double.parseDouble(NBetadPhi.getText());
+            if (t <= 0 ) {
+                NBetadPhi.setText("3");
+
+                new GUI().showNotification("Please set positive φ step.");
+
+            }
+        }
+        catch (Exception e)
+        {
+            NBetadPhi.setText("3");
+        }
+        try {
+            double t = Double.parseDouble(NdBetaPhi.getText());
+            if (t <= 0 ) {
+                NdBetaPhi.setText("3");
+
+                new GUI().showNotification("Please set positive β step.");
+
+            }
+        }
+        catch (Exception e)
+        {
+            NdBetaPhi.setText("3");
+        }
+        try {
+            double t = Double.parseDouble(NEBetadE.getText());
+            if (t <= 0 ) {
+                double E = Double.parseDouble(E0.getText());
+                NEBetadE.setText((int) (E/100)+"");
+                new GUI().showNotification("Please set positive E step.");
+            }
+        }
+        catch (Exception e)
+        {
+            try {
+                double E = Double.parseDouble(E0.getText());
+                NEBetadE.setText((int) (E/100)+"");
+            }
+            catch (Exception ignored){}
         }
     }
 
@@ -363,6 +418,11 @@ public class RootFxmlController {
     public  void showHelp()
     {
         Platform.runLater(() -> new GUI().showHelpPage("pics/axes.png"));
+    }
+    @FXML
+    public  void showPartTypes()
+    {
+        Platform.runLater(() -> new GUI().showHelpPage("pics/part_types.png"));
     }
 
     @FXML
