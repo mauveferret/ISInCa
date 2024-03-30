@@ -32,9 +32,7 @@ public class PolarAngles {
     }
 
     public boolean doesAzimuthAngleMatch(double phi, double dPhi){
-        if ((phi>dPhi && phi<360-dPhi) || (dPhi>45))
-            return (Math.abs(phi - azimuth)<dPhi);
-        else return (azimuth < dPhi || azimuth>360-dPhi);
+        return Math.abs(phi-azimuth)<=dPhi || (360-Math.abs(phi-azimuth))<=dPhi;
     }
 
     public boolean doesPolarAngleMatch(double beta, double dBeta){

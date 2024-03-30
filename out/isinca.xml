@@ -67,11 +67,11 @@
                 <cartesianMapType>ZY</cartesianMapType>
             </cartesian_Map>
         </calc>
-		<calc id="2">
+		<calc id="1">
 			<dir>D,T_FeCrNiTi10keV10deg4750k</dir>
             <dir>D,T_FeCrNiTi20keV10deg500k</dir>
 		</calc>
-		<calc id="3">
+		<calc id="2">
 			<dir>Cs_Ni</dir>
 		</calc>
         <calc>
