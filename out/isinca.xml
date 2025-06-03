@@ -52,7 +52,8 @@
                 <deltaPhi>3</deltaPhi>
             </N_Beta>
             <polar_Map>
-                <delta>3</delta>
+                <deltaPhi>3</deltaPhi>
+				<deltaPolar>3</deltaPolar>
                 <sort>S</sort>
             </polar_Map>
             <eneang_Map>

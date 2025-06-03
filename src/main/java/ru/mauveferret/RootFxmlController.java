@@ -111,7 +111,7 @@ public class RootFxmlController {
 
     //Surface particle distribution
     @FXML
-    private TextField NdBetaPhi, NBetadPhi;
+    private TextField  NdBetaPhi, NBetadPhi;
     @FXML
     private TextField NEBetadBeta, NEBetadE;
 
@@ -343,6 +343,19 @@ public class RootFxmlController {
             NdBetaPhi.setText("3");
         }
         try {
+            double t = Double.parseDouble(NBetadPhi.getText());
+            if (t <= 0 ) {
+                NBetadPhi.setText("3");
+
+                new GUI().showNotification("Please set positive φ step.");
+
+            }
+        }
+        catch (Exception e)
+        {
+            NBetadPhi.setText("3");
+        }
+        try {
             double t = Double.parseDouble(NEBetadE.getText());
             if (t <= 0 ) {
                 double E = Double.parseDouble(E0.getText());
@@ -489,9 +502,11 @@ public class RootFxmlController {
 
                 double dBetaNBeta=Double.parseDouble(dPolarAngleNbeta.getText());
                 double phiNBeta=Double.parseDouble(azimuthAngleNbeta.getText());
-                double dPhiNBeta=Double.parseDouble(dAzimuthAngleNbeta.getText());
-                double NBetadPhi1 = Double.parseDouble(NBetadPhi.getText());
-                double NdBetaPhi1 = Double.parseDouble(NdBetaPhi.getText());
+                double dPhiNBeta_polar=Double.parseDouble(dAzimuthAngleNbeta.getText());
+                //double NBetadPhi1 = Double.parseDouble(NBetadPhi.getText());
+                double NdBetaPhi_angleMap = Double.parseDouble(NdBetaPhi.getText());
+                double NBetadPhi_angleMap = Double.parseDouble(NBetadPhi.getText());
+
                 double NEBetadBeta1 = Double.parseDouble(NEBetadBeta.getText());
                 double NEBetadE1 = Double.parseDouble(NEBetadE.getText());
 
@@ -515,7 +530,7 @@ public class RootFxmlController {
                 sort += (NBetaR.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new Polar(phiNBeta, dPhiNBeta, dBetaNBeta,sort, yourSimulator));
+                    distributions.add(new Polar(phiNBeta, dPhiNBeta_polar, dBetaNBeta,sort, yourSimulator));
 
                 sort = (NBetaPhiB.isSelected()) ? "B" : "";
                 sort += (NBetaPhiS.isSelected()) ? "S" : "";
@@ -523,7 +538,7 @@ public class RootFxmlController {
                 sort += (NBetaPhiR.isSelected()) ? "R" : "";
 
                 if (!sort.equals(""))
-                    distributions.add(new AngleMap(dPhiNBeta, dBetaNBeta,sort, yourSimulator));
+                    distributions.add(new AngleMap(NBetadPhi_angleMap, NdBetaPhi_angleMap, sort, yourSimulator));
 
                 sort = (NEBetaB.isSelected()) ? "B" : "";
                 sort += (NEBetaS.isSelected()) ? "S" : "";

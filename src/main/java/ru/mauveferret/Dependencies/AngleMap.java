@@ -57,7 +57,7 @@ public class AngleMap extends Dependence {
 
             for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
                 for (int j = 1; j <= (int) Math.round(90 / dBeta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi * dBeta * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
                 }
             }
 

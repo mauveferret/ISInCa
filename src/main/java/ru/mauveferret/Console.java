@@ -24,7 +24,7 @@ public class Console {
     String fullpath;
     File configFile;
     //params
-    private double betaNE, phiNE, phiNBeta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaBetaNE, deltaPhiNBeta, deltaBetaNBeta, deltaPolarMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
+    private double betaNE, phiNE, phiNBeta, deltaNE, energyAnalyserBroadening, deltaPhiNE, deltaBetaNE, deltaPhiNBeta, deltaBetaNBeta, deltaPolarMap, deltaPhi_AngMap, deltaPolar_AngMap, deltaE_eneangMap, deltaA_eneangMap, deltaCartesianMap, MapSize;
     private String  sortNE, sortNBeta, sortPolarMap, sortEneangMap, sortCartesianMap, cartesianMapType;
     private String dirSubname="empty";
     //Preferences
@@ -77,6 +77,8 @@ public class Console {
             //polar_Map
             sortPolarMap = "S";
             deltaPolarMap = 3;
+            deltaPolar_AngMap = 3;
+            deltaPhi_AngMap = 3;
             //cartesian_Map
             sortCartesianMap = "S";
             deltaCartesianMap = 10;
@@ -377,23 +379,37 @@ public class Console {
                                         break;
                                     case "deltaphi":
                                         deltaPhiNBeta = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
                                 }
                             }
                             distributions.add(new Polar(phiNBeta, deltaPhiNBeta, deltaBetaNBeta, sortNBeta, yourCalculator));
                         }
                         break;
                         case "polar_Map": {
+                            boolean deltaIsGiven = false;
                             for (int j = 0; j < distrPars.getLength(); j++) {
                                 switch (distrPars.item(j).getNodeName().toLowerCase()) {
                                     case "sort":
                                         sortPolarMap = distrPars.item(j).getTextContent();
                                         break;
                                     case "delta":
+                                        deltaIsGiven = true;
                                         deltaPolarMap = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
+                                    case "deltaphi":
+                                        deltaPhi_AngMap = Double.parseDouble(distrPars.item(j).getTextContent());
+                                        break;
+                                    case "deltapolar":
+                                        deltaPolar_AngMap = Double.parseDouble(distrPars.item(j).getTextContent());
                                         break;
                                 }
                             }
-                            distributions.add(new AngleMap(deltaPolarMap, deltaPolarMap, sortPolarMap, yourCalculator));
+                            if (deltaIsGiven) {
+                                distributions.add(new AngleMap(deltaPolarMap, deltaPolarMap, sortPolarMap, yourCalculator));
+                            }
+                            else {
+                                distributions.add(new AngleMap(deltaPhi_AngMap, deltaPolar_AngMap, sortPolarMap, yourCalculator));
+                            }
                         }
                         break;
                         case "eneang_Map": {
