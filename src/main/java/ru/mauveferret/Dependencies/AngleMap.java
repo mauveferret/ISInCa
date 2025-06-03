@@ -49,7 +49,7 @@ public class AngleMap extends Dependence {
         //FIXME ITS A TRAP!!!
         for (String element: elements) {
 
-            for (int i = 0; i < (int) Math.ceil(90 / dBeta) + 1; i++) {
+            for (int i = 1; i < (int) Math.ceil(90 / dBeta) + 1; i++) {
                 mapArray.get(element)[0][i] = mapArray.get(element)[(int) Math.round((360 - dPhi) / dPhi)][i];
             }
 
@@ -60,6 +60,10 @@ public class AngleMap extends Dependence {
                     mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi * dBeta * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
                 }
             }
+
+            // for Surface  Normal angle. Fix for @IANikiti
+            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (dPhi * dBeta * (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
+
 
             try {
                 FileOutputStream surfaceWriter = new FileOutputStream(pathsToLog.get(element));
