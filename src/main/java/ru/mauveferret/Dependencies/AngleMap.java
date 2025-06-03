@@ -46,23 +46,26 @@ public class AngleMap extends Dependence {
     @Override
     public boolean logDependencies() {
 
-        //FIXME ITS A TRAP!!!
         for (String element: elements) {
 
+            // For some reason for zero azimuth angles values are sufficiently underestimated,
+            // so we take neighbour row of azimuth angles
             for (int i = 1; i < (int) Math.ceil(90 / dBeta) + 1; i++) {
                 mapArray.get(element)[0][i] = mapArray.get(element)[(int) Math.round((360 - dPhi) / dPhi)][i];
             }
 
             // from probability distr. to angle
-
             for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
-                for (int j = 1; j <= (int) Math.round(90 / dBeta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi * dBeta * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
+                for (int j = 1; j < (int) Math.round(90 / dBeta); j++) {
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi *  Math.sin(Math.toRadians(Math.abs(j * dBeta)))
+                            * 2 * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                 }
+                // Fix for @IANikiti
+                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = dPhi * Math.sin(Math.toRadians(Math.abs(dBeta/2)));
             }
 
             // for Surface  Normal angle. Fix for @IANikiti
-            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (dPhi * dBeta * (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
+            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (dPhi *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
 
 
             try {
