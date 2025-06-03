@@ -57,15 +57,15 @@ public class AngleMap extends Dependence {
             // from probability distr. to angle
             for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
                 for (int j = 1; j < (int) Math.round(90 / dBeta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi *  Math.sin(Math.toRadians(Math.abs(j * dBeta)))
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (Math.toRadians(dPhi) *  Math.sin(Math.toRadians(Math.abs(j * dBeta)))
                             * 2 * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                 }
                 // Fix for @IANikiti
-                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (dPhi * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (Math.toRadians(dPhi) * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
             }
 
             // for Surface  Normal angle. Fix for @IANikiti
-            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (dPhi *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
+            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (Math.toRadians(dPhi) *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
 
 
             try {
