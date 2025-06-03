@@ -61,12 +61,11 @@ public class AngleMap extends Dependence {
                             * 2 * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                 }
                 // Fix for @IANikiti
+                // for Surface  max grazing angle.
                 mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (Math.toRadians(dPhi) * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                // for Surface  Normal angle.
+                mapArray.get(element)[i][0] = mapArray.get(element)[i][0] / (Math.toRadians(dPhi) *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
             }
-
-            // for Surface  Normal angle. Fix for @IANikiti
-            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (Math.toRadians(dPhi) *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
-
 
             try {
                 FileOutputStream surfaceWriter = new FileOutputStream(pathsToLog.get(element));
