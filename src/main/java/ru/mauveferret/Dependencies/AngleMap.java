@@ -61,7 +61,7 @@ public class AngleMap extends Dependence {
                             * 2 * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
                 }
                 // Fix for @IANikiti
-                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = dPhi * Math.sin(Math.toRadians(Math.abs(dBeta/2)));
+                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (dPhi * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
             }
 
             // for Surface  Normal angle. Fix for @IANikiti
