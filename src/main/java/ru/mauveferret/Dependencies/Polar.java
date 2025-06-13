@@ -33,7 +33,7 @@ public class Polar extends Dependence {
         headerComment = simulator.createHeader();
         String addheaderComment = " phi "+phi+"  degrees dPhi "+dPhi+" degrees dBeta "+dBeta+" degrees ";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
-        headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
+        headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles/(dBetadPhiSinBeta) \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
 
@@ -102,6 +102,9 @@ public class Polar extends Dependence {
 
     private double[] normDistrToDBeta(double[] someDistr1){
 
+        double __rad_dPhi = Math.toRadians(dPhi);
+        double __rad_dBeta = Math.toRadians(dBeta);
+
         //We make a copy of someDistr1 because it's not an array, but  just a link to distributionArray
         //If we use someDistr1 further, we would change the arraylist("all"), which is unfavourable
         double[] someDistr = new double[someDistr1.length];
@@ -110,12 +113,12 @@ public class Polar extends Dependence {
         for (int i = 0; i <= (int) Math.round(180 / dBeta); i++) {
 
             if (Math.abs(i * dBeta -90)!= 0) {
-                someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
+                someDistr[i] = someDistr[i] / (__rad_dPhi * __rad_dBeta *
                         Math.sin(Math.toRadians(Math.abs(i * dBeta - 90))));
             } //we can't divide by zero
             else {
-                someDistr[i] = someDistr[i] / (Math.toRadians(dPhi) *
-                        Math.sin(Math.toRadians(dBeta)));
+                someDistr[i] = someDistr[i] / (__rad_dPhi * __rad_dBeta *
+                        Math.sin(__rad_dBeta));
             }
         }
         return someDistr;

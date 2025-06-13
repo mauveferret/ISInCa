@@ -45,7 +45,7 @@ public class Energy extends Dependence {
         String addheaderComment = " E step "+ Estep +" eV "+ ((deltaEtoE!=0.0)?((IsdEconstChoosen)?" , dE = "+deltaEtoE+ " eV":" , dE/E = "+deltaEtoE):"")+" beta "+beta+" deg dBeta "+dBeta+" deg phi "+
                 phi+" deg dPhi "+dPhi+" deg";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
-        headerComment= "Energy particles "+"\n"+"eV  count \n\n"+headerComment+"\n";
+        headerComment= "Energy Intensity"+"\n"+"eV  particles \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
 

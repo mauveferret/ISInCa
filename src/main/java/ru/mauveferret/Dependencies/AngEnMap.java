@@ -108,12 +108,6 @@ public class AngEnMap extends Dependence {
             }
         }
 
-        //FIXME !!!!!! only for Mamedov's calcs
-        if (!doVisualisation) {
-            if (isConsole) doVisualisation = true;
-            visualize();
-        }
-
         return  true;
     }
 

@@ -29,7 +29,7 @@ public class AngleMap extends Dependence {
         headerComment = simulator.createHeader();
         String addheaderComment = " dPhi "+dPhi+" degrees dBeta "+dBeta+" degrees ";
         headerComment += simulator.createLine(addheaderComment)+"*".repeat(simulator.LINE_LENGTH)+"\n";
-        headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles \n\n"+headerComment+"\n";
+        headerComment= "Angle dN/dOmega "+"\n"+"degrees  particles/(dPhidBetaSinBeta) \n\n"+headerComment+"\n";
         super.initializeArrays(elements);
     }
 
@@ -46,7 +46,9 @@ public class AngleMap extends Dependence {
     @Override
     public boolean logDependencies() {
 
-        //FIXME ITS A TRAP!!!
+        double __rad_dPhi = Math.toRadians(dPhi);
+        double __rad_dBeta = Math.toRadians(dBeta);
+
         for (String element: elements) {
 
             for (int i = 1; i < (int) Math.ceil(90 / dBeta) + 1; i++) {
@@ -57,12 +59,14 @@ public class AngleMap extends Dependence {
 
             for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
                 for (int j = 1; j <= (int) Math.round(90 / dBeta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (dPhi * dBeta * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] /
+                            (__rad_dPhi * __rad_dBeta * Math.sin(Math.toRadians(Math.abs(j * dBeta))));
                 }
             }
 
             // for Surface  Normal angle. Fix for @IANikiti
-            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] / (dPhi * dBeta * (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
+            mapArray.get(element)[0][0] = mapArray.get(element)[0][0] /
+                    (__rad_dPhi * __rad_dBeta * (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
 
 
             try {
@@ -92,11 +96,7 @@ public class AngleMap extends Dependence {
                 return false;
             }
         }
-        //FIXME !!!!!! only for Mamedov's calcs
-        if (!doVisualisation) {
-            if (isConsole) doVisualisation = true;
-            visualize();
-        }
+
         return  true;
     }
 

@@ -4,11 +4,14 @@ ISInCA - is the cross-platform tool, intended for the post-procession of outputs
 *[`SCATTER`](https://www.sciencedirect.com/science/article/pii/S0042207X00001366)*,
 *[`TRIM`](http://www.srim.org/)*, 
 *[`SDTrimSP`](https://pure.mpg.de/rest/items/item_3026474_2/component/file_3026477/content)*. 
-It allows to generate, visualise and export various differential ind integral characteristics of particles scattering,
+It allows to generate, visualise and export various differential and integral characteristics of particles scattering,
 sputtering and implantation for the specific ranges of energies and angles.
 
 ![header](https://github.com/mauveferret/ISInCa/blob/master/docs/pics/header.png?raw=true)
- 
+
+> [!NOTE]
+> Feel free to create issue and feature requests!
+
 # Basic outputs
 
  The codes listed above are intended for the simulation of  particle beams interaction with solids. 
@@ -18,7 +21,7 @@ sputtering and implantation for the specific ranges of energies and angles.
  data on their position, motion direction, sort, energy, path length etc. `ISInCa` allows to transform 
  this huge (up to hundreds of GB) data files to easy for interpretation data. it can generate:
 
-### **Graphs:**
+### **Distributions:**
  - `Energy distributions` dN/dE(E) for any solid angle and any energy step and resolution. 
 **(for backscattered and transmitted primary particles and sputtered particles of a target)**
  - `Angle distributions` dN/dβ(β) **(backscattered and transmitted primary particles and sputtered particles of target)**
