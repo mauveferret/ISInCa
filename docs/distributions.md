@@ -103,10 +103,10 @@ First row is Polar angle axis
 First column is Azimuthal angle axis
 Columns: Polar angle [degrees]
 Rows: Azimuthal angle [degrees]
-Intensity: [1/(rads^2)] == [particles/(dBeta dPhi sin(Beta))]
+Intensity: [1/(rads)] == [particles/(2 dPhi sin(Beta) sin(dBeta/2))]
 where `IncidentAmount` - total amount of incident particles.
 
-**Please note that due to requests of some users `dPhi` and `dBeta` are converted to radians in this output !**
+**Please note that due to requests of some users `dPhi` is converted to radians in this output !**
 
 
 

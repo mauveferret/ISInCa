@@ -47,7 +47,7 @@ public class AngleMap extends Dependence {
     public boolean logDependencies() {
 
         double __rad_dPhi = Math.toRadians(dPhi);
-        double __rad_dBeta = Math.toRadians(dBeta);
+        double __rad_dBeta2 = Math.toRadians(Math.abs(dBeta/2));
 
         for (String element: elements) {
 
@@ -60,14 +60,14 @@ public class AngleMap extends Dependence {
             // from probability distr. to angle
             for (int i = 0; i <= (int) Math.round(360 / dPhi); i++) {
                 for (int j = 1; j < (int) Math.round(90 / dBeta); j++) {
-                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (Math.toRadians(dPhi) *  Math.sin(Math.toRadians(Math.abs(j * dBeta)))
-                            * 2 * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                    mapArray.get(element)[i][j] = mapArray.get(element)[i][j] / (__rad_dPhi *  Math.sin(Math.toRadians(Math.abs(j * dBeta)))
+                            * 2 * Math.sin(__rad_dBeta2));
                 }
                 // Fix for @IANikiti
                 // for Surface  max grazing angle.
-                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (Math.toRadians(dPhi) * Math.sin(Math.toRadians(Math.abs(dBeta/2))));
+                mapArray.get(element)[i][(int) Math.round(90 / dBeta)] = mapArray.get(element)[i][(int) Math.round(90 / dBeta)] / (__rad_dPhi * Math.sin(__rad_dBeta2));
                 // for Surface  Normal angle.
-                mapArray.get(element)[i][0] = mapArray.get(element)[i][0] / (Math.toRadians(dPhi) *  (1 - Math.cos(Math.toRadians(Math.abs(dBeta/2)))));
+                mapArray.get(element)[i][0] = mapArray.get(element)[i][0] / (__rad_dPhi *  (1 - Math.cos(__rad_dBeta2)));
             }
 
             try {
