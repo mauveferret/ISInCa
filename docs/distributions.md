@@ -83,10 +83,15 @@ Note that at the moment it does not take into account azimuthal angle! Create th
 ### Output
 
 First row is Polar angle axis
+
 First column is Energy axis
+
 Columns: Polar angle [degrees]
+
 Rows: energy [eV]
+
 Intensity: [1/(degrees*eV)] == [particles/(IncidentAmount dBeta deltaE sin(Beta))]
+
 where `IncidentAmount` - total amount of incident particles. 
 
 **Please note that due to requests of some users the intensity normalization is quite strange here!**
@@ -100,10 +105,15 @@ where `IncidentAmount` - total amount of incident particles.
 ### Output
 
 First row is Polar angle axis
+
 First column is Azimuthal angle axis
+
 Columns: Polar angle [degrees]
+
 Rows: Azimuthal angle [degrees]
+
 Intensity: [1/(rads)] == [particles/(2 dPhi sin(Beta) sin(dBeta/2))]
+
 where `IncidentAmount` - total amount of incident particles.
 
 **Please note that due to requests of some users `dPhi` is converted to radians in this output !**
